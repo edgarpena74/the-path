@@ -1,0 +1,12 @@
+.parent {
+  position: absolute !important;
+}
+.mainPhoto {
+  position: relative !important;
+  z-index: 0 !important;
+}
+
+.overlay {
+  position: relative !important;
+  z-index: 1 !important ;
+}
