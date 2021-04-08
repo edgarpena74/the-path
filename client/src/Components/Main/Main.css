@@ -22,21 +22,24 @@
   height: 70px !important;
 }
 
-/* .icon, */
 .form,
-.buttonCol {
+.blankCol {
   color: black !important;
   background: white !important;
   margin: 0px !important;
 }
+
 .form {
-  padding-left: 20px !important;
-  padding-right: 0px !important;
+  /* padding-left: 0px !important;
+  padding-right: 0px !important; */
+  /* padding: 20px !important; */
+  /* width: 10px !important; */
   border-top-left-radius: 60% !important;
   border-bottom-left-radius: 60% !important;
 }
 
-/* searchForm */
+/* .searchForm {
+} */
 
 .formControl {
   padding-top: 0px !important;
@@ -44,7 +47,8 @@
   padding-left: 20px !important;
   padding-right: 7px !important;
   border: 0px !important;
-  border-radius: 0px !important;
+  border-top-left-radius: 60% !important;
+  border-bottom-left-radius: 60% !important;
 }
 /* change media querys on padding */
 /* .icon {
@@ -61,12 +65,7 @@
   margin: 0px !important;
   border-top-right-radius: 60% !important;
   border-bottom-right-radius: 60% !important;
-  /* column-width: 0px !important; */
 }
-
-/* .searchForm {
-  width: 100% !important;
-} */
 
 .searchBtn {
   background: white !important;
@@ -78,8 +77,3 @@
   border-top-right-radius: 60% !important;
   border-bottom-right-radius: 60% !important;
 }
-
-/* .searchTxt {
-  margin-bottom: 0px !important;
-  font-size: 1.5rem !important;
-} */

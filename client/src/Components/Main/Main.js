@@ -44,6 +44,15 @@ const Main = () => {
               </svg>
             </div>
           </Col> */}
+          {/* <Col
+            className="blankCol d-flex align-items-stretch"
+            xs="1"
+            sm="1"
+            md="1"
+            lg="1"
+          >
+            {" "}
+          </Col> */}
           <Col className="form d-flex align-items-center">
             <Form className="searchForm">
               <Form.Control
