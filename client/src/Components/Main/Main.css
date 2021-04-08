@@ -12,68 +12,57 @@
   z-index: 2 !important ;
   top: 100px !important;
   left: 100px !important;
-  width: 50% !important;
+  width: 500px !important;
   color: white !important;
-  border-radius: 50% !important;
+  /* border-radius: 50% !important; */
   padding: 0px !important;
 }
 
+/* the row that contains all form items */
 .formRow {
   height: 70px !important;
-}
-
-.form,
-.blankCol {
-  color: black !important;
+  /* width: 100% !important; */
   background: white !important;
-  margin: 0px !important;
+  border-radius: 40px;
+}
+/* Blank Columns */
+.blankColLeft {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+  width: 4.16666667% !important;
+}
+.blankColRight {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  width: 4.16666667% !important;
 }
 
-.form {
-  /* padding-left: 0px !important;
-  padding-right: 0px !important; */
-  /* padding: 20px !important; */
-  /* width: 10px !important; */
-  border-top-left-radius: 60% !important;
-  border-bottom-left-radius: 60% !important;
-}
-
-/* .searchForm {
-} */
-
-.formControl {
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-  padding-left: 20px !important;
-  padding-right: 7px !important;
-  border: 0px !important;
-  border-top-left-radius: 60% !important;
-  border-bottom-left-radius: 60% !important;
-}
-/* change media querys on padding */
-/* .icon {
-  padding-left: 30px;
-  padding-right: 10px !important;
-  border-top-left-radius: 60% !important;
-  border-bottom-left-radius: 60% !important;
-} */
-
-.buttonCol {
-  background: white !important;
-  padding: 0px !important;
-  padding-right: 20px !important;
-  margin: 0px !important;
-  border-top-right-radius: 60% !important;
-  border-bottom-right-radius: 60% !important;
-}
-
-.searchBtn {
-  background: white !important;
+/* Start of the form column */
+.formCol {
+  padding-left: 0px !important;
+  padding-right: 3px !important;
   border: none !important;
-  margin-bottom: 0px !important;
-  padding-right: 10px !important;
-  vertical-align: middle !important;
-  border-radius: 0px !important;
-  border-top-right-radius: 60% !important;
-  border-bottom-right-radius: 60% !important;
+}
+/* "container" of form */
+.searchForm {
+  width: 100% !important;
+  padding-right: 0 !important;
+}
+/* user input area */
+.formInput {
+  width: 100% !important;
+  padding: 0px !important;
+  border: 0 !important;
+}
+
+/* Start of the button column */
+.btnCol {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.submitBtn {
+  float: right !important;
+  border: 0 !important;
+  padding: 0 !important;
 }
