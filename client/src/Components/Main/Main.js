@@ -1,20 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Main.css";
-// import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
-// import binoculars from "../Assets/binoculars.png";
 import mainPhoto from "../Assets/mainPhoto.jpeg";
-// import InputGroup from "react-bootstrap/InputGroup";
-// import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import axios from "axios";
+
+//
+//
+// EDIT CSS DETAILS LATER TO
+//
+//
+//
+
 const Main = () => {
+  const [userSearch, setUserSearch] = useState({
+    input: "",
+  });
+
+  const onChange = (e) => {
+    setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
+    console.log("onChange function ran");
+  };
+
+  const search = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/api/searchinput", userSearch);
+      console.log(userSearch, " this is from handleSearch");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="mainDiv">
-      {/* <Container fluid className="mainContainer"> */}
       {/* Image */}
       <div className="mainPhoto">
         <Image src={mainPhoto} fluid />
@@ -22,6 +43,7 @@ const Main = () => {
       {/*  */}
       {/*  */}
       {/* make fluid container a media query */}
+      {/* !!!!!!!!! DUDE YOU CAN USE THE DEV TOOLS "DEVICE TOOL BAR" TO HELP WITH MOBILE */}
       {/*  */}
       {/*  */}
       <Container fluid className="overlay">
@@ -41,12 +63,17 @@ const Main = () => {
             lg="9"
             className="formCol d-flex align-items-center"
           >
-            <Form className="form-inline searchForm">
+            <Form
+              className="form-inline searchForm"
+              id="inputSearch"
+              onSubmit={search}
+            >
               <input
+                onChange={onChange}
                 type="text"
                 className="form-control formInput form-control-lg"
-                id="inputSearch"
                 placeholder="Search"
+                name="input"
               ></input>
             </Form>
           </Col>
@@ -56,7 +83,7 @@ const Main = () => {
             sm="1"
             md="1"
             lg="1"
-            className="btnCol border-left d-flex align-items-center justify-content-center "
+            className="btnCol d-flex border-left  align-items-center justify-content-center "
           >
             <button type="submit" className="btn submitBtn" form="inputSearch">
               <svg
