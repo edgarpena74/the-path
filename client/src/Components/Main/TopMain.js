@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Main.css";
+import "./TopMain.css";
 import Image from "react-bootstrap/Image";
 // import mainPhoto from "../Assets/mainPhoto.jpeg";
 import mainPhoto from "./Assets/mainPhoto.jpeg";
@@ -16,7 +16,7 @@ import axios from "axios";
 //
 //
 
-const Main = () => {
+const TopMain = () => {
   const [userSearch, setUserSearch] = useState({
     input: "",
   });
@@ -36,7 +36,7 @@ const Main = () => {
     }
   };
   return (
-    <div className="mainDiv d-flex align-items-center">
+    <div className="topMainDiv d-flex align-items-center">
       {/* Image */}
       {/* <div className="mainPhoto">
         <Image src={mainPhoto} fluid />
@@ -113,4 +113,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default TopMain;

@@ -2,8 +2,8 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "./subMain.css";
-const SubMain = () => {
+import "./BottomMain.css";
+const BottomMain = () => {
   return (
     <div className="subDiv d-flex align-items-stretch">
       <Container fluid className="subContainer ">
@@ -28,4 +28,4 @@ const SubMain = () => {
   );
 };
 
-export default SubMain;
+export default BottomMain;

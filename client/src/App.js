@@ -4,8 +4,8 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Nav from "./Components/Nav/Nav";
-import Main from "./Components/Main/Main";
-import SubMain from "./Components/Main/SubMain";
+import TopMain from "./Components/Main/TopMain";
+import BottomMain from "./Components/Main/BottomMain";
 import Footer from "./Components/Footer/Footer";
 
 function App() {
@@ -13,8 +13,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Nav />
-        <Main />
-        <SubMain />
+        <TopMain />
+        <BottomMain />
         <Footer />
       </BrowserRouter>
     </div>
