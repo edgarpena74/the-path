@@ -36,7 +36,7 @@ const Main = () => {
     }
   };
   return (
-    <div className="mainDiv">
+    <div className="mainDiv d-flex align-items-center">
       {/* Image */}
       {/* <div className="mainPhoto">
         <Image src={mainPhoto} fluid />
@@ -48,11 +48,11 @@ const Main = () => {
       {/*  */}
       {/*  */}
       <Container fluid className="overlay">
-        {/* <Row d-flex className="justify-content-center">
+        <Row d-flex className="justify-content-center">
           <div>
             <h1>Find Your Path</h1>
           </div>
-        </Row> */}
+        </Row>
         <Row className="formRow d-flex align-items-stretch">
           {/* Blank */}
           <Col sm="1" md="1" lg="1" className="blankColLeft"></Col>

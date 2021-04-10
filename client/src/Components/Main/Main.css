@@ -5,6 +5,7 @@
   background-image: url(./Assets/mainPhoto.jpeg);
   background-position: center !important;
   background-size: cover !important;
+  /* justify-content: center !important; */
 }
 /* .mainPhoto {
   position: relative !important;
@@ -12,14 +13,8 @@
 } */
 
 .overlay {
-  position: absolute !important;
-  z-index: 2 !important ;
-  top: 100px !important;
-  left: 100px !important;
   width: 500px !important;
   color: white !important;
-  border-radius: 50% !important;
-  padding: 0px !important;
 }
 
 /* the row that contains all form items */
