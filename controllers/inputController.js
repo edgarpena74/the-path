@@ -6,15 +6,15 @@ module.exports = {
       const newSearchInput = new SearchInput({ input: req.body.input });
       res.json(await newSearchInput.save());
     } catch (error) {
-      res.send(err);
+      res.send(error);
     }
   },
 
-  getInput: async (req, res) => {
+  getInputdb: async (req, res) => {
     try {
-      res.json(await SearchInput.find({}));
+      res.json(await SearchInput.find());
     } catch (error) {
-      res.send(err);
+      res.send(error);
     }
   },
 
@@ -22,7 +22,7 @@ module.exports = {
     try {
       res.json(await SearchInput.deleteMany({}));
     } catch (error) {
-      res.send(err);
+      res.send(error);
     }
   },
 };

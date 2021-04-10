@@ -28,7 +28,7 @@ const Main = () => {
   const search = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/searchinput", userSearch);
+      await axios.post("/api/search-input", userSearch);
       console.log(userSearch, " this is from handleSearch");
     } catch (error) {
       console.log(error);
