@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Main.css";
 import Image from "react-bootstrap/Image";
-import mainPhoto from "../Assets/mainPhoto.jpeg";
+// import mainPhoto from "../Assets/mainPhoto.jpeg";
+import mainPhoto from "./Assets/mainPhoto.jpeg";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -28,8 +29,8 @@ const Main = () => {
   const search = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/search-input", userSearch);
-      console.log(userSearch, " this is from handleSearch");
+      const apiData = await axios.get(`/api/search/${userSearch.input}`);
+      console.log(apiData, " this is from handleSearch FE");
     } catch (error) {
       console.log(error);
     }
@@ -37,9 +38,9 @@ const Main = () => {
   return (
     <div className="mainDiv">
       {/* Image */}
-      <div className="mainPhoto">
+      {/* <div className="mainPhoto">
         <Image src={mainPhoto} fluid />
-      </div>
+      </div> */}
       {/*  */}
       {/*  */}
       {/* make fluid container a media query */}
@@ -47,11 +48,11 @@ const Main = () => {
       {/*  */}
       {/*  */}
       <Container fluid className="overlay">
-        <Row d-flex className="justify-content-center">
+        {/* <Row d-flex className="justify-content-center">
           <div>
             <h1>Find Your Path</h1>
           </div>
-        </Row>
+        </Row> */}
         <Row className="formRow d-flex align-items-stretch">
           {/* Blank */}
           <Col sm="1" md="1" lg="1" className="blankColLeft"></Col>

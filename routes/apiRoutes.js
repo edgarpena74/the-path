@@ -17,15 +17,15 @@ router.get("/search-input", getInputdb);
 router.delete("/search-input", deleteInput);
 //
 
-router.get("/search", async (req, res) => {
-  const searchInput = await db.SearchInput.find({ input: req.input });
-  console.log("Line 40 // Back end SearchInput: ", searchInput);
-  const url = `https://ridb.recreation.gov/api/v1/activities?apikey=${process.env.API_KEY}&query=${searchInput}`;
+router.get("/search/:input", async (req, res) => {
+  // const searchInput = await db.SearchInput.find({ input: req.body });
+  // console.log("Line 40 // Back end SearchInput: ", searchInput);
+  const url = `https://ridb.recreation.gov/api/v1/activities?apikey=${process.env.API_KEY}&query=${req.params.input}`;
   axios
     .get(url)
     .then((data) => {
-      res.json(data);
-      console.log(data);
+      res.json(data.data);
+      console.log(data.data, " BE// Line 28");
     })
     .catch((err) => console.log(err));
 });
