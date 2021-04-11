@@ -29,7 +29,7 @@ const TopMain = () => {
   const search = async (e) => {
     e.preventDefault();
     try {
-      const apiData = await axios.get(`/api/search/${userSearch.input}`);
+      const apiData = await axios.get(`/api/activities/${userSearch.input}`);
       console.log(apiData, " this is from handleSearch FE");
     } catch (error) {
       console.log(error);
@@ -48,7 +48,7 @@ const TopMain = () => {
       {/*  */}
       {/*  */}
       <Container fluid className="overlay">
-        <Row d-flex className="justify-content-center">
+        <Row className="d-flex justify-content-center">
           <div>
             <h1>Find Your Path</h1>
           </div>
