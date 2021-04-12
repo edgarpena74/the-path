@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./BottomMain.css";
+//implement use effect to render code upon loading
 const BottomMain = () => {
   return (
     <div className="subDiv d-flex align-items-stretch">
