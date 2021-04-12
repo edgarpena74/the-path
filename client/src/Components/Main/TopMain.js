@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./TopMain.css";
-import Image from "react-bootstrap/Image";
+// import Image from "react-bootstrap/Image";
 // import mainPhoto from "../Assets/mainPhoto.jpeg";
-import mainPhoto from "./Assets/mainPhoto.jpeg";
+// import mainPhoto from "./Assets/mainPhoto.jpeg";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

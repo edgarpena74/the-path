@@ -7,20 +7,22 @@ router.get("/test", (req, res) => {
 });
 
 // Input Routes
-const {
-  newInput,
-  getInputdb,
-  deleteInput,
-} = require("../controllers/inputController");
-const { SearchInput } = require("../models");
+// const {
+//   newInput,
+//   getInputdb,
+//   deleteInput,
+// } = require("../controllers/inputController");
+// const { SearchInput } = require("../models");
 
-router.post("/search-input", newInput);
+// router.post("/search-input", newInput);
 
-router.get("/search-input", getInputdb);
+// router.get("/search-input", getInputdb);
 
-router.delete("/search-input", deleteInput);
+// router.delete("/search-input", deleteInput);
 //
-
+// Seeds
+const { getSeeds } = require("../controllers/seeds");
+router.get("/seeds", getSeeds);
 // router.get("/activities/:input", async (req, res) => {
 //   // const searchInput = await db.SearchInput.find({ input: req.body });
 //   // console.log("Line 40 // Back end SearchInput: ", searchInput);
