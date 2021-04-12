@@ -37,10 +37,6 @@ const TopMain = () => {
   };
   return (
     <div className="topMainDiv d-flex align-items-center">
-      {/* Image */}
-      {/* <div className="mainPhoto">
-        <Image src={mainPhoto} fluid />
-      </div> */}
       {/*  */}
       {/*  */}
       {/* make fluid container a media query */}

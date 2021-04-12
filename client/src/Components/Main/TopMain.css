@@ -1,7 +1,7 @@
 .topMainDiv {
   /* position: relative;
   z-index: auto !important; */
-  display: block !important;
+  display: block absolute !important;
   height: 500px;
   background-image: url(./Assets/mainPhoto.jpeg);
   background-position: center !important;
@@ -14,6 +14,9 @@
 } */
 
 .overlay {
+  display: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
   width: 500px !important;
   color: white !important;
 }

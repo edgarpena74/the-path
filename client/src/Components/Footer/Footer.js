@@ -6,7 +6,11 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <div>
-      <Navbar className="justify-content-center" sticky="bottom" bg="dark">
+      <Navbar
+        className="footer justify-content-center"
+        sticky="bottom"
+        bg="dark"
+      >
         <Nav>
           <Nav.Item className="footerText">&copy; Edgar Peña 2021</Nav.Item>
         </Nav>

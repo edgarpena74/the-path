@@ -40,12 +40,9 @@ const BottomMain = () => {
           <h1>Northern California Favorites</h1>
         </Row>
         {/* <Row className="subBoxRow d-flex justify-content-center"> */}
-        <Row className="subBoxRow justify-content-center">
+        <Row className="subBoxRow d-flex justify-content-center">
           {seeds.map((data) => (
-            <Card
-              style={{ width: "15rem", margin: "7px" }}
-              className="float-left "
-            >
+            <Card style={{ width: "15rem", margin: "7px" }}>
               <Card.Body>
                 <Card.Text>
                   <p>{data.title}</p>
