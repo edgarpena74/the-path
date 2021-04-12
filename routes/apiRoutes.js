@@ -47,15 +47,37 @@ router.delete("/search-input", deleteInput);
 //     .catch((err) => console.log(err));
 // });
 
-router.get("/places", async (req, res) => {
+router.get("/places/:input", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
-  const url = `https://developer.nps.gov/api/v1/places?q=point%20reyes&api_key=tEgUGWuSzzWprEXfOcsbhg5fDi4eM5OkCNXcQq0e`;
+  const url = `https://developer.nps.gov/api/v1/places?q=${req.params.input}&api_key=${process.env.API_KEY}&limit=1`;
   axios
     .get(url)
     .then((data) => {
-      res.json(data.data);
       console.log(data.data, " BE// Line 58");
+      res.json(data.data);
+      const test = data.data.data[0].title;
+      console.log(test, " This is the test value BE");
+    })
+    .catch((err) => console.log(err));
+});
+
+//For Seed data
+router.get("/places", async (req, res) => {
+  // const searchInput = await db.SearchInput.find({ input: req.body });
+  // console.log("Line 40 // Back end SearchInput: ", searchInput);
+  const url = `https://developer.nps.gov/api/v1/places?q=muir%20woods%20national%20monumentk&api_key=${process.env.API_KEY}&limit=1`;
+  axios
+    .get(url)
+    .then((data) => {
+      console.log(data.data, " BE// Line 58");
+      res.json(data.data);
+      const apiObject = {
+        title: data.data.data[0].title,
+        desc: data.data.data[0].title,
+        img: data.data.data[0].images[0].url,
+      };
+      console.log("this is the object", apiObject);
     })
     .catch((err) => console.log(err));
 });

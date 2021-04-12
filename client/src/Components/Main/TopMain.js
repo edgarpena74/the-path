@@ -29,7 +29,7 @@ const TopMain = () => {
   const search = async (e) => {
     e.preventDefault();
     try {
-      const apiData = await axios.get(`/api/activities/${userSearch.input}`);
+      const apiData = await axios.get(`/api/places/${userSearch.input}`);
       console.log(apiData, " this is from handleSearch FE");
     } catch (error) {
       console.log(error);
