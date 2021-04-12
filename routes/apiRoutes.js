@@ -6,49 +6,11 @@ router.get("/test", (req, res) => {
   res.send({ msg: "success" });
 });
 
-// Input Routes
-// const {
-//   newInput,
-//   getInputdb,
-//   deleteInput,
-// } = require("../controllers/inputController");
-// const { SearchInput } = require("../models");
-
-// router.post("/search-input", newInput);
-
-// router.get("/search-input", getInputdb);
-
-// router.delete("/search-input", deleteInput);
-//
 // Seeds
 const { getSeeds } = require("../controllers/seeds");
 router.get("/seeds", getSeeds);
-// router.get("/activities/:input", async (req, res) => {
-//   // const searchInput = await db.SearchInput.find({ input: req.body });
-//   // console.log("Line 40 // Back end SearchInput: ", searchInput);
-//   const url = `https://ridb.recreation.gov/api/v1/activities?apikey=${process.env.API_KEY}&query=${req.params.input}`;
-//   axios
-//     .get(url)
-//     .then((data) => {
-//       res.json(data.data);
-//       console.log(data.data, " BE// Line 28");
-//     })
-//     .catch((err) => console.log(err));
-// });
 
-// router.get("/rec-areas", async (req, res) => {
-//   // const searchInput = await db.SearchInput.find({ input: req.body });
-//   // console.log("Line 40 // Back end SearchInput: ", searchInput);
-//   const url = `https://ridb.recreation.gov/api/v1/recareas?apikey=${process.env.API_KEY}&query=camp&full=true&state=CA&activity=Camping`;
-//   axios
-//     .get(url)
-//     .then((data) => {
-//       res.json(data.data);
-//       console.log(data.data, " BE// Line 41");
-//     })
-//     .catch((err) => console.log(err));
-// });
-
+//API
 router.get("/places/:input", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);

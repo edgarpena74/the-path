@@ -1,19 +1,12 @@
-// const axios = require("axios");
+const axios = require("axios");
 
-// export async function searchAPI() {
-//   try {
-//     // const response = await axios.get("http://localhost:5000/api/search");
-//     const response = await axios.get("/api/search");
-//     return response.json();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+async function getSeeds() {
+  try {
+    const response = await axios.get("http://locahost:5000/api/seeds");
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-// export async function saveSearchInput() {
-//   try {
-//     axios.post("/api/searchinput");
-//   } catch (error) {}
-// }
-
-// export default { searchAPI };
+export default { getSeeds };
