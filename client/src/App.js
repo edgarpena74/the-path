@@ -11,9 +11,15 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Nav />
-        <Main />
-        <Footer />
+        <header>
+          <Nav />
+        </header>
+        <main>
+          <Main />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </BrowserRouter>
     </div>
   );

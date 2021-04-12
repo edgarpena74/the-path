@@ -5,7 +5,7 @@ const favoritesSchema = new Schema({
   title: {
     type: String,
   },
-  img: {
+  imageURL: {
     type: String,
   },
 });

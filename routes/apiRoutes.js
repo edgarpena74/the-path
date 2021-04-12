@@ -7,7 +7,7 @@ router.get("/test", (req, res) => {
 });
 
 // Seeds
-const { getSeeds } = require("../controllers/seeds");
+const { getSeeds } = require("../controllers/seedController");
 router.get("/seeds", getSeeds);
 
 //API
@@ -27,7 +27,7 @@ router.get("/places/:input", async (req, res) => {
 });
 
 //For Seed data
-router.get("/places", async (req, res) => {
+router.get("/places-seed", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
   const url = `https://developer.nps.gov/api/v1/places?q=muir%20woods%20national%20monumentk&api_key=${process.env.API_KEY}&limit=1`;
