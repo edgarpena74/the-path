@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TopMain from "./TopMain";
 import BottomMain from "./BottomMain";
 
-const Test = () => {
+const Test = ({ searchFunction, onChangeFunction }) => {
   return (
     <div>
-      <TopMain />
+      <TopMain search={searchFunction} OnChange={onChangeFunction} />
       <BottomMain />
     </div>
   );

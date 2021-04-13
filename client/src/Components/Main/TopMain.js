@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TopMain.css";
 // import Image from "react-bootstrap/Image";
 // import mainPhoto from "../Assets/mainPhoto.jpeg";
@@ -17,26 +17,16 @@ import axios from "axios";
 //
 //
 
-const TopMain = () => {
-  const [userSearch, setUserSearch] = useState({
-    input: "",
-  });
+const TopMain = (props) => {
+  //look at passing down a state as a prop
+  // ???
+  // const [userSearch, setUserSearch] = useState({
+  //   input: "",
+  // });
 
-  const onChange = (e) => {
-    setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
-    console.log("onChange function ran");
-  };
-
-  const search = async (e) => {
-    e.preventDefault();
-    try {
-      const apiData = await axios.get(`/api/places/${userSearch.input}`);
-      console.log(apiData, " this is from handleSearch FE");
-      const
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // useEffect(() => {
+  //   props.search();
+  // }, []);
   return (
     <div className="topMainDiv d-flex align-items-center">
       {/*  */}
@@ -65,7 +55,7 @@ const TopMain = () => {
             <Form
               className="form-inline searchForm"
               id="inputSearch"
-              onSubmit={search}
+              onSubmit={props.search(userSearch)}
             >
               <input
                 onChange={onChange}
