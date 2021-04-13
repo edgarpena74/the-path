@@ -3,6 +3,7 @@ import "./TopMain.css";
 // import Image from "react-bootstrap/Image";
 // import mainPhoto from "../Assets/mainPhoto.jpeg";
 // import mainPhoto from "./Assets/mainPhoto.jpeg";
+import SearchResults from "../SearchResults/SearchResults";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -31,6 +32,7 @@ const TopMain = () => {
     try {
       const apiData = await axios.get(`/api/places/${userSearch.input}`);
       console.log(apiData, " this is from handleSearch FE");
+      const
     } catch (error) {
       console.log(error);
     }
