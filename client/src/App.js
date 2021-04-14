@@ -47,6 +47,8 @@ function App() {
             path="/"
             searchFunction={search}
             onChangeFunction={onChange}
+            userSearchState={userSearch}
+            setUserSearchState={setUserSearch}
             component={Intro}
           />
         </Switch>

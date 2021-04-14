@@ -17,7 +17,8 @@ import axios from "axios";
 //
 //
 
-const TopIntro = ({ search, onChange }) => {
+// const TopIntro = ({ search, onChange, userSearch, setUserSearch }) => {
+const TopIntro = ({ search, userSearch, setUserSearch }) => {
   //look at passing down a state as a prop
   // ???
   // const [userSearch, setUserSearch] = useState({
@@ -27,6 +28,11 @@ const TopIntro = ({ search, onChange }) => {
   // useEffect(() => {
   //   props.search();
   // }, []);
+
+  function updateState() {
+    setUserSearch("test");
+  }
+
   return (
     <div className="topMainDiv d-flex align-items-center">
       {/*  */}
@@ -55,10 +61,10 @@ const TopIntro = ({ search, onChange }) => {
             <Form
               className="form-inline searchForm"
               id="inputSearch"
-              onSubmit={search}
+              // onSubmit={search}
             >
               <input
-                onChange={onChange}
+                // onChange={updateState()}
                 type="text"
                 className="form-control formInput form-control-lg"
                 placeholder="Search"
