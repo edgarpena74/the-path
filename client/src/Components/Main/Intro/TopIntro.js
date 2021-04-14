@@ -3,7 +3,7 @@ import "./TopMain.css";
 // import Image from "react-bootstrap/Image";
 // import mainPhoto from "../Assets/mainPhoto.jpeg";
 // import mainPhoto from "./Assets/mainPhoto.jpeg";
-import SearchResults from "../SearchResults/SearchResults";
+// import SearchResults from "../SearchResults/SearchResults";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -17,7 +17,7 @@ import axios from "axios";
 //
 //
 
-const TopMain = (props) => {
+const TopIntro = ({ search, onChange }) => {
   //look at passing down a state as a prop
   // ???
   // const [userSearch, setUserSearch] = useState({
@@ -55,7 +55,7 @@ const TopMain = (props) => {
             <Form
               className="form-inline searchForm"
               id="inputSearch"
-              onSubmit={props.search(userSearch)}
+              onSubmit={search}
             >
               <input
                 onChange={onChange}
@@ -101,4 +101,4 @@ const TopMain = (props) => {
   );
 };
 
-export default TopMain;
+export default TopIntro;

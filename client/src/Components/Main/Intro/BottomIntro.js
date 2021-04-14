@@ -4,11 +4,11 @@ import Row from "react-bootstrap/Row";
 // import Col from "react-bootstrap/Col";
 // import Image from "react-bootstrap/Image";
 import "./BottomMain.css";
-import API from "../../utils/API";
+import API from "../../../utils/API";
 import Card from "react-bootstrap/Card";
 
 //implement use effect to render code upon loading
-const BottomMain = () => {
+const BottomIntro = () => {
   const [seeds, setSeeds] = useState([
     // {
     //   title: "",
@@ -61,4 +61,4 @@ const BottomMain = () => {
   );
 };
 
-export default BottomMain;
+export default BottomIntro;

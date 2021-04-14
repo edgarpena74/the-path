@@ -1,0 +1,17 @@
+.leftSide {
+  margin-left: 0px !important;
+  padding: 0px !important;
+}
+
+.resultsDiv {
+  border: 10px solid black !important;
+}
+
+.rightSide {
+  margin-right: 0px !important;
+  padding: 0px !important;
+}
+
+.infoDiv {
+  border: 10px solid black !important;
+}
