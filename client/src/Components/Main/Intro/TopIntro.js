@@ -18,7 +18,7 @@ import axios from "axios";
 //
 
 // const TopIntro = ({ search, onChange, userSearch, setUserSearch }) => {
-const TopIntro = ({ search, userSearch, setUserSearch }) => {
+const TopIntro = () => {
   //look at passing down a state as a prop
   // ???
   // const [userSearch, setUserSearch] = useState({
@@ -29,9 +29,9 @@ const TopIntro = ({ search, userSearch, setUserSearch }) => {
   //   props.search();
   // }, []);
 
-  function updateState() {
-    setUserSearch("test");
-  }
+  // function updateState() {
+  //   setUserSearch("test");
+  // }
 
   return (
     <div className="topMainDiv d-flex align-items-center">

@@ -8,12 +8,13 @@ import Nav from "./Components/Nav/Nav";
 import Intro from "./Components/Main/Intro/IntroMain";
 import SearchResults from "./Components/Main/SearchResults/SearchResults";
 import Footer from "./Components/Footer/Footer";
-
+// import ContextRoute from "./utils/ContextRoute";
+import SearchContext from "./utils/SearchContext";
 function App() {
   const history = useHistory();
 
   const [userSearch, setUserSearch] = useState({
-    input: "",
+    searchInput: "",
   });
 
   const onChange = (e) => {
@@ -21,7 +22,7 @@ function App() {
     console.log("onChange function ran");
   };
 
-  const search = async (userInput) => {
+  const handleSearch = async (userInput) => {
     try {
       // e.preventDefault();
       console.log("search ran from parent div");
@@ -40,17 +41,14 @@ function App() {
         <Nav />
 
         <Switch>
-          {/* Search results page */}
-          <Route path="/searchresults" component={SearchResults} />
-          {/* Intro Page */}
-          <Route
-            path="/"
-            searchFunction={search}
-            onChangeFunction={onChange}
-            userSearchState={userSearch}
-            setUserSearchState={setUserSearch}
-            component={Intro}
-          />
+          <SearchContext.Provider
+            value={{ ...userSearch, onChange, handleSearch }}
+          >
+            {/* Search results page */}
+            <Route path="/searchresults" component={SearchResults} />
+            {/* Intro Page */}
+            <Route path="/" component={Intro} />
+          </SearchContext.Provider>
         </Switch>
 
         <Footer />
