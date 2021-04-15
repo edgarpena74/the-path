@@ -1,6 +1,6 @@
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   BrowserRouter,
   Route,
@@ -18,13 +18,15 @@ import Footer from "./Components/Footer/Footer";
 // import ContextRoute from "./utils/ContextRoute";
 import SearchContext from "./utils/SearchContext";
 function App() {
-  const [userSearch, setUserSearch] = useState({
-    searchInput: "",
-  });
+  // const [userSearch, setUserSearch] = useState({
+  //   searchInput: "",
+  // });
 
   const [redirectState, setRedirectState] = useState({
     redirect: false,
   });
+
+  const { userSearch, setUserSearch } = useContext(SearchContext);
 
   function renderRedirect() {
     if (redirectState.redirect === true) {
@@ -39,6 +41,7 @@ function App() {
   const onChange = (e) => {
     setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
     // setRedirectState({ redirect: true });
+    console.log(userSearch, " userSearch value inside of onChange");
     console.log("onChange function ran");
   };
   console.log(redirectState, "redirect state before handleSearch");
@@ -51,9 +54,9 @@ function App() {
       //
       // Consider using the get function in a child component to
       //
-      const apiData = await axios.get(`/api/places/${userSearch.searchInput}`);
+      // const apiData = await axios.get(`/api/places/${userSearch.searchInput}`);
       // console.log(userInput, "this was the user input App.js");
-      console.log(apiData, " this is from handleSearch App.js");
+      // console.log(apiData, " this is from handleSearch App.js");
       return setRedirectState({ redirect: true });
     } catch (error) {
       return console.log(error);

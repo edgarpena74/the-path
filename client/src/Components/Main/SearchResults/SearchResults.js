@@ -9,6 +9,7 @@ import "./SearchResults.css";
 import SearchContext from "../../../utils/SearchContext";
 const SearchResults = () => {
   const { userSearch } = useContext(SearchContext);
+  console.log({ userSearch });
   return (
     <div className="searchResultsDiv">
       <Container>
