@@ -1,7 +1,8 @@
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
-import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+// import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 import Nav from "./Components/Nav/Nav";
@@ -11,25 +12,28 @@ import Footer from "./Components/Footer/Footer";
 // import ContextRoute from "./utils/ContextRoute";
 import SearchContext from "./utils/SearchContext";
 function App() {
-  const history = useHistory();
+  // const history = useHistory();
 
   const [userSearch, setUserSearch] = useState({
     searchInput: "",
   });
+
+  console.log(userSearch, " current userSearch state");
 
   const onChange = (e) => {
     setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
     console.log("onChange function ran");
   };
 
-  const handleSearch = async (userInput) => {
+  const handleSearch = async (e) => {
     try {
-      // e.preventDefault();
-      console.log("search ran from parent div");
-      const apiData = await axios.get(`/api/places/${userInput}`);
+      e.preventDefault();
+      console.log("Handlesearch ran from parent div");
+      const apiData = await axios.get(`/api/places/${userSearch.searchInput}`);
       // console.log(userInput, "this was the user input App.js");
       console.log(apiData, " this is from handleSearch App.js");
-      return history.push("/searchresults");
+      return;
+      // return history.push("/searchresults");
     } catch (error) {
       console.log(error);
     }

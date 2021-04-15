@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import "./TopMain.css";
 // import Image from "react-bootstrap/Image";
 // import mainPhoto from "../Assets/mainPhoto.jpeg";
@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
+import SearchContext from "../../../utils/SearchContext";
 
 //
 //
@@ -19,20 +20,7 @@ import axios from "axios";
 
 // const TopIntro = ({ search, onChange, userSearch, setUserSearch }) => {
 const TopIntro = () => {
-  //look at passing down a state as a prop
-  // ???
-  // const [userSearch, setUserSearch] = useState({
-  //   input: "",
-  // });
-
-  // useEffect(() => {
-  //   props.search();
-  // }, []);
-
-  // function updateState() {
-  //   setUserSearch("test");
-  // }
-
+  const { onChange, handleSearch } = useContext(SearchContext);
   return (
     <div className="topMainDiv d-flex align-items-center">
       {/*  */}
@@ -61,14 +49,14 @@ const TopIntro = () => {
             <Form
               className="form-inline searchForm"
               id="inputSearch"
-              // onSubmit={search}
+              onSubmit={handleSearch}
             >
               <input
-                // onChange={updateState()}
+                onChange={onChange}
                 type="text"
                 className="form-control formInput form-control-lg"
                 placeholder="Search"
-                name="input"
+                name="searchInput"
               ></input>
             </Form>
           </Col>

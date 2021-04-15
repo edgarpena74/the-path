@@ -22,11 +22,11 @@ const BottomIntro = () => {
 
   function getSeedData() {
     API.getSeeds().then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setSeeds(res.data);
     });
   }
-  console.log(seeds);
+  // console.log(seeds);
 
   // const cards = ({title, imageURL}) => {
 
