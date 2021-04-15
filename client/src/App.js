@@ -1,7 +1,13 @@
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
 // import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
@@ -12,7 +18,7 @@ import Footer from "./Components/Footer/Footer";
 // import ContextRoute from "./utils/ContextRoute";
 import SearchContext from "./utils/SearchContext";
 function App() {
-  // const history = useHistory();
+  const history = useHistory();
 
   const [userSearch, setUserSearch] = useState({
     searchInput: "",
@@ -38,6 +44,7 @@ function App() {
 
   const onChange = (e) => {
     setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
+    // setRedirectState({ redirect: true });
     console.log("onChange function ran");
   };
   console.log(redirectState, "redirect state before handleSearch");
@@ -46,20 +53,22 @@ function App() {
       e.preventDefault();
 
       console.log("handleSearch ran from parent div");
-      setRedirectState({ redirect: true });
+
       //
       // Consider using the get function in a child component to
       //
       const apiData = await axios.get(`/api/places/${userSearch.searchInput}`);
       // console.log(userInput, "this was the user input App.js");
       console.log(apiData, " this is from handleSearch App.js");
-      console.log(redirectState, "redirect state handleSearch");
-      if (redirectState.redirect === true) {
-        return <Redirect to="/searchresults" />;
-      } else {
-        return console.log("Redirect did not work");
-      }
+      // console.log(redirectState, "redirect state handleSearch");
+      // if (redirectState.redirect === true) {
+      //   console.log("redirect should have happened");
+      //   return <Redirect from="/intro" to="/searchresults" />;
+      // } else {
+      //   return console.log("Redirect did not work");
+      // }
       // return history.push("/searchresults");
+      return <Redirect to="/searchresults" />;
     } catch (error) {
       console.log(error);
     }
@@ -78,7 +87,7 @@ function App() {
             <Route path="/searchresults" component={SearchResults} />
             {/* Intro Page */}
             <Route path="/intro" component={Intro} />
-            <Redirect from="/" to="/intro" />
+            <Redirect from="/" to="/intro" exact />
           </SearchContext.Provider>
         </Switch>
 
