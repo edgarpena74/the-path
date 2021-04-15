@@ -1,6 +1,6 @@
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useContext } from "react";
+import React, { useState, useMemo } from "react";
 import {
   BrowserRouter,
   Route,
@@ -16,17 +16,17 @@ import Intro from "./Components/Main/Intro/IntroMain";
 import SearchResults from "./Components/Main/SearchResults/SearchResults";
 import Footer from "./Components/Footer/Footer";
 // import ContextRoute from "./utils/ContextRoute";
-import SearchContext from "./utils/SearchContext";
+import FunctionsContext from "./utils/FunctionsContext";
+import { QueryContext } from "./utils/QueryContext";
 function App() {
-  // const [userSearch, setUserSearch] = useState({
-  //   searchInput: "",
-  // });
-
+  const [userSearch, setUserSearch] = useState("");
+  const providerValue = useMemo(() => ({ userSearch, setUserSearch }), [
+    userSearch,
+    setUserSearch,
+  ]);
   const [redirectState, setRedirectState] = useState({
     redirect: false,
   });
-
-  const { userSearch, setUserSearch } = useContext(SearchContext);
 
   function renderRedirect() {
     if (redirectState.redirect === true) {
@@ -36,14 +36,6 @@ function App() {
     }
   }
 
-  console.log(userSearch, " current userSearch state");
-
-  const onChange = (e) => {
-    setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
-    // setRedirectState({ redirect: true });
-    console.log(userSearch, " userSearch value inside of onChange");
-    console.log("onChange function ran");
-  };
   console.log(redirectState, "redirect state before handleSearch");
   const handleSearch = async (e) => {
     try {
@@ -51,12 +43,6 @@ function App() {
 
       console.log("handleSearch ran from parent div");
 
-      //
-      // Consider using the get function in a child component to
-      //
-      // const apiData = await axios.get(`/api/places/${userSearch.searchInput}`);
-      // console.log(userInput, "this was the user input App.js");
-      // console.log(apiData, " this is from handleSearch App.js");
       return setRedirectState({ redirect: true });
     } catch (error) {
       return console.log(error);
@@ -69,15 +55,15 @@ function App() {
         <Nav />
         {renderRedirect()}
         <Switch>
-          <SearchContext.Provider
-            value={{ ...userSearch, onChange, handleSearch }}
-          >
-            {/* Search results page */}
-            <Route path="/searchresults" component={SearchResults} />
-            {/* Intro Page */}
-            <Route path="/intro" component={Intro} />
-            <Redirect from="/" to="/intro" />
-          </SearchContext.Provider>
+          <FunctionsContext.Provider value={{ handleSearch }}>
+            <QueryContext.Provider value={providerValue}>
+              {/* Search results page */}
+              <Route path="/searchresults" component={SearchResults} />
+              {/* Intro Page */}
+              <Route path="/intro" component={Intro} />
+              <Redirect from="/" to="/intro" />
+            </QueryContext.Provider>
+          </FunctionsContext.Provider>
         </Switch>
 
         <Footer />

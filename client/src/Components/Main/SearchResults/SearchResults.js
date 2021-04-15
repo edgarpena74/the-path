@@ -1,15 +1,23 @@
 import React, { useContext } from "react";
 // import { useHistory } from "react-router-dom";
+import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Cards from "./CardBlock/Cards";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import "./SearchResults.css";
-import SearchContext from "../../../utils/SearchContext";
+// import FunctionsContext from "../../../utils/FunctionsContext";
+import { QueryContext } from "../../../utils/QueryContext";
 const SearchResults = () => {
-  const { userSearch } = useContext(SearchContext);
-  console.log({ userSearch });
+  const { userSearch, setUserSearch } = useContext(QueryContext);
+  console.log(userSearch, " value of userSearch inside of SearchResults.js");
+
+  const onPageLoad = async () => {
+    const data = [];
+    const callback = await axios.get(`/api/places/${userSearch}`);
+    console.log(callback);
+  };
   return (
     <div className="searchResultsDiv">
       <Container>

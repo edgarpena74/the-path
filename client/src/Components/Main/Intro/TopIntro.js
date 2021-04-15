@@ -9,7 +9,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
-import SearchContext from "../../../utils/SearchContext";
+import FunctionsContext from "../../../utils/FunctionsContext";
+import { QueryContext } from "../../../utils/QueryContext";
 
 //
 //
@@ -20,7 +21,14 @@ import SearchContext from "../../../utils/SearchContext";
 
 // const TopIntro = ({ search, onChange, userSearch, setUserSearch }) => {
 const TopIntro = () => {
-  const { onChange, handleSearch } = useContext(SearchContext);
+  const { handleSearch } = useContext(FunctionsContext);
+  const { userSearch, setUserSearch } = useContext(QueryContext);
+
+  const onChange = (e) => {
+    console.log("on change ran");
+    setUserSearch({ userSearch, [e.target.name]: e.target.value });
+    console.log(userSearch, " this is the value for userSearch");
+  };
   return (
     <div className="topMainDiv d-flex align-items-center">
       {/*  */}
@@ -56,7 +64,7 @@ const TopIntro = () => {
                 type="text"
                 className="form-control formInput form-control-lg"
                 placeholder="Search"
-                name="searchInput"
+                name="userSearch"
               ></input>
             </Form>
           </Col>
