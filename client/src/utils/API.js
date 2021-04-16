@@ -10,4 +10,15 @@ async function getSeeds() {
   }
 }
 
-export default { getSeeds };
+async function initSearch(userSearch) {
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/api/places/${userSearch}`
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export default { getSeeds, initSearch };
