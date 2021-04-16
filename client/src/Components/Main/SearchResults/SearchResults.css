@@ -5,6 +5,8 @@
 
 .resultsDiv {
   border: 10px solid black !important;
+  height: 500px !important;
+  overflow-y: scroll !important;
 }
 
 .rightSide {

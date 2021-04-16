@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Cards from "./CardBlock/Cards";
+import ListGroup from "react-bootstrap/ListGroup";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import "./SearchResults.css";
 // import FunctionsContext from "../../../utils/FunctionsContext";
@@ -14,28 +15,25 @@ import { QueryContext } from "../../../utils/QueryContext";
 const SearchResults = () => {
   const { userSearch, setUserSearch } = useContext(QueryContext);
 
-  console.log(userSearch, " value of userSearch inside of SearchResults.js");
+  // console.log(
+  //   userSearch.input,
+  //   " value of userSearch inside of SearchResults.js"
+  // );
 
   const [initSearch, setInitSearch] = useState([]);
+  // console.log(initSearch, "init search pre useEffect");
 
-  function onPageLoad() {
-    API.initSearch(userSearch).then((res) => {
+  // API.initSearch(userSearch.input).then((res) => {
+  //   return setInitSearch(res.data.data);
+  // });
+
+  useEffect(() => {
+    API.initSearch(userSearch.input).then((res) => {
       setInitSearch(res.data.data);
     });
-  }
+  }, [userSearch.input]);
 
-  useEffect(() => {
-    onPageLoad();
-  }, []);
-
-  useEffect(() => {
-    onPageLoad();
-    return () => {
-      setInitSearch([]);
-      setUserSearch({});
-    };
-  }, []);
-
+  console.log(userSearch, "current userSearch State");
   console.log(initSearch, " initSearch Data");
   return (
     <div className="searchResultsDiv">
@@ -43,11 +41,16 @@ const SearchResults = () => {
         <Row>
           {/* Left Side */}
           <Col className="leftSide" lg="6" md="6">
-            <div className="resultsDiv">
+            {/* <div className="resultsDiv">
               {initSearch.map((result) => (
                 <Cards result={result} />
               ))}
-            </div>
+            </div> */}
+            <ListGroup className="resultsDiv">
+              {initSearch.map((result) => (
+                <Cards result={result} />
+              ))}
+            </ListGroup>
           </Col>
           {/* Right Side */}
           <Col className="rightSide" lg="6" md="6">

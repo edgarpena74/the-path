@@ -1,29 +1,17 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
+import ListGroup from "react-bootstrap/ListGroup";
 import "./Cards.css";
 const Cards = ({ result }) => {
-  // const { userSearch, setUserSearch } = useContext(QueryContext);
-
-  // console.log(userSearch, " value of userSearch inside of SearchResults.js");
-
-  // const [initSearch, setInitSearch] = useState([]);
-
-  // function onPageLoad() {
-  //   API.initSearch(userSearch).then((res) => {
-  //     setInitSearch(res.data);
-  //   });
-  // }
-
-  // useEffect(() => {
-  //   onPageLoad();
-  // }, []);
-
-  // console.log(initSearch, " initSearch Data");
   return (
-    <div className="cardStyle">
-      <Image className="img d-inline" src={result.images[0].url} />
+    <ListGroup.Item className="cardStyle">
+      <Image
+        className="img d-inline"
+        src={result.images[0].url}
+        alt="No image"
+      />
       <div className="title d-inline">{result.title}</div>
-    </div>
+    </ListGroup.Item>
   );
 };
 

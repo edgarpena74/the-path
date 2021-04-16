@@ -15,10 +15,21 @@ async function initSearch(userSearch) {
     const response = await axios.get(
       `http://localhost:5000/api/places/${userSearch}`
     );
+    console.log(response, "response from API.js");
     return response;
   } catch (error) {
     console.log(error);
   }
 }
-
-export default { getSeeds, initSearch };
+async function deleteInitSearch(userSearch) {
+  try {
+    const response = await axios.delete(
+      `http://localhost:5000/api/places/${userSearch}`,
+      { data: [] }
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+export default { getSeeds, initSearch, deleteInitSearch };

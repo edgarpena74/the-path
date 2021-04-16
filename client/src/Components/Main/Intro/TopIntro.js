@@ -26,9 +26,9 @@ const TopIntro = () => {
 
   const onChange = (e) => {
     console.log("on change ran");
-    setUserSearch({ userSearch, [e.target.name]: e.target.value });
-    console.log(userSearch, " this is the value for userSearch");
+    setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
   };
+  console.log(userSearch, " this is the value for userSearch");
   return (
     <div className="topMainDiv d-flex align-items-center">
       {/*  */}
@@ -64,7 +64,7 @@ const TopIntro = () => {
                 type="text"
                 className="form-control formInput form-control-lg"
                 placeholder="Search"
-                name="userSearch"
+                name="input"
               ></input>
             </Form>
           </Col>

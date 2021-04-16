@@ -14,18 +14,31 @@ router.get("/seeds", getSeeds);
 router.get("/places/:input", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
-  const url = `https://developer.nps.gov/api/v1/places?q=${req.params.input}&api_key=${process.env.API_KEY}&limit=15`;
+  const url = `https://developer.nps.gov/api/v1/places?q=${req.params.input}&api_key=${process.env.API_KEY}&limit=30`;
   axios
     .get(url)
     .then((data) => {
-      console.log(data.data, " BE// Line 58");
+      // console.log(data.data, " BE// Line 58");
       res.json(data.data);
-      const test = data.data.data[0].title;
-      console.log(test, " This is the test value BE");
+      // const test = data.data.data[0].title;
+      // console.log(test, " This is the test value BE");
     })
     .catch((err) => console.log(err));
 });
-
+// router.delete("/places/:input", async (req, res) => {
+//   // const searchInput = await db.SearchInput.find({ input: req.body });
+//   // console.log("Line 40 // Back end SearchInput: ", searchInput);
+//   const url = `https://developer.nps.gov/api/v1/places?q=${req.params.input}&api_key=${process.env.API_KEY}&limit=30`;
+//   axios
+//     .delete(url)
+//     .then((data) => {
+//       console.log(data.data, " BE// Line 58");
+//       res.json(data.data);
+//       const test = data.data.data[0].title;
+//       console.log(test, " This is the test value BE");
+//     })
+//     .catch((err) => console.log(err));
+// });
 //For Seed data
 router.get("/places-seed", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });

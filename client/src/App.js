@@ -19,11 +19,14 @@ import Footer from "./Components/Footer/Footer";
 import FunctionsContext from "./utils/FunctionsContext";
 import { QueryContext } from "./utils/QueryContext";
 function App() {
-  const [userSearch, setUserSearch] = useState("");
-  const providerValue = useMemo(() => ({ userSearch, setUserSearch }), [
-    userSearch,
-    setUserSearch,
-  ]);
+  const [userSearch, setUserSearch] = useState({
+    input: "",
+  });
+
+  // const providerValue = useMemo(() => ({ userSearch, setUserSearch }), [
+  //   userSearch,
+  //   setUserSearch,
+  // ]);
   const [redirectState, setRedirectState] = useState({
     redirect: false,
   });
@@ -56,7 +59,7 @@ function App() {
         {renderRedirect()}
         <Switch>
           <FunctionsContext.Provider value={{ handleSearch }}>
-            <QueryContext.Provider value={providerValue}>
+            <QueryContext.Provider value={{ userSearch, setUserSearch }}>
               {/* Search results page */}
               <Route path="/searchresults" component={SearchResults} />
               {/* Intro Page */}
