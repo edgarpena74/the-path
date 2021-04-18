@@ -2,6 +2,7 @@ import React from "react";
 import Image from "react-bootstrap/Image";
 import ListGroup from "react-bootstrap/ListGroup";
 import "./Cards.css";
+// renders the API data to the list items/ cards
 const Cards = ({ result }) => {
   return (
     <ListGroup.Item className="cardStyle">

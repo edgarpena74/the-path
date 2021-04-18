@@ -21,9 +21,14 @@ import { QueryContext } from "../../../utils/QueryContext";
 
 // const TopIntro = ({ search, onChange, userSearch, setUserSearch }) => {
 const TopIntro = () => {
+  //This context passes he handleSearch function from App.js
   const { handleSearch } = useContext(FunctionsContext);
+
+  //This context is used to save whats the user is searching
+  //allowing the data to be used in other components
   const { userSearch, setUserSearch } = useContext(QueryContext);
 
+  // Updates the state of userSearch
   const onChange = (e) => {
     console.log("on change ran");
     setUserSearch({ ...userSearch, [e.target.name]: e.target.value });

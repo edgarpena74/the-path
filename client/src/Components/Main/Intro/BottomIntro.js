@@ -7,19 +7,22 @@ import "./BottomMain.css";
 import API from "../../../utils/API";
 import Card from "react-bootstrap/Card";
 
-//implement use effect to render code upon loading
 const BottomIntro = () => {
+  //This brings the seed data in to the bottom section of the
+  //first page
   const [seeds, setSeeds] = useState([
     // {
     //   title: "",
     //   imageURL: "",
     // },
   ]);
-
+  // This renders the seed data when it loads(is mounted)
   useEffect(() => {
     getSeedData();
   }, []);
 
+  // This is the callback for getting te seed data and updating
+  // the state for seeds const
   function getSeedData() {
     API.getSeeds().then((res) => {
       // console.log(res.data);

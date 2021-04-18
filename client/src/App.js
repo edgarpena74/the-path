@@ -18,19 +18,21 @@ import Footer from "./Components/Footer/Footer";
 // import ContextRoute from "./utils/ContextRoute";
 import FunctionsContext from "./utils/FunctionsContext";
 import { QueryContext } from "./utils/QueryContext";
+
 function App() {
+  //Setting up userSearch in parent to send to children
   const [userSearch, setUserSearch] = useState({
     input: "",
   });
 
-  // const providerValue = useMemo(() => ({ userSearch, setUserSearch }), [
-  //   userSearch,
-  //   setUserSearch,
-  // ]);
+  //initial state for redirecting. If redirect is true then
+  //user gets redirected to /searchresults
   const [redirectState, setRedirectState] = useState({
     redirect: false,
   });
 
+  //When this function runs it sets the redirect state to true and
+  //which would Redirect the user
   function renderRedirect() {
     if (redirectState.redirect === true) {
       return <Redirect to="/searchresults" />;
@@ -40,6 +42,8 @@ function App() {
   }
 
   console.log(redirectState, "redirect state before handleSearch");
+  //handleSearch is run when the user clicks submit on TopInto.js
+  //then user it redirected to SearchResults.js page
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
@@ -56,6 +60,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Nav />
+        {/* This function activates the Redirect function which redirects the user to /searchResults */}
         {renderRedirect()}
         <Switch>
           <FunctionsContext.Provider value={{ handleSearch }}>
@@ -64,6 +69,7 @@ function App() {
               <Route path="/searchresults" component={SearchResults} />
               {/* Intro Page */}
               <Route path="/intro" component={Intro} />
+              {/* This had to be added to make the redirect work. Still not sure why its needed for it to work but it does. oh well */}
               <Redirect from="/" to="/intro" />
             </QueryContext.Provider>
           </FunctionsContext.Provider>
