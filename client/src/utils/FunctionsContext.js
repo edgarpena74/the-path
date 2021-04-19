@@ -5,6 +5,7 @@ const FunctionsContext = React.createContext({
   // setUserSearch: () => {},
   handleSearch: () => {},
   onChange: () => {},
+  onClick: () => {},
 });
 
 export default FunctionsContext;

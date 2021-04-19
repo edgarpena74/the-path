@@ -10,7 +10,7 @@ async function getSeeds() {
   }
 }
 
-async function initSearch(userSearch) {
+async function searchRes(userSearch) {
   try {
     const response = await axios.get(
       `http://localhost:5000/api/places/${userSearch}`
@@ -32,4 +32,4 @@ async function deleteInitSearch(userSearch) {
     console.log(error);
   }
 }
-export default { getSeeds, initSearch, deleteInitSearch };
+export default { getSeeds, searchRes, deleteInitSearch };

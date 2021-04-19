@@ -12,12 +12,13 @@ import {
 import axios from "axios";
 import "./App.css";
 import Nav from "./Components/Nav/Nav";
-import Intro from "./Components/Main/Intro/IntroMain";
+import IntroMain from "./Components/Main/Intro/IntroMain";
 import SearchResults from "./Components/Main/SearchResults/SearchResults";
 import Footer from "./Components/Footer/Footer";
 // import ContextRoute from "./utils/ContextRoute";
 import FunctionsContext from "./utils/FunctionsContext";
-import { QueryContext } from "./utils/QueryContext";
+// import { QueryContext } from "./utils/QueryContext";
+import { QueryContext } from "./utils/Contexts";
 
 function App() {
   //Setting up userSearch in parent to send to children
@@ -68,7 +69,7 @@ function App() {
               {/* Search results page */}
               <Route path="/searchresults" component={SearchResults} />
               {/* Intro Page */}
-              <Route path="/intro" component={Intro} />
+              <Route path="/intro" component={IntroMain} />
               {/* This had to be added to make the redirect work. Still not sure why its needed for it to work but it does. oh well */}
               <Redirect from="/" to="/intro" />
             </QueryContext.Provider>

@@ -9,9 +9,13 @@ import Cards from "./CardBlock/Cards";
 import ListGroup from "react-bootstrap/ListGroup";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import "./SearchResults.css";
-// import FunctionsContext from "../../../utils/FunctionsContext";
-import { QueryContext } from "../../../utils/QueryContext";
-import { ResultIDContext } from "../../../utils/ResultIDContext";
+import SearchBar from "../../SearchBar/SearchBar";
+// import { QueryContext } from "../../../utils/QueryContext";
+// import { ResultIDContext } from "../../../utils/ResultIDContext";
+import FunctionsContext from "../../../utils/FunctionsContext";
+import { QueryContext } from "../../../utils/Contexts";
+import { ResultIDContext } from "../../../utils/Contexts";
+import SearchResultsContext from "../../../utils/SearchResultsContext";
 
 const SearchResults = () => {
   //This is the context for the state that was declared in App.js(Parent)
@@ -31,33 +35,45 @@ const SearchResults = () => {
   // );
 
   //Stores and is used to render the search query from IntroMain.js component(first page user sees)
-  const [initSearch, setInitSearch] = useState([]);
+  const [searchData, setSearchData] = useState([]);
+
+  const onClick = (e) => {
+    console.log("onClick");
+  };
 
   //When the component mounts the userSearch.input is passed down as the param when
   //getting data from the API.
   useEffect(() => {
-    API.initSearch(userSearch.input).then((res) => {
-      setInitSearch(res.data.data);
+    API.searchRes(userSearch.input).then((res) => {
+      setSearchData(res.data.data);
     });
-  }, [userSearch.input]);
+  }, []);
 
-  console.log(userSearch, "current userSearch State");
-  console.log(initSearch, " initSearch Data");
+  console.log(searchData);
   return (
-    <ResultIDContext.provider value={{ resultID, setResultID }}>
+    <ResultIDContext.Provider value={{ resultID, setResultID }}>
       <div className="searchResultsDiv">
+        {/* Search bar component */}
+        {/* <SearchBar /> */}
+        {/*  */}
+        {/* Container for cards and info */}
         <Container>
           <Row>
             {/* Left Side */}
             <Col className="leftSide" lg="6" md="6">
               {/* <div className="resultsDiv">
-              {initSearch.map((result) => (
+              {searchData.map((result) => (
                 <Cards result={result} />
               ))}
             </div> */}
               <ListGroup className="resultsDiv">
-                {initSearch.map((result) => (
-                  <Cards result={result} />
+                {searchData.map((result) => (
+                  <Cards
+                    onClick={onClick}
+                    key={result.id}
+                    id={result.id}
+                    result={result}
+                  />
                 ))}
               </ListGroup>
             </Col>
@@ -70,7 +86,7 @@ const SearchResults = () => {
           </Row>
         </Container>
       </div>
-    </ResultIDContext.provider>
+    </ResultIDContext.Provider>
   );
 };
 

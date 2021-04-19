@@ -45,11 +45,9 @@ const BottomIntro = () => {
         {/* <Row className="subBoxRow d-flex justify-content-center"> */}
         <Row className="subBoxRow d-flex justify-content-center">
           {seeds.map((data) => (
-            <Card style={{ width: "15rem", margin: "7px" }}>
+            <Card key={data.id} style={{ width: "15rem", margin: "7px" }}>
               <Card.Body>
-                <Card.Text>
-                  <p>{data.title}</p>
-                </Card.Text>
+                <Card.Text>{data.title}</Card.Text>
               </Card.Body>
               <Card.Img
                 style={{ height: "178px" }}

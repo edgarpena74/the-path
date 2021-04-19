@@ -4,8 +4,10 @@
   display: block absolute !important;
   height: 500px;
   background-image: url(./Assets/mainPhoto.jpeg);
+  /* opacity: 75%; */
   background-position: center !important;
   background-size: cover !important;
+
   /* justify-content: center !important; */
 }
 /* .mainPhoto {

@@ -10,21 +10,25 @@ mongoose.connect("mongodb://localhost/trails", {
 
 let favoriteSeed = [
   {
+    id: "1",
     title: "Point Reyes Lighthouse",
     imageURL:
       "https://www.nps.gov/common/uploads/cropped_image/DFB0CAAA-EE69-F1BA-5D4C31A2CB62CB66.jpg",
   },
   {
+    id: "2",
     title: "Baker Beach",
     imageURL:
       "https://www.nps.gov/common/uploads/cropped_image/CCF42D59-ABD7-9F3D-9C16257CC86F35F4.jpg",
   },
   {
+    id: "4",
     title: "Drakes Beach",
     imageURL:
       "https://www.nps.gov/common/uploads/cropped_image/primary/820D2985-9030-A353-D0DB1EEF0A9BFDBC.jpg",
   },
   {
+    id: "5",
     title: "Muir Woods Main Trail",
     imageURL: "http://www.redwoodhikes.com/Muir/Main1.jpg",
   },
