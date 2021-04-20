@@ -32,29 +32,42 @@ const SearchResults = () => {
   console.log(listItemID, "listItemID");
 
   //State for the data based on the list item id
-  const [listItemData, setListItemData] = useState([]);
+  const [listItemData, setListItemData] = useState({});
 
-  const infoBlockData = async () => {
-    try {
-      return setListItemData(
-        searchData.filter((data) => data.id === listItemID)
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // Filter the searchData based on the id of the item that was selected
+  // and update the state of the list item data
+  // const infoBlockData = () => {
+  //   try {
+  //     console.log("InfoBlockData function ran");
+  //     return setListItemData(
+  //       searchData.filter((data) => data.id === listItemID)
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const listItemTest = searchData.filter((data) => data.id === listItemID);
+  console.log(listItemTest, "list Items after filter");
 
   // onClick function for getting the id of the selected list item
   const onClickItem = async (e) => {
     try {
       e.preventDefault();
-      infoBlockData(e);
+      console.log("onClick ran");
+      setListItemID(e.target.id);
+      // infoBlockData(e);
       console.log(e.target.id, "inside of onClick");
-      return setListItemID(e.target.id);
+      // return setListItemID(e.target.id);
+      return setListItemData({ listItemTest });
     } catch (error) {
       return console.log(error);
     }
   };
+
+  // function infoBlockData() {
+  //   return setListItemData(searchData.filter((data) => data.id === listItemID));
+  // }
 
   // // Const for getting the data of the specific list item
   // // const selectedItemData = searchData.filter((data) => data.id === listItemID);
@@ -125,6 +138,7 @@ const SearchResults = () => {
           {/* Right Side */}
           <Col className="rightSide" lg="6" md="6">
             <div className="infoDiv">
+              <h1>{listItemData.title}</h1>
               {/* data From API callback
                     -id
                     -images[0].url
@@ -134,6 +148,21 @@ const SearchResults = () => {
                     -tags[index], tags.length
                     -url
               */}
+              {/* <div className="title">{listItemData.title}</div> */}
+              {/* <Image className="img d-inline" src={listItemData.image.url} /> */}
+              {/* <div className="info">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut al
+              </div> */}
             </div>
           </Col>
           {/*  */}
