@@ -26,7 +26,6 @@ const SearchResults = () => {
 
   // Stores and is used to render the search query from IntroMain.js component(first page user sees)
   const [searchData, setSearchData] = useState([]);
-  console.log(searchData);
 
   // State for saving the list item id that was clicked on
   const [listItemID, setListItemID] = useState("");
@@ -44,14 +43,17 @@ const SearchResults = () => {
     });
   }, [userSearch.input]);
 
+  console.log(searchData, "searchData value");
   const onClickItem = async (e) => {
     console.log("OnCLickItem ran");
     try {
       e.preventDefault();
-      console.log(e.target.id, "inside of onClick");
-      setListItemID(e.target.id);
+      console.log(e.target.id, "ID inside of onClick");
+      // setListItemID(e.target.id);
+      let idTest = e.target.id;
+      console.log(idTest, "idTest value");
       console.log(searchData, "search Data inside of onCLick");
-      let listItemFilter = searchData.filter((data) => data.id === listItemID);
+      let listItemFilter = searchData.filter((data) => data.id === idTest);
       console.log(listItemFilter, "list Items after filter");
       return setListItemData("hello");
     } catch (error) {
