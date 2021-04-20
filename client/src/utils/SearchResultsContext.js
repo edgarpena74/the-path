@@ -1,7 +1,7 @@
 import React from "react";
 
-const SearchResultsContext = React.createContext({
-  onClick: () => {},
-});
+// const SearchResultsContext = React.createContext({
+//   onClick: () => {},
+// });
 
-export default SearchResultsContext;
+export const SearchResultsContext = React.createContext(null);

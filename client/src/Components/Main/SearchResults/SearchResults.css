@@ -9,6 +9,11 @@
   overflow-y: scroll !important;
 }
 
+.listItemImg {
+  height: 100px !important;
+  width: 100px !important;
+}
+
 .rightSide {
   margin-right: 0px !important;
   padding: 0px !important;

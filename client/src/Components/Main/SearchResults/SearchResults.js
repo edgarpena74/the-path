@@ -5,7 +5,7 @@ import API from "../../../utils/API";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Cards from "./CardBlock/Cards";
+import Image from "react-bootstrap/Image";
 import ListGroup from "react-bootstrap/ListGroup";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import "./SearchResults.css";
@@ -15,7 +15,7 @@ import SearchBar from "../../SearchBar/SearchBar";
 import FunctionsContext from "../../../utils/FunctionsContext";
 import { QueryContext } from "../../../utils/Contexts";
 import { ResultIDContext } from "../../../utils/Contexts";
-import SearchResultsContext from "../../../utils/SearchResultsContext";
+import { SearchResultsContext } from "../../../utils/SearchResultsContext";
 
 const SearchResults = () => {
   //This is the context for the state that was declared in App.js(Parent)
@@ -37,13 +37,16 @@ const SearchResults = () => {
   //Stores and is used to render the search query from IntroMain.js component(first page user sees)
   const [searchData, setSearchData] = useState([]);
 
-  const onClick = (e) => {
+  const onClickItem = (data, e) => {
     console.log("onClick");
+    console.log(data);
+    // console.log(e.target.id);
   };
 
   //When the component mounts the userSearch.input is passed down as the param when
   //getting data from the API.
   useEffect(() => {
+    console.log("useEffect ran for Search Results");
     API.searchRes(userSearch.input).then((res) => {
       setSearchData(res.data.data);
     });
@@ -52,6 +55,7 @@ const SearchResults = () => {
   console.log(searchData);
   return (
     <ResultIDContext.Provider value={{ resultID, setResultID }}>
+      {/* <SearchResultsContext.Provider value={{ onClick }}> */}
       <div className="searchResultsDiv">
         {/* Search bar component */}
         {/* <SearchBar /> */}
@@ -68,12 +72,21 @@ const SearchResults = () => {
             </div> */}
               <ListGroup className="resultsDiv">
                 {searchData.map((result) => (
-                  <Cards
-                    onClick={onClick}
+                  <ListGroup.Item
+                    data={result}
                     key={result.id}
+                    action
+                    onClick={onClickItem}
+                    className="cardStyle"
                     id={result.id}
-                    result={result}
-                  />
+                  >
+                    <Image
+                      className="listItemImg d-inline"
+                      src={result.images[0].url}
+                      alt=""
+                    />
+                    <div className="title d-inline">{result.title}</div>
+                  </ListGroup.Item>
                 ))}
               </ListGroup>
             </Col>
@@ -86,6 +99,7 @@ const SearchResults = () => {
           </Row>
         </Container>
       </div>
+      {/* </SearchResultsContext.Provider> */}
     </ResultIDContext.Provider>
   );
 };
