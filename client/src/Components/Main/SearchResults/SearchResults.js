@@ -29,6 +29,8 @@ const SearchResults = () => {
     id: "",
   });
 
+  const [testData, setTestData] = useState([]);
+
   // console.log(
   //   userSearch.input,
   //   " value of userSearch inside of SearchResults.js"
@@ -37,10 +39,19 @@ const SearchResults = () => {
   //Stores and is used to render the search query from IntroMain.js component(first page user sees)
   const [searchData, setSearchData] = useState([]);
 
-  const onClickItem = (data, e) => {
-    console.log("onClick");
-    console.log(data);
-    // console.log(e.target.id);
+  const onClickItem = async (e) => {
+    try {
+      e.preventDefault();
+      console.log("onClick Ran");
+      return setTestData({ ...testData, [e.target.id]: e.target.value });
+    } catch (error) {
+      return console.log(error);
+    }
+    // console.log("onClick");
+    // console.log(data);
+    // await setTestData({ ...testData, [e.target.id]: e.target.value });
+    // console.log(testData);
+    // return;
   };
 
   //When the component mounts the userSearch.input is passed down as the param when
@@ -52,6 +63,7 @@ const SearchResults = () => {
     });
   }, []);
 
+  console.log(testData, "testData");
   console.log(searchData);
   return (
     <ResultIDContext.Provider value={{ resultID, setResultID }}>
