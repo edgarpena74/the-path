@@ -12,6 +12,10 @@
 .listItemImg {
   height: 100px !important;
   width: 100px !important;
+  pointer-events: none !important;
+}
+.listItemTitle {
+  pointer-events: none !important;
 }
 
 .rightSide {
