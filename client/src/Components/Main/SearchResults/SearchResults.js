@@ -32,14 +32,14 @@ const SearchResults = () => {
   // console.log(listItemID, "listItemID outside on onClick");
 
   //State for the data based on the list item id
-  const [listItemData, setListItemData] = useState({});
+  const [listItemData, setListItemData] = useState([]);
   // console.log(listItemData, "before onclick list item data");
 
   useEffect(() => {
     // console.log("useEffect ran for Search Results");
     API.searchRes(userSearch.input).then((res) => {
       setSearchData(res.data.data);
-      setListItemData(res.data.data[0]);
+      setListItemData([res.data.data[0]]);
     });
   }, [userSearch.input]);
 
@@ -55,7 +55,8 @@ const SearchResults = () => {
       console.log(searchData, "search Data inside of onCLick");
       let listItemFilter = searchData.filter((data) => data.id === idTest);
       console.log(listItemFilter, "list Items after filter");
-      return setListItemData("hello");
+      // return setListItemData("hello again");
+      setListItemData(listItemFilter);
     } catch (error) {
       return console.log(error);
     }
@@ -67,7 +68,7 @@ const SearchResults = () => {
       {/* <SearchBar /> */}
       {/*  */}
       {/* Container for cards and info */}
-      <Container>
+      <Container className="searchResultsContainer">
         {/* Search bar*/}
         <Form>
           <Form.Row className="align-items-center">
@@ -114,7 +115,18 @@ const SearchResults = () => {
           {/* Right Side */}
           <Col className="rightSide" lg="6" md="6">
             <div className="infoDiv">
-              {/* <h1>{listItemData.title}</h1> */}
+              {listItemData.map((data) => (
+                <div key={data.id}>
+                  <h1>{data.title}</h1>
+
+                  <Image
+                    src={data.images[0].url}
+                    fluid
+                    // className="m-0 p-0"
+                  />
+                  <div style={{ display: "none" }}>Hello World</div>
+                </div>
+              ))}
               {/* data From API callback
                     -id
                     -images[0].url
@@ -124,21 +136,6 @@ const SearchResults = () => {
                     -tags[index], tags.length
                     -url
               */}
-              {/* <div className="title">{listItemData.title}</div> */}
-              {/* <Image className="img d-inline" src={listItemData.image.url} /> */}
-              {/* <div className="info">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut al
-              </div> */}
             </div>
           </Col>
           {/*  */}

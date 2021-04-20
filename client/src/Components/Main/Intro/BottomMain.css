@@ -1,6 +1,6 @@
-.subDiv {
-  display: block !important;
-  margin: 0px !important;
+.bottomDiv{
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important
 }
 
 .subContainer {

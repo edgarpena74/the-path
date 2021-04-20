@@ -1,7 +1,7 @@
 .topMainDiv {
   /* position: relative;
   z-index: auto !important; */
-  display: block absolute !important;
+  /* display: block absolute !important; */
   height: 500px;
   background-image: url(./Assets/mainPhoto.jpeg);
   /* opacity: 75%; */
@@ -16,7 +16,7 @@
 } */
 
 .overlay {
-  display: absolute !important;
+  /* display: absolute !important; */
   top: 50% !important;
   left: 50% !important;
   width: 500px !important;

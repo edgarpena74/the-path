@@ -37,27 +37,29 @@ const BottomIntro = () => {
 
   return (
     // <div className="subDiv d-flex align-items-stretch">
-    <div className="subDiv ">
-      <Container className="subContainer ">
-        <Row className="subHeading">
-          <h1>Northern California Favorites</h1>
-        </Row>
-        {/* <Row className="subBoxRow d-flex justify-content-center"> */}
-        <Row className="subBoxRow d-flex justify-content-center">
-          {seeds.map((data) => (
-            <Card key={data.id} style={{ width: "15rem", margin: "7px" }}>
-              <Card.Body>
-                <Card.Text>{data.title}</Card.Text>
-              </Card.Body>
-              <Card.Img
-                style={{ height: "178px" }}
-                variant="bottom"
-                src={data.imageURL}
-              />
-            </Card>
-          ))}
-        </Row>
-      </Container>
+    <div className="d-flex">
+      <div className="container-fluid bottomDiv">
+        <Container className="subContainer ">
+          <Row className="subHeading">
+            <h1>Northern California Favorites</h1>
+          </Row>
+          {/* <Row className="subBoxRow d-flex justify-content-center"> */}
+          <Row className="subBoxRow d-flex justify-content-center">
+            {seeds.map((data) => (
+              <Card key={data.id} style={{ width: "15rem", margin: "7px" }}>
+                <Card.Body>
+                  <Card.Text>{data.title}</Card.Text>
+                </Card.Body>
+                <Card.Img
+                  style={{ height: "178px" }}
+                  variant="bottom"
+                  src={data.imageURL}
+                />
+              </Card>
+            ))}
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 };
