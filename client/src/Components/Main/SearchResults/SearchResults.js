@@ -29,10 +29,19 @@ const SearchResults = () => {
 
   // State for saving the list item id that was clicked on
   const [listItemID, setListItemID] = useState("");
-  console.log(listItemID, "listItemID");
+  // console.log(listItemID, "listItemID outside on onClick");
 
   //State for the data based on the list item id
   const [listItemData, setListItemData] = useState({});
+  // console.log(listItemData, "before onclick list item data");
+
+  useEffect(() => {
+    // console.log("useEffect ran for Search Results");
+    API.searchRes(userSearch.input).then((res) => {
+      setSearchData(res.data.data);
+      setListItemData(res.data.data[0]);
+    });
+  }, [userSearch.input]);
 
   // Filter the searchData based on the id of the item that was selected
   // and update the state of the list item data
@@ -47,19 +56,23 @@ const SearchResults = () => {
   //   }
   // };
 
+  // const listItemTest = searchData.filter((data) => data.id === listItemID);
+  // console.log(listItemTest, "list Items after filter");
+  // console.log("  ");
+  // console.log("  ");
+  // console.log("  ");
   const listItemTest = searchData.filter((data) => data.id === listItemID);
   console.log(listItemTest, "list Items after filter");
-
   // onClick function for getting the id of the selected list item
   const onClickItem = async (e) => {
     try {
       e.preventDefault();
+      console.log("blank");
       console.log("onClick ran");
       setListItemID(e.target.id);
-      // infoBlockData(e);
       console.log(e.target.id, "inside of onClick");
-      // return setListItemID(e.target.id);
-      return setListItemData({ listItemTest });
+      console.log(listItemTest, " list item test inaide of onclick");
+      return setListItemData(listItemTest);
     } catch (error) {
       return console.log(error);
     }
@@ -77,15 +90,8 @@ const SearchResults = () => {
 
   // When the component mounts the userSearch.input is passed down as the param when
   // getting data from the API.
-  useEffect(() => {
-    console.log("useEffect ran for Search Results");
-    API.searchRes(userSearch.input).then((res) => {
-      setSearchData(res.data.data);
-      setListItemData(res.data.data[0]);
-    });
-  }, []);
 
-  console.log(listItemData, "listItem data");
+  console.log(listItemData, "listItem data after onClick");
   return (
     <div className="searchResultsDiv">
       {/* <SearchBar /> */}
@@ -138,7 +144,7 @@ const SearchResults = () => {
           {/* Right Side */}
           <Col className="rightSide" lg="6" md="6">
             <div className="infoDiv">
-              <h1>{listItemData.title}</h1>
+              {/* <h1>{listItemData.title}</h1> */}
               {/* data From API callback
                     -id
                     -images[0].url

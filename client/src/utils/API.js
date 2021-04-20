@@ -15,7 +15,8 @@ async function searchRes(userSearch) {
     const response = await axios.get(
       `http://localhost:5000/api/places/${userSearch}`
     );
-    console.log(response, "response from API.js");
+    // console.log(response, "response from API.js");
+
     return response;
   } catch (error) {
     console.log(error);
