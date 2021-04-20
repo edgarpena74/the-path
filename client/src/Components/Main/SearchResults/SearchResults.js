@@ -26,6 +26,7 @@ const SearchResults = () => {
 
   // Stores and is used to render the search query from IntroMain.js component(first page user sees)
   const [searchData, setSearchData] = useState([]);
+  console.log(searchData);
 
   // State for saving the list item id that was clicked on
   const [listItemID, setListItemID] = useState("");
@@ -43,53 +44,20 @@ const SearchResults = () => {
     });
   }, [userSearch.input]);
 
-  // Filter the searchData based on the id of the item that was selected
-  // and update the state of the list item data
-  // const infoBlockData = () => {
-  //   try {
-  //     console.log("InfoBlockData function ran");
-  //     return setListItemData(
-  //       searchData.filter((data) => data.id === listItemID)
-  //     );
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const listItemTest = searchData.filter((data) => data.id === listItemID);
-  // console.log(listItemTest, "list Items after filter");
-  // console.log("  ");
-  // console.log("  ");
-  // console.log("  ");
-  const listItemTest = searchData.filter((data) => data.id === listItemID);
-  console.log(listItemTest, "list Items after filter");
-  // onClick function for getting the id of the selected list item
   const onClickItem = async (e) => {
+    console.log("OnCLickItem ran");
     try {
       e.preventDefault();
-      console.log("blank");
-      console.log("onClick ran");
-      setListItemID(e.target.id);
       console.log(e.target.id, "inside of onClick");
-      console.log(listItemTest, " list item test inaide of onclick");
-      return setListItemData(listItemTest);
+      setListItemID(e.target.id);
+      console.log(searchData, "search Data inside of onCLick");
+      let listItemFilter = searchData.filter((data) => data.id === listItemID);
+      console.log(listItemFilter, "list Items after filter");
+      return setListItemData("hello");
     } catch (error) {
       return console.log(error);
     }
   };
-
-  // function infoBlockData() {
-  //   return setListItemData(searchData.filter((data) => data.id === listItemID));
-  // }
-
-  // // Const for getting the data of the specific list item
-  // // const selectedItemData = searchData.filter((data) => data.id === listItemID);
-  // // console.log(selectedItemData, "selectedItemData test");
-
-  // const [selectedItemData, setSelectedItemData] = useState();
-
-  // When the component mounts the userSearch.input is passed down as the param when
-  // getting data from the API.
 
   console.log(listItemData, "listItem data after onClick");
   return (
@@ -124,7 +92,7 @@ const SearchResults = () => {
                 <ListGroup.Item
                   id={result.id}
                   key={result.id}
-                  onClick={onClickItem}
+                  onClick={(e) => onClickItem(e)}
                   type="button"
                   action
                   className="listItemStyle"
