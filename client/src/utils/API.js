@@ -12,6 +12,7 @@ async function getSeeds() {
 
 async function searchRes(userSearch) {
   try {
+    
     const userQuery = encodeURIComponent(userSearch);
     console.log(userQuery, "userQuery");
     const response = await axios.get(
