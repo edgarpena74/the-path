@@ -10,14 +10,14 @@ router.get("/test", (req, res) => {
 const { getSeeds } = require("../controllers/seedController");
 router.get("/seeds", getSeeds);
 
-//API
+//API for getting places
 router.get("/places/:input", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
   const searchQuery = encodeURIComponent(req.params.input);
   console.log(searchQuery);
   const url = `https://developer.nps.gov/api/v1/places?q=${searchQuery}&api_key=${process.env.API_KEY}&limit=7`;
-  console.log(url);
+  // const reverseGeocode = console.log(url);
   axios
     .get(url)
     .then((data) => {
@@ -28,21 +28,23 @@ router.get("/places/:input", async (req, res) => {
     })
     .catch((err) => console.log(err));
 });
-// router.delete("/places/:input", async (req, res) => {
-//   // const searchInput = await db.SearchInput.find({ input: req.body });
-//   // console.log("Line 40 // Back end SearchInput: ", searchInput);
-//   const url = `https://developer.nps.gov/api/v1/places?q=${req.params.input}&api_key=${process.env.API_KEY}&limit=30`;
-//   axios
-//     .delete(url)
-//     .then((data) => {
-//       console.log(data.data, " BE// Line 58");
-//       res.json(data.data);
-//       const test = data.data.data[0].title;
-//       console.log(test, " This is the test value BE");
-//     })
-//     .catch((err) => console.log(err));
-// });
-//For Seed data
+
+// API for getting the location by using reverse geocoding
+// // router.get("/Location/:latLong", async (req, res) => {
+router.get("/Location/:lon&:lat", async (req, res) => {
+  // console.log(req.body);
+  // const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${req.params.latLong}&key=${process.env.GOOGLE_KEY}`;
+  const url = `https://api.openrouteservice.org/geocode/reverse?api_key=${process.env.ORS_KEY}&point.lon=${lon}&point.lat=${lat}&size=1`;
+  axios
+    .get(url)
+    .then((data) => {
+      console.log(data.data);
+      res.json(data.data);
+    })
+    .catch((error) => console.log(error));
+});
+
+//For getting Seed data
 router.get("/places-seed", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
@@ -60,5 +62,8 @@ router.get("/places-seed", async (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+
+//Getting location by reverse geocoding
+router.get("/");
 
 module.exports = router;

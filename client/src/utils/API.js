@@ -12,7 +12,6 @@ async function getSeeds() {
 
 async function searchRes(userSearch) {
   try {
-    
     const userQuery = encodeURIComponent(userSearch);
     console.log(userQuery, "userQuery");
     const response = await axios.get(
@@ -25,15 +24,17 @@ async function searchRes(userSearch) {
     console.log(error);
   }
 }
-async function deleteInitSearch(userSearch) {
+
+async function getLocation(latLong) {
   try {
-    const response = await axios.delete(
-      `http://localhost:5000/api/places/${userSearch}`,
-      { data: [] }
+    const response = await axios.get(
+      `http://localhost:5000/api/location/${latLong}`,
+      latLong
     );
     return response;
   } catch (error) {
     console.log(error);
   }
 }
-export default { getSeeds, searchRes, deleteInitSearch };
+
+export default { getSeeds, searchRes, getLocation };

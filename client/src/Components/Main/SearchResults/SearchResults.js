@@ -35,6 +35,14 @@ const SearchResults = () => {
   const [listItemData, setListItemData] = useState([]);
   // console.log(listItemData, "before onclick list item data");
 
+  //state for latitude and longitude
+  const [latLongState, setLatLongState] = useState([]);
+  console.log(latLongState, " state of lat long");
+
+  //State for location data
+  const [locationState, setLocationState] = useState([]);
+  console.log(locationState);
+  //
   useEffect(() => {
     // console.log("useEffect ran for Search Results");
     API.searchRes(userSearch.input).then((res) => {
@@ -42,6 +50,18 @@ const SearchResults = () => {
       setListItemData([res.data.data[0]]);
     });
   }, []);
+
+  // useEffect(() => {
+  //   // console.log("useEffect ran for Search Results");
+  //   // location();
+  //   const latLongArray = searchData.map((data) => data.latLong);
+  //   const locationResults = [];
+  //   setLatLongState(latLongArray);
+  //   for (let index = 0; index < latLongState.length; index++) {
+  //     console.log(latLongState[index], "inside for");
+  //     setLocationState(API.getLocation(latLongState[index]));
+  //   }
+  // }, [searchData]);
 
   const handleSearch = async (e) => {
     try {
@@ -69,10 +89,10 @@ const SearchResults = () => {
       console.log(e.target.id, "ID inside of onClick");
       // setListItemID(e.target.id);
       let idTest = e.target.id;
-      console.log(idTest, "idTest value");
-      console.log(searchData, "search Data inside of onCLick");
+      // console.log(idTest, "idTest value");
+      // console.log(searchData, "search Data inside of onCLick");
       let listItemFilter = searchData.filter((data) => data.id === idTest);
-      console.log(listItemFilter, "list Items after filter");
+      // console.log(listItemFilter, "list Items after filter");
       // return setListItemData("hello again");
       setListItemData(listItemFilter);
     } catch (error) {
