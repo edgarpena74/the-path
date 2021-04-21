@@ -41,7 +41,25 @@ const SearchResults = () => {
       setSearchData(res.data.data);
       setListItemData([res.data.data[0]]);
     });
-  }, [userSearch.input]);
+  }, []);
+
+  const handleSearch = async (e) => {
+    try {
+      e.preventDefault();
+      console.log("handleSearch ran");
+      API.searchRes(userSearch.input).then((res) => {
+        setSearchData(res.data.data);
+        setListItemData([res.data.data[0]]);
+      });
+    } catch (error) {
+      return console.log(error);
+    }
+  };
+
+  const onChange = (e) => {
+    console.log("onChange ran");
+    setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
+  };
 
   console.log(searchData, "searchData value");
   const onClickItem = async (e) => {
@@ -70,13 +88,19 @@ const SearchResults = () => {
       {/* Container for cards and info */}
       <Container className="searchResultsContainer">
         {/* Search bar*/}
-        <Form>
+        <Form onSubmit={handleSearch}>
           <Form.Row className="align-items-center">
             <Col xs="auto">
               {/* <Form.Label htmlFor="inlineFormInput" srOnly>
                 Name
               </Form.Label> */}
-              <Form.Control id="searchInput" placeholder="Search" />
+              <Form.Control
+                onChange={onChange}
+                type="text"
+                name="input"
+                id="searchInput"
+                placeholder="Search"
+              />
             </Col>
             <Col xs="auto">
               <Button type="submit">Search</Button>
@@ -125,6 +149,10 @@ const SearchResults = () => {
                     // className="m-0 p-0"
                   />
                   <div style={{ display: "none" }}>Hello World</div>
+                  <div>
+                    <a href={data.url}>Link to Location</a>
+                  </div>
+                  {/* <div>{data.bodyText}</div> */}
                 </div>
               ))}
               {/* data From API callback

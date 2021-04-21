@@ -28,7 +28,7 @@ const TopIntro = () => {
   //This context is used to save whats the user is searching
   //allowing the data to be used in other components
   const { userSearch, setUserSearch } = useContext(QueryContext);
-
+  console.log(userSearch, "usersearch from top intro");
   // Updates the state of userSearch
   const onChange = (e) => {
     console.log("on change ran");

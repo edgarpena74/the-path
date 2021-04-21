@@ -9,8 +9,6 @@ import {
   useHistory,
 } from "react-router-dom";
 // import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import axios from "axios";
-import Container from "react-bootstrap/Container";
 import "./App.css";
 import Nav from "./Components/Nav/Nav";
 import IntroMain from "./Components/Main/Intro/IntroMain";
@@ -76,9 +74,8 @@ function App() {
             </QueryContext.Provider>
           </FunctionsContext.Provider>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
-      
     </div>
   );
 }

@@ -14,13 +14,14 @@ router.get("/seeds", getSeeds);
 router.get("/places/:input", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
-  const url = `https://developer.nps.gov/api/v1/places?q=${req.params.input}&api_key=${process.env.API_KEY}&limit=3`;
+  const url = `https://developer.nps.gov/api/v1/places?q=${req.params.input}&api_key=${process.env.API_KEY}&limit=7`;
+  console.log(url);
   axios
     .get(url)
     .then((data) => {
       // console.log(data.data, " BE// Line 58");
       res.json(data.data);
-      // const test = data.data.data[0].title;
+      // const test = data.data.data[0];
       // console.log(test, " This is the test value BE");
     })
     .catch((err) => console.log(err));
@@ -47,14 +48,14 @@ router.get("/places-seed", async (req, res) => {
   axios
     .get(url)
     .then((data) => {
-      console.log(data.data, " BE// Line 58");
+      // console.log(data.data, " BE// Line 58");
       res.json(data.data);
-      const apiObject = {
-        title: data.data.data[0].title,
-        desc: data.data.data[0].title,
-        img: data.data.data[0].images[0].url,
-      };
-      console.log("this is the object", apiObject);
+      // const apiObject = {
+      //   title: data.data.data[0].title,
+      //   desc: data.data.data[0].title,
+      //   img: data.data.data[0].images[0].url,
+      // };
+      // // console.log("this is the object", apiObject);
     })
     .catch((err) => console.log(err));
 });
