@@ -14,7 +14,9 @@ router.get("/seeds", getSeeds);
 router.get("/places/:input", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
-  const url = `https://developer.nps.gov/api/v1/places?q=${req.params.input}&api_key=${process.env.API_KEY}&limit=7`;
+  const searchQuery = encodeURIComponent(req.params.input);
+  console.log(searchQuery);
+  const url = `https://developer.nps.gov/api/v1/places?q=${searchQuery}&api_key=${process.env.API_KEY}&limit=7`;
   console.log(url);
   axios
     .get(url)
@@ -48,7 +50,6 @@ router.get("/places-seed", async (req, res) => {
   axios
     .get(url)
     .then((data) => {
-      // console.log(data.data, " BE// Line 58");
       res.json(data.data);
       // const apiObject = {
       //   title: data.data.data[0].title,
