@@ -25,12 +25,12 @@ async function searchRes(userSearch) {
   }
 }
 
-async function getLocation(latLong) {
+async function getLocation(lon, lat) {
   try {
-    const response = await axios.get(
-      `http://localhost:5000/api/location/${latLong}`,
-      latLong
+    const response = axios.get(
+      `http://localhost:5000/api/location/${lon}/${lat}`
     );
+    console.log(response);
     return response;
   } catch (error) {
     console.log(error);

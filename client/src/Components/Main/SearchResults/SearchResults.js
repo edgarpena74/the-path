@@ -36,7 +36,12 @@ const SearchResults = () => {
   // console.log(listItemData, "before onclick list item data");
 
   //state for latitude and longitude
-  const [latLongState, setLatLongState] = useState([]);
+  const [latLongState, setLatLongState] = useState([
+    {
+      lat: "",
+      lon: "",
+    },
+  ]);
   console.log(latLongState, " state of lat long");
 
   //State for location data
@@ -51,17 +56,20 @@ const SearchResults = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   // console.log("useEffect ran for Search Results");
-  //   // location();
-  //   const latLongArray = searchData.map((data) => data.latLong);
-  //   const locationResults = [];
-  //   setLatLongState(latLongArray);
-  //   for (let index = 0; index < latLongState.length; index++) {
-  //     console.log(latLongState[index], "inside for");
-  //     setLocationState(API.getLocation(latLongState[index]));
-  //   }
-  // }, [searchData]);
+  useEffect(() => {
+    // console.log("useEffect ran for Search Results");
+    const latLonArray = searchData.map((data) => ({
+      lat: data.latitude,
+      lon: data.longitude,
+    }));
+    console.log(latLonArray, " lat lon array");
+    // const locationResults = [];
+    // setLatLongState(latLongArray);
+    // for (let index = 0; index < latLongState.length; index++) {
+    //   console.log(latLongState[index], "inside for");
+    //   setLocationState(API.getLocation(latLongState[index]));
+    // }
+  }, [searchData]);
 
   const handleSearch = async (e) => {
     try {
