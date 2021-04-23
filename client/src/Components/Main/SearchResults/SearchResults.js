@@ -25,6 +25,7 @@ const SearchResults = () => {
 
   // Stores and is used to render the search query from IntroMain.js component(first page user sees)
   const [searchData, setSearchData] = useState([]);
+  console.log(searchData, "searchData");
 
   // State for saving the list item id that was clicked on
   const [listItemID, setListItemID] = useState("");
@@ -61,21 +62,66 @@ const SearchResults = () => {
       lon: data.longitude,
       lat: data.latitude,
     }));
-    console.log(latLonArray, " lat lon array");
+    // console.log(latLonArray, " lat lon array");
     setLatLonState(latLonArray);
+    const locationArray = [];
     for (let index = 0; index < latLonState.length; index++) {
       // console.log(latLonState[index].lat, "latitude");
       // console.log(latLonState[index].lon, "longitude");
       API.getLocation(latLonState[index].lon, latLonState[index].lat).then(
         (res) => {
           // console.log(res.data.features);
-          const data = res.data.features[0].properties;
-          const testArray = [];
-          console.log(data, index++);
+          // Optional chaining for returning a value or undefined when the data is returned
+          // from the api
+          const resData = res?.data?.features;
+
+          //Map resData in order to extract the object then push the objects into
+          //the location array
+          resData.map((obj) => {
+            locationArray.push(obj);
+            return;
+          });
+
+          console.log(resData, index++);
+          // setLocationState(res)
         }
       );
     }
+    console.log(locationArray, "locationArray");
   }, [searchData]);
+
+  // useEffect(() => {
+  //   // console.log("useEffect ran for Search Results");
+  //   const latLonArray = searchData.map((data) => ({
+  //     lon: data.longitude,
+  //     lat: data.latitude,
+  //   }));
+  //   // console.log(latLonArray, " lat lon array");
+  //   setLatLonState(latLonArray);
+  //   const locationArray = [];
+  //   for (let index = 0; index < latLonState.length; index++) {
+  //     // console.log(latLonState[index].lat, "latitude");
+  //     // console.log(latLonState[index].lon, "longitude");
+  //     API.getLocation(latLonState[index].lon, latLonState[index].lat).then(
+  //       (res) => {
+  //         // console.log(res.data.features);
+  //         // Optional chaining for returning a value or undefined when the data is returned
+  //         // from the api
+  //         const resData = res?.data?.features;
+
+  //         //Map resData in order to extract the object then push the objects into
+  //         //the location array
+  //         resData.map((obj) => {
+  //           locationArray.push(obj);
+  //         });
+
+  //         console.log(resData, index++);
+  //         // setLocationState(res)
+  //       }
+  //     );
+  //   }
+  //   console.log(locationArray, "locationArray");
+  // }, [searchData]);
 
   const handleSearch = async (e) => {
     try {
@@ -95,7 +141,7 @@ const SearchResults = () => {
     setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
   };
 
-  console.log(searchData, "searchData value");
+  // console.log(searchData, "searchData value");
   const onClickItem = async (e) => {
     console.log("OnCLickItem ran");
     try {
@@ -111,7 +157,7 @@ const SearchResults = () => {
     }
   };
 
-  console.log(listItemData, "listItem data after onClick");
+  // console.log(listItemData, "listItem data after onClick");
   return (
     <div className="searchResultsDiv">
       {/* <SearchBar /> */}

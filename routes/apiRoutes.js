@@ -16,7 +16,7 @@ router.get("/places/:input", async (req, res) => {
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
   const searchQuery = encodeURIComponent(req.params.input);
   console.log(searchQuery);
-  const url = `https://developer.nps.gov/api/v1/places?q=${searchQuery}&api_key=${process.env.API_KEY}&limit=7`;
+  const url = `https://developer.nps.gov/api/v1/places?q=${searchQuery}&api_key=${process.env.API_KEY}&limit=3`;
   // const reverseGeocode = console.log(url);
   axios
     .get(url)
@@ -36,7 +36,7 @@ router.get("/location/:lon/:lat", async (req, res) => {
   axios
     .get(url)
     .then((data) => {
-      console.log(data.data);
+      // console.log(data.data);
       res.json(data.data);
     })
     .catch((error) => console.log(error));
