@@ -9,7 +9,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import ListGroup from "react-bootstrap/ListGroup";
-import InfoBlock from "./InfoBlock/InfoBlock";
 
 import "./SearchResults.css";
 // import { QueryContext } from "../../../utils/QueryContext";
@@ -36,17 +35,17 @@ const SearchResults = () => {
   // console.log(listItemData, "before onclick list item data");
 
   //state for latitude and longitude
-  const [latLongState, setLatLongState] = useState([
+  const [latLonState, setLatLonState] = useState([
     {
       lat: "",
       lon: "",
     },
   ]);
-  console.log(latLongState, " state of lat long");
+  // console.log(latLonState, " state of lat long");
 
   //State for location data
   const [locationState, setLocationState] = useState([]);
-  console.log(locationState);
+  // console.log(locationState, "location state");
   //
   useEffect(() => {
     // console.log("useEffect ran for Search Results");
@@ -59,22 +58,29 @@ const SearchResults = () => {
   useEffect(() => {
     // console.log("useEffect ran for Search Results");
     const latLonArray = searchData.map((data) => ({
-      lat: data.latitude,
       lon: data.longitude,
+      lat: data.latitude,
     }));
     console.log(latLonArray, " lat lon array");
-    // const locationResults = [];
-    // setLatLongState(latLongArray);
-    // for (let index = 0; index < latLongState.length; index++) {
-    //   console.log(latLongState[index], "inside for");
-    //   setLocationState(API.getLocation(latLongState[index]));
-    // }
+    setLatLonState(latLonArray);
+    for (let index = 0; index < latLonState.length; index++) {
+      // console.log(latLonState[index].lat, "latitude");
+      // console.log(latLonState[index].lon, "longitude");
+      API.getLocation(latLonState[index].lon, latLonState[index].lat).then(
+        (res) => {
+          // console.log(res.data.features);
+          const data = res.data.features[0].properties;
+          const testArray = [];
+          console.log(data, index++);
+        }
+      );
+    }
   }, [searchData]);
 
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
-      console.log("handleSearch ran");
+      // console.log("handleSearch ran");
       API.searchRes(userSearch.input).then((res) => {
         setSearchData(res.data.data);
         setListItemData([res.data.data[0]]);
@@ -85,7 +91,7 @@ const SearchResults = () => {
   };
 
   const onChange = (e) => {
-    console.log("onChange ran");
+    // console.log("onChange ran");
     setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
   };
 
@@ -94,14 +100,11 @@ const SearchResults = () => {
     console.log("OnCLickItem ran");
     try {
       e.preventDefault();
-      console.log(e.target.id, "ID inside of onClick");
-      // setListItemID(e.target.id);
+      // console.log(e.target.id, "ID inside of onClick");
       let idTest = e.target.id;
       // console.log(idTest, "idTest value");
       // console.log(searchData, "search Data inside of onCLick");
       let listItemFilter = searchData.filter((data) => data.id === idTest);
-      // console.log(listItemFilter, "list Items after filter");
-      // return setListItemData("hello again");
       setListItemData(listItemFilter);
     } catch (error) {
       return console.log(error);
@@ -171,11 +174,7 @@ const SearchResults = () => {
                 <div key={data.id}>
                   <h1>{data.title}</h1>
 
-                  <Image
-                    src={data.images[0].url}
-                    fluid
-                    // className="m-0 p-0"
-                  />
+                  <Image src={data.images[0].url} fluid />
                   <div style={{ display: "none" }}>Hello World</div>
                   <div>
                     <a href={data.url}>Link to Location</a>

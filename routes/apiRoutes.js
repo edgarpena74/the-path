@@ -61,7 +61,7 @@ router.get("/places-seed", async (req, res) => {
     .catch((err) => console.log(err));
 });
 
-//Getting location by reverse geocoding
-router.get("/");
+// //Getting location by reverse geocoding
+// router.get("/");
 
 module.exports = router;
