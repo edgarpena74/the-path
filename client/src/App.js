@@ -18,6 +18,7 @@ import Footer from "./Components/Footer/Footer";
 import FunctionsContext from "./utils/FunctionsContext";
 // import { QueryContext } from "./utils/QueryContext";
 import { QueryContext } from "./utils/Contexts";
+import API from "./utils/API";
 
 function App() {
   //Setting up userSearch in parent to send to children

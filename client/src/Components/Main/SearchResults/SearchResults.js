@@ -25,7 +25,7 @@ const SearchResults = () => {
 
   // Stores and is used to render the search query from IntroMain.js component(first page user sees)
   const [searchData, setSearchData] = useState([]);
-  console.log(searchData, "searchData");
+  console.log(searchData, "searchData after search");
 
   // State for saving the list item id that was clicked on
   const [listItemID, setListItemID] = useState("");
@@ -48,16 +48,33 @@ const SearchResults = () => {
   const [locationState, setLocationState] = useState([]);
   // console.log(locationState, "location state");
   //
+  // useEffect(() => {
+  //   // console.log("useEffect ran for Search Results");
+  //   API.searchRes(userSearch.input).then((res) => {
+  //     if (res.status === 200) {
+  //       console.log(res.data.data);
+  //       setSearchData(res.data.data);
+  //       console.log(searchData, "searchData inside of useEffect");
+  //       setListItemData([res.data.data[0]]);
+  //       testFunc();
+  //     }
+  //   });
+  // }, []);
   useEffect(() => {
     // console.log("useEffect ran for Search Results");
     API.searchRes(userSearch.input).then((res) => {
+      console.log("res.data.data", res.data.data);
       setSearchData(res.data.data);
       setListItemData([res.data.data[0]]);
+      console.log("searchState(userSearch) effect", userSearch);
+      testFunc(userSearch);
     });
   }, []);
 
-  useEffect(() => {
+  function testFunc(searchData) {
     // console.log("useEffect ran for Search Results");
+    console.log(searchData, "this is searchData inside of the test func");
+
     const latLonArray = searchData.map((data) => ({
       lon: data.longitude,
       lat: data.latitude,
@@ -78,6 +95,7 @@ const SearchResults = () => {
           //Map resData in order to extract the object then push the objects into
           //the location array
           resData.map((obj) => {
+            console.log(obj);
             locationArray.push(obj);
             return;
           });
@@ -88,10 +106,11 @@ const SearchResults = () => {
       );
     }
     console.log(locationArray, "locationArray");
-  }, [searchData]);
+  }
 
   // useEffect(() => {
   //   // console.log("useEffect ran for Search Results");
+
   //   const latLonArray = searchData.map((data) => ({
   //     lon: data.longitude,
   //     lat: data.latitude,
@@ -112,7 +131,9 @@ const SearchResults = () => {
   //         //Map resData in order to extract the object then push the objects into
   //         //the location array
   //         resData.map((obj) => {
+  //           console.log(obj);
   //           locationArray.push(obj);
+  //           return;
   //         });
 
   //         console.log(resData, index++);
