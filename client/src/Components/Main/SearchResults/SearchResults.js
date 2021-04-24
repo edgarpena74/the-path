@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, Component } from "react";
 // import { useHistory } from "react-router-dom";
 import axios from "axios";
 import API from "../../../utils/API";
@@ -48,41 +48,30 @@ const SearchResults = () => {
   //State for location data
   const [locationState, setLocationState] = useState([]);
   // console.log(locationState, "location state");
-  //
-  // useEffect(() => {
-  //   // console.log("useEffect ran for Search Results");
-  //   API.searchRes(userSearch.input).then((res) => {
-  //     if (res.status === 200) {
-  //       console.log(res.data.data);
-  //       setSearchData(res.data.data);
-  //       console.log(searchData, "searchData inside of useEffect");
-  //       setListItemData([res.data.data[0]]);
-  //       testFunc();
-  //     }
-  //   });
-  // }, []);
+
+  //Since useEffect uses componentDidMount under the hood it is rerendering twice
   useEffect(() => {
     // console.log("useEffect ran for Search Results");
-    API.searchRes(userSearch.input)
-      .then((res) => {
-        console.log("res.data.data", res.data.data);
+    API.searchRes(userSearch.input).then((res) => {
+      if (res.status === 200) {
+        console.log(res.data.data);
         setSearchData(res.data.data);
-        console.log(searchData, "searchData inside of use Effect");
+        console.log(searchData, "searchData inside of useEffect");
         setListItemData([res.data.data[0]]);
-        console.log("searchState(userSearch) effect", userSearch);
-        return res.data.data;
-        // testFunc(searchData);
-      })
-      .then((res) => {
-        testFunc(res);
-      });
+      }
+    });
+    return searchData;
   }, []);
 
-  function testFunc(res) {
-    // console.log("useEffect ran for Search Results");
-    console.log(res, "this is res inside of the test func");
+  useEffect(() => {
+    testFunc(searchData);
+  }, []);
 
-    const latLonArray = res.map((data) => ({
+  function testFunc(searchData) {
+    // console.log("useEffect ran for Search searchDataults");
+    console.log(searchData, "this is searchData inside of the test func");
+
+    const latLonArray = searchData.map((data) => ({
       lon: data.longitude,
       lat: data.latitude,
     }));
@@ -120,42 +109,6 @@ const SearchResults = () => {
     console.log(locationArray, "locationArray");
   }
 
-  // useEffect(() => {
-  //   // console.log("useEffect ran for Search Results");
-
-  //   const latLonArray = searchData.map((data) => ({
-  //     lon: data.longitude,
-  //     lat: data.latitude,
-  //   }));
-  //   // console.log(latLonArray, " lat lon array");
-  //   setLatLonState(latLonArray);
-  //   const locationArray = [];
-  //   for (let index = 0; index < latLonState.length; index++) {
-  //     // console.log(latLonState[index].lat, "latitude");
-  //     // console.log(latLonState[index].lon, "longitude");
-  //     API.getLocation(latLonState[index].lon, latLonState[index].lat).then(
-  //       (res) => {
-  //         // console.log(res.data.features);
-  //         // Optional chaining for returning a value or undefined when the data is returned
-  //         // from the api
-  //         const resData = res?.data?.features;
-
-  //         //Map resData in order to extract the object then push the objects into
-  //         //the location array
-  //         resData.map((obj) => {
-  //           console.log(obj);
-  //           locationArray.push(obj);
-  //           return;
-  //         });
-
-  //         console.log(resData, index++);
-  //         // setLocationState(res)
-  //       }
-  //     );
-  //   }
-  //   console.log(locationArray, "locationArray");
-  // }, [searchData]);
-
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
@@ -180,10 +133,10 @@ const SearchResults = () => {
     try {
       e.preventDefault();
       // console.log(e.target.id, "ID inside of onClick");
-      let idTest = e.target.id;
+      let idTarget = e.target.id;
       // console.log(idTest, "idTest value");
       // console.log(searchData, "search Data inside of onCLick");
-      let listItemFilter = searchData.filter((data) => data.id === idTest);
+      let listItemFilter = searchData.filter((data) => data.id === idTarget);
       setListItemData(listItemFilter);
     } catch (error) {
       return console.log(error);
