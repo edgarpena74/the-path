@@ -34,7 +34,7 @@ const TopIntro = () => {
     console.log("on change ran");
     setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
   };
-  console.log(userSearch, " this is the value for userSearch");
+  console.log(userSearch, " this is the value for userSearch TopMain.js");
   return (
     <div>
       <div className="container-fluid topMainDiv d-flex align-items-center">

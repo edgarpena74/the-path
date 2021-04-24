@@ -22,6 +22,7 @@ const SearchResults = () => {
   // This is the context for the state that was declared in App.js(Parent)
   // It updates the state of what the user is searching(When is get the search bar done)
   const { userSearch, setUserSearch } = useContext(QueryContext);
+  console.log(userSearch, "userSearch value");
 
   // Stores and is used to render the search query from IntroMain.js component(first page user sees)
   const [searchData, setSearchData] = useState([]);
@@ -62,25 +63,32 @@ const SearchResults = () => {
   // }, []);
   useEffect(() => {
     // console.log("useEffect ran for Search Results");
-    API.searchRes(userSearch.input).then((res) => {
-      console.log("res.data.data", res.data.data);
-      setSearchData(res.data.data);
-      setListItemData([res.data.data[0]]);
-      console.log("searchState(userSearch) effect", userSearch);
-      testFunc(userSearch);
-    });
+    API.searchRes(userSearch.input)
+      .then((res) => {
+        console.log("res.data.data", res.data.data);
+        setSearchData(res.data.data);
+        console.log(searchData, "searchData inside of use Effect");
+        setListItemData([res.data.data[0]]);
+        console.log("searchState(userSearch) effect", userSearch);
+        return res.data.data;
+        // testFunc(searchData);
+      })
+      .then((res) => {
+        testFunc(res);
+      });
   }, []);
 
-  function testFunc(searchData) {
+  function testFunc(res) {
     // console.log("useEffect ran for Search Results");
-    console.log(searchData, "this is searchData inside of the test func");
+    console.log(res, "this is res inside of the test func");
 
-    const latLonArray = searchData.map((data) => ({
+    const latLonArray = res.map((data) => ({
       lon: data.longitude,
       lat: data.latitude,
     }));
-    // console.log(latLonArray, " lat lon array");
+    console.log(latLonArray, " lat lon array inside of testFunc");
     setLatLonState(latLonArray);
+    console.log(latLonState, "latLonState inside of testFunc");
     const locationArray = [];
     for (let index = 0; index < latLonState.length; index++) {
       // console.log(latLonState[index].lat, "latitude");
@@ -90,6 +98,10 @@ const SearchResults = () => {
           // console.log(res.data.features);
           // Optional chaining for returning a value or undefined when the data is returned
           // from the api
+          console.log(
+            res?.data?.features,
+            "res?.data?.feature inside of testFunc"
+          );
           const resData = res?.data?.features;
 
           //Map resData in order to extract the object then push the objects into
