@@ -3,7 +3,7 @@ const axios = require("axios");
 async function getSeeds() {
   try {
     const response = await axios.get("http://localhost:5000/api/seeds");
-    console.log(response, " seeds from API.js");
+    // console.log(response, " seeds from API.js");
     return response;
   } catch (error) {
     console.log(error);
