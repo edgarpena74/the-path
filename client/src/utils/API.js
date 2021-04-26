@@ -27,7 +27,6 @@ async function getLocation(lon, lat) {
     const response = await axios.get(
       `http://localhost:5000/api/location/${lon}/${lat}`
     );
-    // console.log(response);
     return response;
   } catch (error) {
     console.log(error);

@@ -31,10 +31,7 @@ class SearchResults extends Component {
       // The Data for the list item that was clicked on
       listItemData: [],
       // Latitude and longitude data from mapping the search data
-      latLon: {
-        lat: "", //this data will be processed through an API call to
-        lon: "", //get the location using reverse geocoding
-      },
+      latLon: [],
       //The location data after processing latLon in an api call
     };
   }
@@ -45,7 +42,9 @@ class SearchResults extends Component {
     console.log(this.state.searchData, "searchData before callback");
     console.log("did mount");
     const { userSearch } = this.context;
+
     const userQuery = encodeURIComponent(userSearch.input);
+    console.log(userQuery, "user search");
     const resArray = [];
     console.log(resArray, "res arr before callback");
     axios
@@ -64,39 +63,33 @@ class SearchResults extends Component {
         console.log(resArray, "resArray outside if");
         if (resArray !== []) {
           this.setState({ searchData: resArray, listItemData: [resArray[0]] });
+          console.log("satte has been set");
         }
-        console.log(this.state.searchData, "searchDatastate inside then");
+        console.log(this.state.searchData, "searchData state inside then");
         if (this.state.searchData !== [] && this.listItemData !== []) {
-          console.log(this.state.searchData, "searchData isnide if");
+          console.log(this.state.searchData, "searchData inside if");
           const latLonArray = this.state.searchData.map((data) => ({
             lon: data.longitude,
             lat: data.latitude,
           }));
           console.log(latLonArray, "latLonArray");
+          this.setState({ latLon: latLonArray });
         }
+        return;
+      })
+      .then(() => {
+        this.state.latLon.forEach((data) => {
+          if (data.lon !== undefined && data.lat !== undefined) {
+            API.getLocation(data.lon, data.lat).then((res) => {
+              console.log(res);
+            });
+          } else console.log("something was undefined");
+        });
       })
       .catch((error) => {
         console.log(error);
       });
-    // if (
-    //   resArray !== [] &&
-    //   this.state.searchData !== [] &&
-    //   this.state.listItemData !== []
-    // ) {
-    //   console.log("success");
-    //   console.log(
-    //     this.state.searchData,
-    //     "searchData",
-    //     this.state.listItemData,
-    //     "listItemdata"
-    //   );
   }
-  //   // const latLonArray = this.state.searchData.map((data) => ({
-  //   //   lon: data.Longitude,
-  //   //   lat: data.latitude,
-  //   // }));
-  //   // console.log(latLonArray, "latLongArray");
-  // }
 
   onClickItem(e) {
     console.log("onClickItem");
