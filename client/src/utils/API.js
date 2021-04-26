@@ -12,13 +12,10 @@ async function getSeeds() {
 
 async function searchRes(userSearch) {
   try {
-    const userQuery = encodeURIComponent(userSearch);
-    console.log(userQuery, "userQuery");
+    const userQuery = encodeURIComponent(userSearch.input);
     const response = await axios.get(
       `http://localhost:5000/api/places/${userQuery}`
     );
-    // console.log(response, "response from API.js");
-
     return response;
   } catch (error) {
     console.log(error);

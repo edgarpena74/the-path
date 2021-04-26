@@ -15,7 +15,7 @@ router.get("/places/:input", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
   const searchQuery = encodeURIComponent(req.params.input);
-  console.log(searchQuery);
+  console.log(searchQuery, "searchQuery back end line 18");
   const url = `https://developer.nps.gov/api/v1/places?q=${searchQuery}&api_key=${process.env.API_KEY}&limit=3`;
   // const reverseGeocode = console.log(url);
   axios

@@ -18,43 +18,37 @@ import { QueryContext } from "../../../utils/Contexts";
 import { ResultIDContext } from "../../../utils/Contexts";
 import { SearchResultsContext } from "../../../utils/SearchResultsContext";
 
-
-
 class SearchResults extends Component {
-  Constructor() {
-    super()
-    this.state = {
-      // New user search for this component
-      userInput: "",
-      // The data from the search api call
-      searchData: [],
-      // The id for the item that was clicked on
-      listItemID: "", //This is used to et the data below
-      // The Data for the list item that was clicked on
-      listItemData: [],
-      // Latitude and longitude data from mapping the search data
-      latLon: {
-        lat: "", //this data will be processed through an API call to
-        lon: "", //get the location using reverse geocoding
-      },
-      //The location data after processing latLon in an api call
-    };
-    this.handleClick = this.handleClick.bind(this)
-  }
+  state = {
+    // New user search for this component
+    userInput: "",
+    // The data from the search api call
+    searchData: [],
+    // The id for the item that was clicked on
+    listItemID: "", //This is used to et the data below
+    // The Data for the list item that was clicked on
+    listItemData: [],
+    // Latitude and longitude data from mapping the search data
+    latLon: {
+      lat: "", //this data will be processed through an API call to
+      lon: "", //get the location using reverse geocoding
+    },
+    //The location data after processing latLon in an api call
+  };
 
-  handleClick() {
-    console.log("handleClick ran")
-  }
-
-  
   static contextType = QueryContext;
-
-  onChange = (e) => {
-    this.setState{}
-  }
 
   componentDidMount() {
     console.log("did mount");
+    const { userSearch } = this.context;
+    console.log(userSearch, "test context val");
+    API.searchRes(userSearch)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
