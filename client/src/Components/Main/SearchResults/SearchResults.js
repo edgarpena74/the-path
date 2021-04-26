@@ -33,6 +33,7 @@ class SearchResults extends Component {
       // Latitude and longitude data from mapping the search data
       latLon: [],
       //The location data after processing latLon in an api call
+      locationData: [],
     };
   }
 
@@ -42,49 +43,117 @@ class SearchResults extends Component {
     console.log(this.state.searchData, "searchData before callback");
     console.log("did mount");
     const { userSearch } = this.context;
-
+    //
+    // **************
+    // Hiking returns back a few undefined responses
+    // **************
+    //
     const userQuery = encodeURIComponent(userSearch.input);
     console.log(userQuery, "user search");
-    const resArray = [];
-    console.log(resArray, "res arr before callback");
+    const searchResArray = [];
+    const locationArray = [];
+    console.log(locationArray, "res arr before callback");
     axios
       .get(`http://localhost:5000/api/places/${userQuery}`)
       .then((res) => {
-        console.log(res, "res");
+        // console.log(res, "res");
         // Proceed with setting data is res is ok
         if (res.status === 200) {
           //Array from the response
           const resData = res.data.data;
-          console.log(resData);
+          // console.log(resData);
           resData.map((data) => {
-            resArray.push(data);
+            searchResArray.push(data);
           });
+          if (searchResArray !== []) {
+            this.setState({
+              searchData: searchResArray,
+              listItemData: [searchResArray[0]],
+            });
+            // console.log("state has been set");
+          }
+          // console.log(this.state.searchData, "searchData state inside then");
+          if (this.state.searchData !== [] && this.listItemData !== []) {
+            // console.log(this.state.searchData, "searchData inside if");
+            const latLonArray = this.state.searchData.map((data) => ({
+              lon: data.longitude,
+              lat: data.latitude,
+            }));
+            // console.log(latLonArray, "latLonArray");
+            this.setState({ latLon: latLonArray });
+          }
         }
-        console.log(resArray, "resArray outside if");
-        if (resArray !== []) {
-          this.setState({ searchData: resArray, listItemData: [resArray[0]] });
-          console.log("satte has been set");
+      })
+      // This is for the location api call
+      .then(() => {
+        if (this.state.latLon !== []) {
+          //Goes through each obj in array and processes it below
+          //to get location data
+          // this.state.latLon.forEach((data) => {
+          for (let index = 0; index < this.state.latLon.length; index++) {
+            // Conditional for getting undefined or empty data for the lon and lat
+            if (
+              (data.lon === undefined && data.lat === undefined) ||
+              (data.lon === "" && data.lat === "")
+            ) {
+              const emptyObj = {
+                label: "No Location Available",
+              };
+              locationArray.push(emptyObj);
+              console.log("data undefined for lat lon");
+              //
+              // Test this out using hiking
+              //
+              return;
+            } else {
+              // Needed to do nested call in order to avoid async bugs
+              // This callback gets location data
+              API.getLocation(data.lon, data.lat).then((res) => {
+                //
+                // ************
+                // camping returns features data as undefined for one of the responses
+                // ************
+                //
+                //Conditional for undefined responses when getting location
+                if (
+                  res.data.features[0] === undefined ||
+                  res.data === undefined
+                ) {
+                  // If empty push this response otherwise proceed
+                  console.log("Data value undefined for features or data");
+                  const emptyLabel = { label: "No Location Available" };
+                  return locationArray.push(emptyLabel);
+                  // console.log(locationArray);
+
+                  //
+                } else {
+                  // console.log({ label: res.data.features[0].properties.label });
+                  const labelData = {
+                    label: res.data.features[0].properties.label,
+                  };
+                  // console.log(labelData);
+                  return locationArray.push(labelData);
+                  // console.log(locationArray);
+                }
+              });
+            }
+          }
+          // });
+          // End of for each
+          // this.setState({ locationData: locationArray });
+          // console.log(this.state.locationData, "location data state");
         }
-        console.log(this.state.searchData, "searchData state inside then");
-        if (this.state.searchData !== [] && this.listItemData !== []) {
-          console.log(this.state.searchData, "searchData inside if");
-          const latLonArray = this.state.searchData.map((data) => ({
-            lon: data.longitude,
-            lat: data.latitude,
-          }));
-          console.log(latLonArray, "latLonArray");
-          this.setState({ latLon: latLonArray });
+        console.log(locationArray);
+        if (locationArray !== undefined && locationArray.length >= 3) {
+          console.log("success");
         }
-        return;
+        //
       })
       .then(() => {
-        this.state.latLon.forEach((data) => {
-          if (data.lon !== undefined && data.lat !== undefined) {
-            API.getLocation(data.lon, data.lat).then((res) => {
-              console.log(res);
-            });
-          } else console.log("something was undefined");
-        });
+        if (locationArray.length <= 3) {
+          console.log("success");
+          console.log(locationArray.length);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -135,7 +204,7 @@ class SearchResults extends Component {
             {/* Left Side */}
             <Col className="leftSide" lg="6" md="6">
               <ListGroup className="resultsDiv">
-                {/* {this.state.searchData.map((result) => (
+                {this.state.searchData.map((result) => (
                   //
                   //
                   // *** set point-events to non in order to make this one cohesive clickable item
@@ -156,7 +225,7 @@ class SearchResults extends Component {
                     <div className="listItemTitle d-inline">{result.title}</div>
                   </ListGroup.Item>
                   // </div>
-                ))} */}
+                ))}
               </ListGroup>
             </Col>
             {/*  */}
