@@ -33,14 +33,18 @@ class SearchResults extends Component {
       // Latitude and longitude data from mapping the search data
       latLon: [],
       //The location data after processing latLon in an api call
-      locationData: [],
+      locationData: [
+        {
+          label: "",
+        },
+      ],
     };
   }
 
   static contextType = QueryContext;
 
   componentDidMount() {
-    console.log(this.state.searchData, "searchData before callback");
+    // console.log(this.state.searchData, "searchData before callback");
     console.log("did mount");
     const { userSearch } = this.context;
     //
@@ -51,8 +55,8 @@ class SearchResults extends Component {
     const userQuery = encodeURIComponent(userSearch.input);
     console.log(userQuery, "user search");
     const searchResArray = [];
-    const locationArray = [];
-    console.log(locationArray, "res arr before callback");
+    let locationArray = [];
+    console.log(locationArray, "location arr before callback");
     axios
       .get(`http://localhost:5000/api/places/${userQuery}`)
       .then((res) => {
@@ -90,54 +94,67 @@ class SearchResults extends Component {
           //Goes through each obj in array and processes it below
           //to get location data
           // this.state.latLon.forEach((data) => {
+          console.log(this.state.latLon.length);
           for (let index = 0; index < this.state.latLon.length; index++) {
+            // console.log(this.state.latLon[index]);
             // Conditional for getting undefined or empty data for the lon and lat
             if (
-              (data.lon === undefined && data.lat === undefined) ||
-              (data.lon === "" && data.lat === "")
+              (this.state.latLon[index].lon === undefined &&
+                this.state.latLon[index].lat === undefined) ||
+              (this.state.latLon[index].lon === "" &&
+                this.state.latLon[index].lat === "")
             ) {
+              console.log("if ran, undefined");
               const emptyObj = {
                 label: "No Location Available",
               };
               locationArray.push(emptyObj);
+              // console.log(locationArray);
               console.log("data undefined for lat lon");
               //
               // Test this out using hiking
               //
-              return;
             } else {
               // Needed to do nested call in order to avoid async bugs
               // This callback gets location data
-              API.getLocation(data.lon, data.lat).then((res) => {
+              console.log("else ran, location call back");
+              API.getLocation(
+                this.state.latLon[index].lon,
+                this.state.latLon[index].lat
+              ).then((res) => {
                 //
                 // ************
                 // camping returns features data as undefined for one of the responses
                 // ************
                 //
                 //Conditional for undefined responses when getting location
+                const resData = res.data;
                 if (
-                  res.data.features[0] === undefined ||
-                  res.data === undefined
+                  resData.features[0] === undefined ||
+                  resData === undefined
                 ) {
+                  console.log("if ran, undefined features", index);
                   // If empty push this response otherwise proceed
-                  console.log("Data value undefined for features or data");
+                  // console.log("Data value undefined for features or data");
                   const emptyLabel = { label: "No Location Available" };
-                  return locationArray.push(emptyLabel);
+                  locationArray.push(emptyLabel);
                   // console.log(locationArray);
 
                   //
                 } else {
+                  console.log("else ran, features available", index);
                   // console.log({ label: res.data.features[0].properties.label });
                   const labelData = {
-                    label: res.data.features[0].properties.label,
+                    label: resData.features[0].properties.label,
                   };
                   // console.log(labelData);
-                  return locationArray.push(labelData);
+                  locationArray.push(labelData);
                   // console.log(locationArray);
                 }
               });
             }
           }
+          // end of for
           // });
           // End of for each
           // this.setState({ locationData: locationArray });
@@ -145,16 +162,17 @@ class SearchResults extends Component {
         }
         console.log(locationArray);
         if (locationArray !== undefined && locationArray.length >= 3) {
+          console.log(locationArray);
           console.log("success");
         }
         //
       })
-      .then(() => {
-        if (locationArray.length <= 3) {
-          console.log("success");
-          console.log(locationArray.length);
-        }
-      })
+      // .then(() => {
+      //   if (locationArray.length <= 3) {
+      //     console.log("success");
+      //     console.log(locationArray.length);
+      //   }
+      // })
       .catch((error) => {
         console.log(error);
       });
