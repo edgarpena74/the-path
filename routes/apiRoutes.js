@@ -14,9 +14,10 @@ router.get("/seeds", getSeeds);
 router.get("/places/:input", async (req, res) => {
   // const searchInput = await db.SearchInput.find({ input: req.body });
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
+  console.log(req.params.input);
   const searchQuery = encodeURIComponent(req.params.input);
   console.log(searchQuery, "searchQuery back end line 18");
-  const url = `https://developer.nps.gov/api/v1/places?q=${searchQuery}&api_key=${process.env.API_KEY}&limit=1`;
+  const url = `https://developer.nps.gov/api/v1/places?q=${searchQuery}&api_key=${process.env.API_KEY}&limit=5`;
   // const reverseGeocode = console.log(url);
   axios
     .get(url)

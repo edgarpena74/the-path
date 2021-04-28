@@ -12,9 +12,8 @@ async function getSeeds() {
 
 async function searchRes(userSearch) {
   try {
-    const userQuery = encodeURIComponent(userSearch.input);
     const response = await axios.get(
-      `http://localhost:5000/api/places/${userQuery}`
+      `http://localhost:5000/api/places/${userSearch}`
     );
     return response;
   } catch (error) {
