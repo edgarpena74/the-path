@@ -33,11 +33,7 @@ class SearchResults extends Component {
       // Latitude and longitude data from mapping the search data
       latLon: [],
       //The location data after processing latLon in an api call
-      locationData: [
-        {
-          label: "",
-        },
-      ],
+      locationData: [],
     };
   }
 
@@ -46,6 +42,79 @@ class SearchResults extends Component {
   componentDidMount() {
     // console.log(this.state.searchData, "searchData before callback");
     console.log("did mount");
+    this.getSearchData();
+    console.log(this.state.searchData);
+  }
+  // componentDidUpdate(prevState) {
+  //   const locationArray = [];
+  //   if (
+  //     this.state.searchData !== prevState.searchData &&
+  //     this.state.latLon !== prevState.latLon
+  //   ) {
+  //     console.log(this.state.latLon);
+  //     this.state.latLon.forEach((data, index) => {
+  //       console.log(data, index);
+  //       // Conditional for getting undefined or empty data for the lon and lat
+  //       if (
+  //         (data.lon === undefined && data.lat === undefined) ||
+  //         (data.lon === "" && data.lat === "")
+  //       ) {
+  //         const emptyObj = {
+  //           label: "No Location Available",
+  //         };
+  //         let pushObj = emptyObj;
+  //         console.log("if ran, undefined lat lon data", emptyObj);
+  //         locationArray.push(pushObj);
+  //         console.log(locationArray);
+  //         // console.log("data undefined for lat lon");
+  //         //
+  //         // Test this out using hiking
+  //         //
+  //       } else {
+  //         // Needed to do nested call in order to avoid async bugs
+  //         // This callback gets location data
+  //         console.log("else ran// running location call back");
+  //         API.getLocation(data.lon, data.lat).then((res) => {
+  //           //
+  //           // ************
+  //           // camping returns features data as undefined for one of the responses
+  //           // ************
+  //           //
+  //           //Conditional for undefined responses when getting location
+  //           const resData = res.data;
+  //           if (resData.features[0] === undefined || resData === undefined) {
+  //             // If empty push this response otherwise proceed
+  //             // console.log("Data value undefined for features or data");
+  //             const emptyLabel = { label: "No Location Available" };
+  //             console.log(
+  //               "if ran, undefined features // no label data",
+  //               emptyLabel
+  //             );
+  //             locationArray.push(emptyLabel);
+  //             console.log(locationArray);
+
+  //             //
+  //           } else {
+  //             console.log("else ran, features/ label available");
+  //             console.log({ label: res.data.features[0].properties.label });
+  //             const labelData = {
+  //               label: resData.features[0].properties.label,
+  //             };
+  //             let pushData = labelData;
+  //             // let testArray = labelData;
+  //             // console.log(testArray);
+  //             locationArray.push(pushData);
+  //             console.log(locationArray);
+  //           }
+  //         });
+  //       }
+
+  //       // end of for
+  //     });
+  //   }
+  // }
+
+  getSearchData() {
     const { userSearch } = this.context;
     //
     // **************
@@ -55,8 +124,7 @@ class SearchResults extends Component {
     const userQuery = encodeURIComponent(userSearch.input);
     console.log(userQuery, "user search");
     const searchResArray = [];
-    let locationArray = [];
-    console.log(locationArray, "location arr before callback");
+    const latLonArray = [];
     axios
       .get(`http://localhost:5000/api/places/${userQuery}`)
       .then((res) => {
@@ -66,131 +134,41 @@ class SearchResults extends Component {
           //Array from the response
           const resData = res.data.data;
           // console.log(resData);
-          resData.map((data) => {
-            searchResArray.push(data);
-          });
-          if (searchResArray !== []) {
+          // resData.map((data) => {
+          //   searchResArray.push(data);
+          //   latLonArray.push({ lat: data.latitude, lon: data.longitude });
+          // });
+          searchResArray.push(resData);
+          latLonArray.push({ lat: resData.latitude, lon: resData.longitude });
+          if (searchResArray !== [] && latLonArray !== []) {
+            // console.log("success!");
+            // console.log(latLonArray);
             this.setState({
               searchData: searchResArray,
               listItemData: [searchResArray[0]],
+              latLon: latLonArray,
             });
-            // console.log("state has been set");
-          }
-          // console.log(this.state.searchData, "searchData state inside then");
-          if (this.state.searchData !== [] && this.listItemData !== []) {
-            // console.log(this.state.searchData, "searchData inside if");
-            const latLonArray = this.state.searchData.map((data) => ({
-              lon: data.longitude,
-              lat: data.latitude,
-            }));
-            // console.log(latLonArray, "latLonArray");
-            this.setState({ latLon: latLonArray });
           }
         }
       })
-      // This is for the location api call
-      .then(() => {
-        if (this.state.latLon !== []) {
-          //Goes through each obj in array and processes it below
-          //to get location data
-          // this.state.latLon.forEach((data) => {
-          console.log(this.state.latLon.length);
-          for (let index = 0; index < this.state.latLon.length; index++) {
-            // console.log(this.state.latLon[index]);
-            // Conditional for getting undefined or empty data for the lon and lat
-            if (
-              (this.state.latLon[index].lon === undefined &&
-                this.state.latLon[index].lat === undefined) ||
-              (this.state.latLon[index].lon === "" &&
-                this.state.latLon[index].lat === "")
-            ) {
-              console.log("if ran, undefined");
-              const emptyObj = {
-                label: "No Location Available",
-              };
-              locationArray.push(emptyObj);
-              // console.log(locationArray);
-              console.log("data undefined for lat lon");
-              //
-              // Test this out using hiking
-              //
-            } else {
-              // Needed to do nested call in order to avoid async bugs
-              // This callback gets location data
-              console.log("else ran, location call back");
-              API.getLocation(
-                this.state.latLon[index].lon,
-                this.state.latLon[index].lat
-              ).then((res) => {
-                //
-                // ************
-                // camping returns features data as undefined for one of the responses
-                // ************
-                //
-                //Conditional for undefined responses when getting location
-                const resData = res.data;
-                if (
-                  resData.features[0] === undefined ||
-                  resData === undefined
-                ) {
-                  console.log("if ran, undefined features", index);
-                  // If empty push this response otherwise proceed
-                  // console.log("Data value undefined for features or data");
-                  const emptyLabel = { label: "No Location Available" };
-                  locationArray.push(emptyLabel);
-                  // console.log(locationArray);
-
-                  //
-                } else {
-                  console.log("else ran, features available", index);
-                  // console.log({ label: res.data.features[0].properties.label });
-                  const labelData = {
-                    label: resData.features[0].properties.label,
-                  };
-                  // console.log(labelData);
-                  locationArray.push(labelData);
-                  // console.log(locationArray);
-                }
-              });
-            }
-          }
-          // end of for
-          // });
-          // End of for each
-          // this.setState({ locationData: locationArray });
-          // console.log(this.state.locationData, "location data state");
-        }
-        console.log(locationArray);
-        if (locationArray !== undefined && locationArray.length >= 3) {
-          console.log(locationArray);
-          console.log("success");
-        }
-        //
-      })
-      // .then(() => {
-      //   if (locationArray.length <= 3) {
-      //     console.log("success");
-      //     console.log(locationArray.length);
-      //   }
-      // })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  onClickItem(e) {
-    console.log("onClickItem");
-    try {
-      e.preventDefault();
-      let idTarget = e.target.id;
-      let listItemFilter = this.state.searchData.filter(
-        (data) => data.id === idTarget
-      );
-      this.setState({ listItemData: listItemFilter });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // onClickItem(e) {
+  //   console.log("onClickItem");
+  //   try {
+  //     e.preventDefault();
+  //     let idTarget = e.target.id;
+  //     let listItemFilter = this.state.searchData.filter(
+  //       (data) => data.id === idTarget
+  //     );
+  //     this.setState({ listItemData: listItemFilter });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
   render() {
     return (
       <div className="searchResultsDiv">
@@ -222,7 +200,7 @@ class SearchResults extends Component {
             {/* Left Side */}
             <Col className="leftSide" lg="6" md="6">
               <ListGroup className="resultsDiv">
-                {this.state.searchData.map((result) => (
+                {/* {this.state.searchData.map((result) => (
                   //
                   //
                   // *** set point-events to non in order to make this one cohesive clickable item
@@ -243,7 +221,7 @@ class SearchResults extends Component {
                     <div className="listItemTitle d-inline">{result.title}</div>
                   </ListGroup.Item>
                   // </div>
-                ))}
+                ))} */}
               </ListGroup>
             </Col>
             {/*  */}

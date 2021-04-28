@@ -16,7 +16,7 @@ router.get("/places/:input", async (req, res) => {
   // console.log("Line 40 // Back end SearchInput: ", searchInput);
   const searchQuery = encodeURIComponent(req.params.input);
   console.log(searchQuery, "searchQuery back end line 18");
-  const url = `https://developer.nps.gov/api/v1/places?q=${searchQuery}&api_key=${process.env.API_KEY}&limit=3`;
+  const url = `https://developer.nps.gov/api/v1/places?q=${searchQuery}&api_key=${process.env.API_KEY}&limit=1`;
   // const reverseGeocode = console.log(url);
   axios
     .get(url)
@@ -31,16 +31,16 @@ router.get("/places/:input", async (req, res) => {
 
 // API for getting the location by using reverse geocoding
 
-router.get("/location/:lon/:lat", async (req, res) => {
-  const url = `https://api.openrouteservice.org/geocode/reverse?api_key=${process.env.ORS_KEY}&point.lon=${req.params.lon}&point.lat=${req.params.lat}&size=1`;
-  axios
-    .get(url)
-    .then((data) => {
-      // console.log(data.data);
-      res.json(data.data);
-    })
-    .catch((error) => console.log(error));
-});
+// router.get("/location/:lon/:lat", async (req, res) => {
+//   const url = `https://api.openrouteservice.org/geocode/reverse?api_key=${process.env.ORS_KEY}&point.lon=${req.params.lon}&point.lat=${req.params.lat}&size=1`;
+//   axios
+//     .get(url)
+//     .then((data) => {
+//       // console.log(data.data);
+//       res.json(data.data);
+//     })
+//     .catch((error) => console.log(error));
+// });
 
 //For getting Seed data
 router.get("/places-seed", async (req, res) => {
