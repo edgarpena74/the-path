@@ -32,7 +32,7 @@ router.get("/places/:input", async (req, res) => {
 
 // API for getting the location by using reverse geocoding
 router.get("/location/:lon/:lat", async (req, res) => {
-  const url = `https://api.openrouteservice.org/geocode/reverse?api_key=${process.env.ORS_KEY}&point.lon=${req.params.lon}&point.lat=${req.params.lat}&size=3`;
+  const url = `https://api.openrouteservice.org/geocode/reverse?api_key=${process.env.ORS_KEY}&point.lon=${req.params.lon}&point.lat=${req.params.lat}&size=2`;
   axios
     .get(url)
     .then((data) => {
