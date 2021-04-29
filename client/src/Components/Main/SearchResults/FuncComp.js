@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import ListGroup from "react-bootstrap/ListGroup";
+import fern from "./Assets/fern.jpg";
 
 import "./SearchResults.css";
 // import { QueryContext } from "../../../utils/QueryContext";
@@ -18,7 +19,7 @@ import { QueryContext } from "../../../utils/Contexts";
 import { ResultIDContext } from "../../../utils/Contexts";
 import { SearchResultsContext } from "../../../utils/SearchResultsContext";
 
-const FuncComp = () => {
+const Search = (props) => {
   // This is the context for the state that was declared in App.js(Parent)
   // It updates the state of what the user is searching(When is get the search bar done)
   const { userSearch, setUserSearch } = useContext(QueryContext);
@@ -61,51 +62,6 @@ const FuncComp = () => {
       }
     });
   }, [userSearch.input]);
-
-  // useEffect(() => {
-  //   testFunc(searchData);
-  // }, [searchData]);
-
-  const testFunc = async (searchData) => {
-    // console.log("useEffect ran for Search searchData");
-    console.log(searchData, "this is searchData inside of the test func");
-
-    const latLonArray = await searchData.map((data) => ({
-      lon: data.longitude,
-      lat: data.latitude,
-    }));
-    console.log(latLonArray, " lat lon array inside of testFunc");
-    setLatLonState(latLonArray);
-    console.log(latLonState, "latLonState inside of testFunc");
-    const locationArray = [];
-    for (let index = 0; index < latLonState.length; index++) {
-      // console.log(latLonState[index].lat, "latitude");
-      // console.log(latLonState[index].lon, "longitude");
-      API.getLocation(latLonState[index].lon, latLonState[index].lat).then(
-        (res) => {
-          // console.log(res.data.features);
-          // Optional chaining for returning a value or undefined when the data is returned
-          // from the api
-          console.log(
-            res?.data?.features,
-            "res?.data?.feature inside of testFunc"
-          );
-          const resData = res?.data?.features;
-
-          //Map resData in order to extract the object then push the objects into
-          //the location array
-          resData.map((obj) => {
-            console.log(obj);
-            locationArray.push(obj);
-          });
-
-          console.log(resData, index++);
-          // setLocationState(res)
-        }
-      );
-    }
-    console.log(locationArray, "locationArray");
-  };
 
   const handleSearch = async (e) => {
     try {
@@ -187,8 +143,10 @@ const FuncComp = () => {
                 >
                   <Image
                     className="listItemImg d-inline"
-                    src={result.images[0].url}
-                    alt=""
+                    src={
+                      result.images[0].url === "" ? fern : result.images[0].url
+                    }
+                    alt="No Image Available"
                   />
                   <div className="listItemTitle d-inline">{result.title}</div>
                 </ListGroup.Item>
@@ -204,10 +162,20 @@ const FuncComp = () => {
                 <div key={data.id}>
                   <h1>{data.title}</h1>
 
-                  <Image src={data.images[0].url} fluid />
+                  <Image
+                    src={data.images[0].url === "" ? fern : data.images[0].url}
+                    fluid
+                  />
                   <div style={{ display: "none" }}>Hello World</div>
+                  <p>{data.audioDescription}</p>
+                  {"\n"}
+                  <p>
+                    {data.isOpenToPublic === "1"
+                      ? "Open to public"
+                      : "Not open to public"}
+                  </p>
                   <div>
-                    <a href={data.url}>Link to Location</a>
+                    <a href={data.url}>See More Information</a>
                   </div>
                   {/* <div>{data.bodyText}</div> */}
                 </div>
@@ -230,4 +198,4 @@ const FuncComp = () => {
   );
 };
 
-export default FuncComp;
+export default Search;
