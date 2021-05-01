@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, Component } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 // import { useHistory } from "react-router-dom";
 import axios from "axios";
 import API from "../../../utils/API";
@@ -31,7 +31,7 @@ const SearchResults = (props) => {
   // It updates the state of what the user is searching(When is get the search bar done)
   const { userSearch, setUserSearch } = useContext(QueryContext);
 
-  const [state, setState] = useState({
+  const [manyState, setManyState] = useState({
     // New user search for this component
     userInput: "",
     // The data from the search api call
@@ -46,57 +46,107 @@ const SearchResults = (props) => {
     locationData: [],
   });
 
+  const source = axios.CancelToken.source();
+  let searchResArray = [];
+
   //Since useEffect uses componentDidMount under the hood it is rerendering twice
   useEffect(() => {
     try {
-      if (userSearch.input !== "") {
-        const searchResArray = [];
-        const latLonArray = [];
-        axios
-          .get(`http://localhost:5000/api/places/${userSearch.input}`)
-          .then((res) => {
-            console.log(res);
-            // console.log(res, "res");
-            // Proceed with setting data is res is ok
-            if (res.status === 200) {
-              //Array from the response
-              const resData = res.data.data;
-              // console.log(resData);
-              resData.map((data) => {
-                searchResArray.push(data);
-                latLonArray.push({ lat: data.latitude, lon: data.longitude });
-              });
+      let latLonArray = [];
+      axios
+        .get(`http://localhost:5000/api/places/${userSearch.input}`, {
+          cancelToken: source.token,
+        })
+        .then((res) => {
+          console.log(res);
+          // console.log(res, "res");
+          // Proceed with setting data is res is ok
+          if (res.status === 200) {
+            //Array from the response
+            const resData = res.data.data;
+            console.log([resData[0]]);
 
-              // console.log(searchResArray);
-              // console.log(latLonArray);
-              if (searchResArray !== [] && latLonArray !== []) {
-                // console.log("success!");
-                // console.log(latLonArray);
-                setState({
-                  searchData: searchResArray,
-                  listItemData: [searchResArray[0]],
-                  latLon: latLonArray,
-                });
-                // console.log(this.state);
-              }
-            }
+            resData.map((data) => {
+              searchResArray.push(data);
+              latLonArray.push({ lat: data.latitude, lon: data.longitude });
+            });
             console.log(searchResArray);
             console.log(latLonArray);
-          });
-      }
+            setManyState({
+              searchData: searchResArray,
+              latLon: latLonArray,
+              listItemData: [resData[0]],
+            });
+          }
+        });
     } catch (error) {
       console.log(error);
     }
-    if (
-      state.searchData !== [] &&
-      state.listItemData !== [] &&
-      state.latLon !== []
-    ) {
+    return () => {
+      console.log("unmounted");
+      console.log(manyState);
+      source.cancel("was cancelled");
       console.log("hello");
-      console.log(state);
-    }
-    return;
+    };
   }, []);
+
+  const testEle = () => {
+    if (manyState.latLon !== undefined || manyState.latLon !== []) {
+      return <h1>hello</h1>;
+    }
+  };
+
+  const listItems = () => {
+    if (manyState.searchData !== undefined || manyState.searchData !== []) {
+      return manyState.searchData.map((result) => (
+        //
+        //
+        // *** set point-events to non in order to make this one cohesive clickable item
+        // List items for results
+        <ListGroup.Item
+          id={result.id}
+          key={result.id}
+          // onClick={(e) => onClickItem(e)}
+          type="button"
+          action
+          className="listItemStyle"
+        >
+          <Image
+            className="listItemImg d-inline"
+            src={result.images[0].url === "" ? fern : result.images[0].url}
+            alt="No Image Available"
+          />
+          <div className="listItemTitle d-inline">{result.title}</div>
+        </ListGroup.Item>
+      ));
+    }
+  };
+
+  // const infoItemMap = manyState.listItemData.map((data) => (
+  //   <div key={data.id}>
+  //     <h1>{data.title}</h1>
+
+  //     <Image
+  //       src={data.images[0].url === "" ? fern : data.images[0].url}
+  //       fluid
+  //     />
+  //     <div style={{ display: "none" }}>Hello World</div>
+  //     <p>{data.audioDescription}</p>
+  //     {"\n"}
+  //     <p>
+  //       {data.isOpenToPublic === "1" ? "Open to public" : "Not open to public"}
+  //     </p>
+  //     <div>
+  //       <a href={data.url}>See More Information</a>
+  //     </div>
+  //     {/* <div>{data.bodyText}</div> */}
+  //   </div>
+  // ));
+  // const infoItem = () => {
+  //   if (manyState.listItemData !== null) {
+  //     return infoItemMap;
+  //   }
+  // };
 
   // const handleSearch = async (e) => {
   //   try {
@@ -116,7 +166,6 @@ const SearchResults = (props) => {
   //   setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
   // };
 
-  // console.log(searchData, "searchData value");
   // const onClickItem = async (e) => {
   //   console.log("OnCLickItem ran");
   //   try {
@@ -132,7 +181,6 @@ const SearchResults = (props) => {
   //   }
   // };
 
-  // console.log(listItemData, "listItem data after onClick");
   return (
     <div className="searchResultsDiv">
       {/* <SearchBar /> */}
@@ -164,36 +212,40 @@ const SearchResults = (props) => {
           {/* Left Side */}
           <Col className="leftSide" lg="6" md="6">
             <ListGroup className="resultsDiv">
-              {/* {searchData.map((result) => (
-                //
-                //
-                // *** set point-events to non in order to make this one cohesive clickable item
-                // List items for results
-                <ListGroup.Item
-                  id={result.id}
-                  key={result.id}
-                  onClick={(e) => onClickItem(e)}
-                  type="button"
-                  action
-                  className="listItemStyle"
-                >
-                  <Image
-                    className="listItemImg d-inline"
-                    src={
-                      result.images[0].url === "" ? fern : result.images[0].url
-                    }
-                    alt="No Image Available"
-                  />
-                  <div className="listItemTitle d-inline">{result.title}</div>
-                </ListGroup.Item>
-                // </div>
-              ))} */}
+              <h1>Search: Hello</h1>
+              {listItems()}
             </ListGroup>
           </Col>
           {/*  */}
           {/* Right Side */}
           <Col className="rightSide" lg="6" md="6">
             <div className="infoDiv">
+              {manyState.listItemData !== undefined
+                ? manyState.listItemData.map((data) => (
+                    <div key={data.id}>
+                      <h1>{data.title}</h1>
+
+                      <Image
+                        src={
+                          data.images[0].url === "" ? fern : data.images[0].url
+                        }
+                        fluid
+                      />
+                      <div style={{ display: "none" }}>Hello World</div>
+                      <p>{data.audioDescription}</p>
+                      {"\n"}
+                      <p>
+                        {data.isOpenToPublic === "1"
+                          ? "Open to public"
+                          : "Not open to public"}
+                      </p>
+                      <div>
+                        <a href={data.url}>See More Information</a>
+                      </div>
+                      {/* <div>{data.bodyText}</div> */}
+                    </div>
+                  ))
+                : ""}
               {/* data From API callback
                     -id
                     -images[0].url
