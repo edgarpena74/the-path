@@ -75,6 +75,7 @@ const SearchResults = () => {
       // console.log(e.target.id, "ID inside of onClick");
       let idTarget = e.target.id;
       console.log(idTarget);
+      setListItemID(idTarget);
     } catch (error) {
       console.log(error);
     }
@@ -131,7 +132,10 @@ const SearchResults = () => {
               {searchData.status === "loading" ? (
                 "loading..."
               ) : (
-                <InformationBlock results={searchResponse} />
+                <InformationBlock
+                  results={searchResponse}
+                  listItemID={listItemID}
+                />
               )}
 
               {/* data From API callback

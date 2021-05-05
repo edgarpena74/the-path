@@ -6,7 +6,15 @@ import Image from "react-bootstrap/Image";
 import API from "../../../utils/API";
 import { QueryContext } from "../../../utils/Contexts";
 
-const InformationBlock = ({ results }) => {
+const InformationBlock = ({ results, listItemID }) => {
+  // if (listItemID === "") {
+  //   console.log("no ID");
+  //   const listItemData = [results[0]];
+  //   return listItemData;
+  // } else if (listItemID !== "") {
+  //   console.log("new ID");
+  //   console.log(listItemID, "new ID");
+  // }
   console.log(results);
   const listItemData = [results[0]];
   console.log(listItemData);
