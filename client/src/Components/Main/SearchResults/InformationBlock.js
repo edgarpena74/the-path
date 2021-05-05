@@ -6,7 +6,10 @@ import Image from "react-bootstrap/Image";
 import API from "../../../utils/API";
 import { QueryContext } from "../../../utils/Contexts";
 
-const InformationBlock = () => {
+const InformationBlock = ({ results }) => {
+  console.log(results);
+  const listItemData = [results[0]];
+  console.log(listItemData);
   return (
     <div>
       {listItemData !== undefined

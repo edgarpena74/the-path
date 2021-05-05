@@ -26,6 +26,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 //Components
 import ResultList from "./ResultList";
+import InformationBlock from "./InformationBlock";
 const SearchResults = () => {
   //
   //
@@ -37,6 +38,7 @@ const SearchResults = () => {
   // This is the context for the state that was declared in App.js(Parent)
   // It updates the state of what the user is searching(When is get the search bar done)
   const { userSearch, setUserSearch } = useContext(QueryContext);
+  const [listItemID, setListItemID] = useState("");
 
   const queryClient = useQueryClient();
 
@@ -46,7 +48,8 @@ const SearchResults = () => {
   );
 
   const searchResponse = searchData?.data?.data?.data;
-  console.log(searchResponse);
+
+  console.log(searchData);
 
   const handleSearch = async (e) => {
     try {
@@ -71,6 +74,7 @@ const SearchResults = () => {
       e.preventDefault();
       // console.log(e.target.id, "ID inside of onClick");
       let idTarget = e.target.id;
+      console.log(idTarget);
     } catch (error) {
       console.log(error);
     }
@@ -109,13 +113,27 @@ const SearchResults = () => {
           <Col className="leftSide" lg="6" md="6">
             <ListGroup className="resultsDiv">
               <p></p>
-              <ResultList onClick={onClickItem} results={searchResponse} />
+              {searchData.status === "loading" ? (
+                "loading..."
+              ) : (
+                <ResultList
+                  onClickItem={onClickItem}
+                  results={searchResponse}
+                />
+              )}
+              {/* <ResultList onClickItem={onClickItem} results={searchResponse} /> */}
             </ListGroup>
           </Col>
           {/*  */}
           {/* Right Side */}
           <Col className="rightSide" lg="6" md="6">
             <div className="infoDiv">
+              {searchData.status === "loading" ? (
+                "loading..."
+              ) : (
+                <InformationBlock results={searchResponse} />
+              )}
+
               {/* data From API callback
                     -id
                     -images[0].url
