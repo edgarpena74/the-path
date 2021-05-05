@@ -76,6 +76,7 @@ const SearchResults = () => {
       let idTarget = e.target.id;
       console.log(idTarget);
       setListItemID(idTarget);
+      console.log(listItemID);
     } catch (error) {
       console.log(error);
     }
