@@ -39,6 +39,7 @@ const SearchResults = () => {
   // It updates the state of what the user is searching(When is get the search bar done)
   const { userSearch, setUserSearch } = useContext(QueryContext);
   const [listItemID, setListItemID] = useState("");
+  const [work, setWork] = useState([]);
 
   const queryClient = useQueryClient();
 
@@ -48,8 +49,57 @@ const SearchResults = () => {
   );
 
   const searchResponse = searchData?.data?.data?.data;
+  console.log(searchResponse);
 
-  console.log(searchData);
+  const lonLatArr =
+    searchResponse === undefined
+      ? undefined
+      : searchResponse.map((data) => ({
+          lon: data.longitude,
+          lat: data.latitude,
+        }));
+
+  console.log(lonLatArr);
+
+  // useEffect(() => {
+  //   if (lonLatArr !== undefined) {
+  //     const umHi = [];
+  //     for (let index = 0; index < lonLatArr.length; index++) {
+  //       // API.getLocation(lonLatArr[index].lon, lonLatArr[index].lat).then(
+  //       //   (res) => {
+  //       //     umHi.push(res);
+  //       //   }
+  //       // );
+  //       const
+  //     }
+  //     // console.log(umHi);
+  //     // if (umHi.length === 3) {
+  //     //   console.log(umHi);
+  //     //   // setWork(umHi);
+  //     // }
+  //   }
+  //   console.log(work);
+  // }, [lonLatArr]);
+
+  // const locationsArr =
+  //   testArr === undefined
+  //     ? []
+  //     : testArr.map((data) => {
+  //         useQuery([{ lon: data.lon, lat: data.lat }], API.getLocation(lon, lat));
+  //       });
+
+  // console.log(locationsArr);
+
+  // const locations = useQueries(
+  //   testArr,
+  //   () => API.getLocation(testArr.lon, testArr.lat),
+  //   {
+  //     enabled: !!testArr,
+  //     enabled: false,
+  //   }
+  // );
+
+  // console.log(locations);
 
   const handleSearch = async (e) => {
     try {
