@@ -38,11 +38,12 @@ const jsxFunc = (listItemData) => {
 };
 
 const InformationBlock = ({ results, listItemID }) => {
+  console.log(results);
   if (listItemID === "") {
     console.log("no ID");
     const listItemData = [results[0]];
     return jsxFunc(listItemData);
-  } else {
+  } else if (results !== undefined) {
     console.log("new ID");
     console.log(listItemID, "new ID");
     const listItemData = results.filter((data) => data.id === listItemID);

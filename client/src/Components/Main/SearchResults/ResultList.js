@@ -6,7 +6,7 @@ import Image from "react-bootstrap/Image";
 import API from "../../../utils/API";
 import { QueryContext } from "../../../utils/Contexts";
 
-const ResultList = ({ onClickItem, results }) => {
+const ResultList = ({ onClickItem, results, locationArray }) => {
   // console.log("hello");
   // const { userSearch, setUserSearch } = useContext(QueryContext);
   // const queryClient = useQueryClient();
@@ -20,6 +20,15 @@ const ResultList = ({ onClickItem, results }) => {
 
   // const results= searchData?.data?.data?.data;
   // console.log(searchResponse);
+  console.log(locationArray);
+  const locationPromise =
+    locationArray !== undefined
+      ? Promise.all(locationArray).then((data) => {
+          console.log(data);
+          return data;
+        })
+      : undefined;
+  console.log(locationPromise);
   return (
     <div>
       {results !== undefined

@@ -27,7 +27,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 //Components
 import ResultList from "./ResultList";
 import InformationBlock from "./InformationBlock";
-import { Promise } from "mongoose";
+// import { Promise } from "mongoose";
 const SearchResults = () => {
   //
   //
@@ -42,9 +42,24 @@ const SearchResults = () => {
   const [listItemID, setListItemID] = useState("");
   // const [locations, setLocations] = useState([]);
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
-  // console.log(userSearch);
+  // const CancelToken = axios.CancelToken;
+
+  // // console.log(userSearch);
+  // const searchData = useQuery(userSearch.input, () => {
+  //   const source = CancelToken.source();
+  //   const promise = API.searchRes(userSearch.input, {
+  //     cancelToken: source.token,
+  //   });
+  //   promise.cancel = () => {
+  //     console.log("cancelled?");
+  //     source.cancel("Query was cancelled by React-Query");
+  //   };
+
+  //   return promise;
+  // });
+
   const searchData = useQuery(userSearch.input, () =>
     API.searchRes(userSearch.input)
   );
@@ -60,66 +75,69 @@ const SearchResults = () => {
           lat: data.latitude,
         }));
 
-  // console.log(lonLatArr);
+  //
+  //
+  // THIS WONT WORK BECAUSE YOU CANT MAP USING USEQUERY
+  //
+  //
+  // const locationRes = useQuery(lonLatArr, () => {
+  //   if (lonLatArr !== undefined) {
+  //     console.log("hello");
+  //     lonLatArr.map((data) => {
+  //       API.getLocation(data.lon, data.lat);
+  //     });
+  //   }
+  // });
 
-  // console.log(lonLatArr[0].lon);
+  // console.log(locationRes);
+
+  const locationArray =
+    lonLatArr !== undefined
+      ? lonLatArr.map((data) => {
+          if (
+            (data.lon === "" && data.lat === "") ||
+            (data.lon === undefined && data.lat === undefined)
+          ) {
+            return;
+          } else {
+            return API.getLocation(data.lon, data.lat);
+          }
+        })
+      : undefined;
+  // const locationPromise =
+  //   locationArray !== undefined
+  //     ? Promise.all(locationArray).then((data) => {
+  //         console.log(data);
+  //         return data;
+  //       })
+  //     : undefined;
 
   // useEffect(() => {
-  //   if (lonLatArr !== undefined) {
-  //     // console.log("hello");
-  //     // for (let index = 0; index < lonLatArr.length; index++) {
-  //     //   // API.getLocation(lonLatArr[index].lon, lonLatArr[index].lat).then(
-  //     //   //   (res) => {
-  //     //   //     console.log(res, index);
-  //     //   //   }
-  //     //   // );
-  //     //   const { data } = useQuery(
-  //     //     lonLatArr[index].lon,
-  //     //     lonLatArr[index].lat,
-  //     //     () => {
-  //     //       API.getLocation(lonLatArr[index].lon, lonLatArr[index].lat);
-  //     //     }
-  //     //   );
-  //     // }
-  //     const {data} = useQuery([])
-  //   }
-  // }, [lonLatArr]);
-
-  // const locationsArr =
-  //   testArr === undefined
-  //     ? []
-  //     : testArr.map((data) => {
-  //         useQuery([data.lon, data.lat], API.getLocation(data.lon, data.lat));
+  //   console.log("useEffect");
+  //   function hello() {
+  //     if (lonLatArr !== undefined) {
+  //       console.log(lonLatArr);
+  //       const locationRes = lonLatArr.map((data) => {
+  //         if (
+  //           (data.lon === "" && data.lat === "") ||
+  //           (data.lon === undefined && data.lat === undefined)
+  //         ) {
+  //           return;
+  //         } else {
+  //           return API.getLocation(data.lon, data.lat);
+  //         }
   //       });
+  //       console.log(locationRes);
 
-  // console.log(locationsArr);
-
-  // const locations = useQuery(
-  //   [lonLatArr, lonLatArr.lon, lonLatArr.lat],
-  //   () => API.getLocation(lonLatArr.lon, lonLatArr.lat),
-  //   {
-  //     enabled: !!lonLatArr,
-  //     enabled: false,
+  //       const promise = Promise.all(locationRes).then((data) => {
+  //         setLocations(data);
+  //         console.log(locations);
+  //       });
+  //       return promise;
+  //     }
   //   }
-  // );
-
-  // console.log(locations);
-
-  useEffect(() => {
-    if (lonLatArr !== undefined) {
-      console.log(lonLatArr);
-      const hello = lonLatArr.map((data) => {
-        if (data.lon === "" && data.lat === "") {
-          return;
-        }
-        return API.getLocation(data.lon, data.lat);
-      });
-
-      // const helloTwo = Promise.all(hello).then((data) => {
-      //   console.log(data);
-      // });
-    }
-  }, [lonLatArr]);
+  //   console.log(hello());
+  // }, [lonLatArr]);
 
   const handleSearch = async (e) => {
     try {
@@ -191,6 +209,7 @@ const SearchResults = () => {
                 <ResultList
                   onClickItem={onClickItem}
                   results={searchResponse}
+                  locationArray={locationArray}
                 />
               )}
               {/* <ResultList onClickItem={onClickItem} results={searchResponse} /> */}
