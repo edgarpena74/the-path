@@ -1,7 +1,7 @@
 import React from "react";
 
-const Location = () => {
-  return <div>hello</div>;
+const Location = ({ data }) => {
+  return <div>{data}</div>;
 };
 
 export default Location;

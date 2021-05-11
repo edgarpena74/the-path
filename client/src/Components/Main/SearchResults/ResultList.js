@@ -5,6 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Image from "react-bootstrap/Image";
 import API from "../../../utils/API";
 import { QueryContext } from "../../../utils/Contexts";
+import Location from "./Location";
 
 const ResultList = ({ onClickItem, results, locationArray }) => {
   // console.log("hello");
@@ -21,13 +22,42 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
   // const results= searchData?.data?.data?.data;
   // console.log(searchResponse);
   console.log(locationArray);
+
   const locationPromise =
     locationArray !== undefined
       ? Promise.all(locationArray).then((data) => {
           console.log(data);
-          return data;
+          const hello = data.map((res) => {
+            const helloTwo = res.data?.features[0]?.properties?.label;
+            console.log(helloTwo);
+            return helloTwo;
+          });
+          console.log(hello);
+          //pass the data as a parameter to a function
+          // return data;
         })
       : undefined;
+
+  // const hello = async () => {
+  //   const locationRes = await locationPromise;
+  //   console.log(locationRes);
+  //   const locationMap = locationRes.map((data) => {
+  //     console.log(data);
+  //     const features = data.features[0];
+  //     console.log(features);
+  //   });
+
+  //   return (
+  //     <div>
+  //       {/* {locationMap.map((data, index) => (
+  //         <Location key={index} index={index} data={data} />
+  //       ))} */}
+  //       hello
+  //     </div>
+  //   );
+  // };
+  // console.log(hello());
+  //do a remap of the data to set "no location if undefined"
   console.log(locationPromise);
   return (
     <div>
@@ -54,6 +84,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
             </ListGroup.Item>
           ))
         : ""}
+      {/* {hello()} */}
     </div>
   );
 };
