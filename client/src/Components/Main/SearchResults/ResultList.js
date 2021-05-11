@@ -38,25 +38,8 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
         })
       : undefined;
 
-  // const hello = async () => {
-  //   const locationRes = await locationPromise;
-  //   console.log(locationRes);
-  //   const locationMap = locationRes.map((data) => {
-  //     console.log(data);
-  //     const features = data.features[0];
-  //     console.log(features);
-  //   });
+  const numArr = ["1", "2", "3"];
 
-  //   return (
-  //     <div>
-  //       {/* {locationMap.map((data, index) => (
-  //         <Location key={index} index={index} data={data} />
-  //       ))} */}
-  //       hello
-  //     </div>
-  //   );
-  // };
-  // console.log(hello());
   //do a remap of the data to set "no location if undefined"
   console.log(locationPromise);
   return (
@@ -81,6 +64,9 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
                 alt="No Image Available"
               />
               <div className="listItemTitle d-inline">{result.title}</div>
+              {numArr.map((data) => {
+                return <div>{data}</div>;
+              })}
             </ListGroup.Item>
           ))
         : ""}

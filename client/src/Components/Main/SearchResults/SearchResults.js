@@ -58,11 +58,13 @@ const SearchResults = () => {
   //   };
 
   //   return promise;
-  // });
 
+  //Don't use curly brackets for a single statement in a function
+  //If you use curly braces the callback data will return undefined
   const searchData = useQuery(userSearch.input, () =>
     API.searchRes(userSearch.input)
   );
+  console.log(searchData);
 
   const searchResponse = searchData?.data?.data?.data;
   // console.log(searchResponse);
@@ -142,15 +144,14 @@ const SearchResults = () => {
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
-      console.log("hello");
-      // console.log("handleSearch ran");
+      console.log("handle search");
     } catch (error) {
       return console.log(error);
     }
   };
 
   //Consider putting this inside of handleSearch
-  const onChange = (e) => {
+  const onClick = (e) => {
     // console.log("onChange ran");
     e.preventDefault();
     return setUserSearch({ [e.target.name]: e.target.value });
@@ -186,7 +187,9 @@ const SearchResults = () => {
                 Name
               </Form.Label> */}
               <Form.Control
-                onChange={onChange}
+                // onClick={(e) => {
+                //   onClick(e);
+                // }}
                 type="text"
                 name="input"
                 id="searchInput"
@@ -205,6 +208,8 @@ const SearchResults = () => {
               <p></p>
               {searchData.status === "loading" ? (
                 "loading..."
+              ) : searchData.status !== "success" ? (
+                "loading..."
               ) : (
                 <ResultList
                   onClickItem={onClickItem}
@@ -221,11 +226,13 @@ const SearchResults = () => {
             <div className="infoDiv">
               {searchData.status === "loading" ? (
                 "loading..."
-              ) : (
+              ) : searchData.data !== undefined ? (
                 <InformationBlock
                   results={searchResponse}
                   listItemID={listItemID}
                 />
+              ) : (
+                "Data Undefined"
               )}
 
               {/* data From API callback
