@@ -45,7 +45,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
   return (
     <div>
       {results !== undefined
-        ? results.map((result) => (
+        ? results.map((result, index) => (
             //
             //
             // *** set point-events to non in order to make this one cohesive clickable item
@@ -64,9 +64,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
                 alt="No Image Available"
               />
               <div className="listItemTitle d-inline">{result.title}</div>
-              {numArr.map((data) => {
-                return <div>{data}</div>;
-              })}
+              <div>{numArr[index]}</div>
             </ListGroup.Item>
           ))
         : ""}
