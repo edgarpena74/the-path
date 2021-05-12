@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useQuery, useQueryClient, useMutation } from "react-query";
 import fern from "./Assets/fern.jpg";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -7,66 +7,56 @@ import API from "../../../utils/API";
 import { QueryContext } from "../../../utils/Contexts";
 import Location from "./Location";
 
+//try moving the jsx as a separate function
+
 const ResultList = ({ onClickItem, results, locationArray }) => {
-  // console.log("hello");
-  // const { userSearch, setUserSearch } = useContext(QueryContext);
-  // const queryClient = useQueryClient();
-  // // const searchData = useMutation((data) =>
-  // //   API.searchRes(userSearch.input, data)
-  // // );
-  // console.log(userSearch);
-  // const searchData = useQuery(userSearch.input, () =>
-  //   API.searchRes(userSearch.input)
-  // );
+  const [testState, setTestState] = useState([]);
+  // console.log(helloTwo());
+  useEffect(() => {
+    const testArr = [];
+    const locationPromise =
+      locationArray !== undefined
+        ? Promise.all(locationArray).then((data) => {
+            // console.log(data);
+            const dataMap = data.map((res) => {
+              const mapRes = res.data?.features[0]?.properties?.label;
+              return mapRes;
+            });
 
-  // const results= searchData?.data?.data?.data;
-  // console.log(searchResponse);
-  // console.log(locationArray);
+            return locationRefine(dataMap);
+            //pass the data as a parameter to a function
+            // return data;
+          })
+        : undefined;
+    // console.log(locationPromise, "hello");
 
-  const locationPromise =
-    locationArray !== undefined
-      ? Promise.all(locationArray).then((data) => {
-          console.log(data);
-          const dataMap = data.map((res) => {
-            const mapRes = res.data?.features[0]?.properties?.label;
-            return mapRes;
-          });
-          console.log(dataMap);
-          return locationElement(dataMap);
-          //pass the data as a parameter to a function
-          // return data;
-        })
-      : undefined;
-
-  const locationElement = (dataMap, index) => {
-    console.log(dataMap);
-    const arr = [];
-    if (dataMap !== undefined) {
-      dataMap.map((el) => {
+    const locationRefine = (dataMap, index) => {
+      // console.log(dataMap);
+      const promiseData = dataMap;
+      // console.log(promiseData);
+      const arr = promiseData.map((el) => {
         if (el === undefined) {
-          const noneFound = "No Location Found";
-          return arr.push(noneFound);
+          return "No Location Found";
         } else {
-          const element = el;
-          return arr.push(element);
+          return el;
         }
       });
-      // console.log(newArr);
-      // return newArr[index];
-    }
-    console.log(arr);
-    return arr[index];
-  };
+      return locationElement(arr);
+    };
+    const locationElement = async (arr, index) => {
+      // console.log(arr);
+      const newArr = await arr;
+      testArr.push(newArr);
+      console.log(testArr);
+      // return <Location data={newArr} />;
+    };
+    console.log(testArr);
+    return <Location data={testArr} />;
+  }, []);
 
-  // const locationElement = (index) => {
-  //   if (locationRefining !== undefined) {
-  //     return locationRefining(index);
-  //   }
-  // };
-  console.log(locationElement());
+  // const locationReturn = locationElement() ?? "";
+  // console.log(locationReturn);
 
-  //do a remap of the data to set "no location if undefined"
-  console.log(locationPromise);
   return (
     <div>
       {results !== undefined
@@ -89,14 +79,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
                 alt="No Image Available"
               />
               <div className="listItemTitle d-inline">{result.title}</div>
-              {locationElement() === undefined ? (
-                <div>Loading...</div>
-              ) : locationElement() !== undefined ? (
-                <div>{locationElement(index)}</div>
-              ) : (
-                <div>{locationElement(index)}</div>
-              )}
-              {/* <div>{locationElement()}</div> */}
+              <Location />
             </ListGroup.Item>
           ))
         : ""}
