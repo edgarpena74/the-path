@@ -21,7 +21,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
 
   // const results= searchData?.data?.data?.data;
   // console.log(searchResponse);
-  console.log(locationArray);
+  // console.log(locationArray);
 
   const locationPromise =
     locationArray !== undefined
@@ -37,22 +37,24 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
           // return data;
         })
       : undefined;
-  const locationElement = async (hello, index) => {
-    console.log(hello);
-    const arr = await hello;
-    console.log(arr);
-    const replaceUndefined = arr.findIndex((el) => el === undefined);
-    console.log(replaceUndefined);
-    //Figure out how to deal with -1
-    if (replaceUndefined !== -1) {
-      return (arr[replaceUndefined] = "No Location Found");
-    }
-    console.log(arr);
 
-    // return <div>{helloAgain[index]}</div>;
+  const locationElement = (dataMap, index) => {
+    console.log(dataMap);
+    const arr = dataMap;
+    console.log(arr);
+    const newArr = arr.map((el) => {
+      if (el === undefined) {
+        const noneFound = "No Location Found";
+        return noneFound;
+      } else {
+        const element = el;
+        return element;
+      }
+    });
+    console.log(newArr);
   };
 
-  const numArr = ["1", "2", "3"];
+  // console.log(locationElement());
 
   //do a remap of the data to set "no location if undefined"
   console.log(locationPromise);
@@ -78,7 +80,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
                 alt="No Image Available"
               />
               <div className="listItemTitle d-inline">{result.title}</div>
-              <div>{numArr[index]}</div>
+              {/* <div>{locationElement(index)}</div> */}
             </ListGroup.Item>
           ))
         : ""}
