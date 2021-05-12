@@ -40,21 +40,30 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
 
   const locationElement = (dataMap, index) => {
     console.log(dataMap);
-    const arr = dataMap;
+    const arr = [];
+    if (dataMap !== undefined) {
+      dataMap.map((el) => {
+        if (el === undefined) {
+          const noneFound = "No Location Found";
+          return arr.push(noneFound);
+        } else {
+          const element = el;
+          return arr.push(element);
+        }
+      });
+      // console.log(newArr);
+      // return newArr[index];
+    }
     console.log(arr);
-    const newArr = arr.map((el) => {
-      if (el === undefined) {
-        const noneFound = "No Location Found";
-        return noneFound;
-      } else {
-        const element = el;
-        return element;
-      }
-    });
-    console.log(newArr);
+    return arr[index];
   };
 
-  // console.log(locationElement());
+  // const locationElement = (index) => {
+  //   if (locationRefining !== undefined) {
+  //     return locationRefining(index);
+  //   }
+  // };
+  console.log(locationElement());
 
   //do a remap of the data to set "no location if undefined"
   console.log(locationPromise);
@@ -80,7 +89,14 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
                 alt="No Image Available"
               />
               <div className="listItemTitle d-inline">{result.title}</div>
-              {/* <div>{locationElement(index)}</div> */}
+              {locationElement() === undefined ? (
+                <div>Loading...</div>
+              ) : locationElement() !== undefined ? (
+                <div>{locationElement(index)}</div>
+              ) : (
+                <div>{locationElement(index)}</div>
+              )}
+              {/* <div>{locationElement()}</div> */}
             </ListGroup.Item>
           ))
         : ""}
