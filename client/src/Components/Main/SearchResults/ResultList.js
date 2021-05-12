@@ -27,16 +27,30 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
     locationArray !== undefined
       ? Promise.all(locationArray).then((data) => {
           console.log(data);
-          const hello = data.map((res) => {
-            const helloTwo = res.data?.features[0]?.properties?.label;
-            console.log(helloTwo);
-            return helloTwo;
+          const dataMap = data.map((res) => {
+            const mapRes = res.data?.features[0]?.properties?.label;
+            return mapRes;
           });
-          console.log(hello);
+          console.log(dataMap);
+          return locationElement(dataMap);
           //pass the data as a parameter to a function
           // return data;
         })
       : undefined;
+  const locationElement = async (hello, index) => {
+    console.log(hello);
+    const arr = await hello;
+    console.log(arr);
+    const replaceUndefined = arr.findIndex((el) => el === undefined);
+    console.log(replaceUndefined);
+    //Figure out how to deal with -1
+    if (replaceUndefined !== -1) {
+      return (arr[replaceUndefined] = "No Location Found");
+    }
+    console.log(arr);
+
+    // return <div>{helloAgain[index]}</div>;
+  };
 
   const numArr = ["1", "2", "3"];
 
