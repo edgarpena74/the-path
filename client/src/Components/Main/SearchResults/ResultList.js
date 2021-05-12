@@ -10,14 +10,15 @@ import Location from "./Location";
 //try moving the jsx as a separate function
 
 const ResultList = ({ onClickItem, results, locationArray }) => {
+  console.log(locationArray);
   const [testState, setTestState] = useState([]);
-  // console.log(helloTwo());
+
   useEffect(() => {
-    const testArr = [];
     const locationPromise =
       locationArray !== undefined
         ? Promise.all(locationArray).then((data) => {
-            // console.log(data);
+            console.log(data);
+
             const dataMap = data.map((res) => {
               const mapRes = res.data?.features[0]?.properties?.label;
               return mapRes;
@@ -46,12 +47,13 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
     const locationElement = async (arr, index) => {
       // console.log(arr);
       const newArr = await arr;
-      testArr.push(newArr);
-      console.log(testArr);
-      // return <Location data={newArr} />;
+      console.log(newArr);
+
+      return newArr;
     };
-    console.log(testArr);
-    return <Location data={testArr} />;
+    //
+    setTestState(locationPromise);
+    console.log(testState);
   }, []);
 
   // const locationReturn = locationElement() ?? "";
@@ -79,7 +81,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
                 alt="No Image Available"
               />
               <div className="listItemTitle d-inline">{result.title}</div>
-              <Location />
+              <Location data={testState} />
             </ListGroup.Item>
           ))
         : ""}
