@@ -61,22 +61,14 @@ const SearchResults = () => {
 
   //Don't use curly brackets for a single statement in a function
   //If you use curly braces the callback data will return undefined
-
   const searchData = useQuery(userSearch.input, () =>
-    API.searchRes(userSearch.input).then((res) => {
-      return res;
-    })
+    API.searchRes(userSearch.input)
   );
-  console.log(searchData?.data?.data?.data);
+  console.log(searchData);
 
   const searchResponse = searchData?.data?.data?.data;
-  console.log(searchResponse);
+  // console.log(searchResponse);
 
-  //
-  //
-  // do the promise all at this point
-  //
-  //
   const lonLatArr =
     searchResponse === undefined
       ? undefined
@@ -84,30 +76,70 @@ const SearchResults = () => {
           lon: data.longitude,
           lat: data.latitude,
         }));
-  console.log(lonLatArr);
+
+  //
+  //
+  // THIS WONT WORK BECAUSE YOU CANT MAP USING USEQUERY
+  //
+  //
+  // const locationRes = useQuery(lonLatArr, () => {
+  //   if (lonLatArr !== undefined) {
+  //     console.log("hello");
+  //     lonLatArr.map((data) => {
+  //       API.getLocation(data.lon, data.lat);
+  //     });
+  //   }
+  // });
+
+  // console.log(locationRes);
 
   const locationArray =
     lonLatArr !== undefined
-      ? lonLatArr.map(async (data) => {
-          try {
-            const response = await API.getLocation(data.lon, data.lat);
-            // console.log(response, "response");
-            return response;
-
-            // return API.getLocation(data.lon, data.lat);
-          } catch (err) {
-            console.log(err);
+      ? lonLatArr.map((data) => {
+          if (
+            (data.lon === "" && data.lat === "") ||
+            (data.lon === undefined && data.lat === undefined)
+          ) {
+            return;
+          } else {
+            return API.getLocation(data.lon, data.lat);
           }
         })
-      : "loading...";
+      : undefined;
+  // const locationPromise =
+  //   locationArray !== undefined
+  //     ? Promise.all(locationArray).then((data) => {
+  //         console.log(data);
+  //         return data;
+  //       })
+  //     : undefined;
 
-  console.log(locationArray);
+  // useEffect(() => {
+  //   console.log("useEffect");
+  //   function hello() {
+  //     if (lonLatArr !== undefined) {
+  //       console.log(lonLatArr);
+  //       const locationRes = lonLatArr.map((data) => {
+  //         if (
+  //           (data.lon === "" && data.lat === "") ||
+  //           (data.lon === undefined && data.lat === undefined)
+  //         ) {
+  //           return;
+  //         } else {
+  //           return API.getLocation(data.lon, data.lat);
+  //         }
+  //       });
+  //       console.log(locationRes);
 
-  const hello =
-    locationArray !== "loading..."
-      ? Promise.all(locationArray).then((res) => console.log(res))
-      : "loading...";
-  console.log(hello);
+  //       const promise = Promise.all(locationRes).then((data) => {
+  //         setLocations(data);
+  //         console.log(locations);
+  //       });
+  //       return promise;
+  //     }
+  //   }
+  //   console.log(hello());
+  // }, [lonLatArr]);
 
   const handleSearch = async (e) => {
     try {
@@ -174,7 +206,7 @@ const SearchResults = () => {
           <Col className="leftSide" lg="6" md="6">
             <ListGroup className="resultsDiv">
               <p></p>
-              {/* {searchData.status === "loading" ? (
+              {searchData.status === "loading" ? (
                 "loading..."
               ) : searchData.status !== "success" ? (
                 "loading..."
@@ -184,7 +216,7 @@ const SearchResults = () => {
                   results={searchResponse}
                   locationArray={locationArray}
                 />
-              )} */}
+              )}
               {/* <ResultList onClickItem={onClickItem} results={searchResponse} /> */}
             </ListGroup>
           </Col>
@@ -192,7 +224,7 @@ const SearchResults = () => {
           {/* Right Side */}
           <Col className="rightSide" lg="6" md="6">
             <div className="infoDiv">
-              {/* {searchData.status === "loading" ? (
+              {searchData.status === "loading" ? (
                 "loading..."
               ) : searchData.data !== undefined ? (
                 <InformationBlock
@@ -201,7 +233,7 @@ const SearchResults = () => {
                 />
               ) : (
                 "Data Undefined"
-              )} */}
+              )}
 
               {/* data From API callback
                     -id

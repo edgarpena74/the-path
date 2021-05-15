@@ -10,7 +10,7 @@ import LocationParent from "./LocationParent";
 //try moving the jsx as a separate function
 
 const ResultList = ({ onClickItem, results, locationArray }) => {
-  // console.log(locationArray);
+  console.log(locationArray);
   const [testState, setTestState] = useState([]);
 
   useEffect(() => {
@@ -48,10 +48,10 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
       // console.log(arr);
       const newArr = await arr;
       console.log(newArr);
+      setTestState(newArr);
+      return newArr;
     };
     //
-
-    console.log(testState);
   }, []);
 
   // const locationReturn = locationElement() ?? "";
@@ -79,7 +79,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
                 alt="No Image Available"
               />
               <div className="listItemTitle d-inline">{result.title}</div>
-              <LocationParent data={testState} />
+              <LocationParent data={testState} index={index} />
             </ListGroup.Item>
           ))
         : ""}

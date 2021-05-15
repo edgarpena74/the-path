@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 
-const LocationParent = ({ data }) => {
-  const [dataState, setDataState] = useState([]);
+const LocationParent = ({ data, index }) => {
+  console.log(index);
+  console.log(data);
+  // const dataNew = await data.then((values) => {
+  //   console.log(values);
+  //   const test = values;
+  //   return test;
+  // });
+  // console.log(dataNew);
+  // const dataArr = [data];
+  // Promise.all(d).then((values) => {
+  //   console.log(values);
+  // });
+  // const newData = data.then((arr) => {
+  //   return arr;
+  // });
+  // console.log(newData);
   if (data !== undefined) {
-    const arr = [data];
-    console.log(arr);
-    Promise.all(arr).then((res) => {
-      return setDataState(res);
-    });
-    console.log(dataState);
-    return <div>hello</div>;
+    console.log(data);
+    return <div>{data[index]}</div>;
+  } else if (data === []) {
+    return <div>Loading...</div>;
   }
 };
 
