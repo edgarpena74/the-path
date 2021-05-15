@@ -48,7 +48,6 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
       // console.log(arr);
       const newArr = await arr;
       console.log(newArr);
-      return newArr;
     };
     //
 
