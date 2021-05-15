@@ -106,40 +106,6 @@ const SearchResults = () => {
           }
         })
       : undefined;
-  // const locationPromise =
-  //   locationArray !== undefined
-  //     ? Promise.all(locationArray).then((data) => {
-  //         console.log(data);
-  //         return data;
-  //       })
-  //     : undefined;
-
-  // useEffect(() => {
-  //   console.log("useEffect");
-  //   function hello() {
-  //     if (lonLatArr !== undefined) {
-  //       console.log(lonLatArr);
-  //       const locationRes = lonLatArr.map((data) => {
-  //         if (
-  //           (data.lon === "" && data.lat === "") ||
-  //           (data.lon === undefined && data.lat === undefined)
-  //         ) {
-  //           return;
-  //         } else {
-  //           return API.getLocation(data.lon, data.lat);
-  //         }
-  //       });
-  //       console.log(locationRes);
-
-  //       const promise = Promise.all(locationRes).then((data) => {
-  //         setLocations(data);
-  //         console.log(locations);
-  //       });
-  //       return promise;
-  //     }
-  //   }
-  //   console.log(hello());
-  // }, [lonLatArr]);
 
   const handleSearch = async (e) => {
     try {
@@ -164,8 +130,8 @@ const SearchResults = () => {
       // console.log(e.target.id, "ID inside of onClick");
       let idTarget = e.target.id;
       console.log(idTarget);
-      setListItemID(idTarget);
-      console.log(listItemID);
+      // setListItemID(idTarget);
+      // console.log(listItemID);
     } catch (error) {
       console.log(error);
     }
@@ -229,6 +195,7 @@ const SearchResults = () => {
               ) : searchData.data !== undefined ? (
                 <InformationBlock
                   results={searchResponse}
+                  locationArray={locationArray}
                   listItemID={listItemID}
                 />
               ) : (

@@ -5,19 +5,18 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Image from "react-bootstrap/Image";
 import API from "../../../utils/API";
 import { QueryContext } from "../../../utils/Contexts";
-import LocationParent from "./LocationParent";
+import LocationList from "./LocationList";
 
 //try moving the jsx as a separate function
 
 const ResultList = ({ onClickItem, results, locationArray }) => {
-  console.log(locationArray);
-  const [testState, setTestState] = useState([]);
+  const [locationElementState, setLocationElementState] = useState([]);
 
   useEffect(() => {
     const locationPromise =
       locationArray !== undefined
         ? Promise.all(locationArray).then((data) => {
-            console.log(data);
+            // console.log(data);
 
             const dataMap = data.map((res) => {
               const mapRes = res.data?.features[0]?.properties?.label;
@@ -48,7 +47,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
       // console.log(arr);
       const newArr = await arr;
       console.log(newArr);
-      setTestState(newArr);
+      setLocationElementState(newArr);
       return newArr;
     };
     //
@@ -79,7 +78,11 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
                 alt="No Image Available"
               />
               <div className="listItemTitle d-inline">{result.title}</div>
-              <LocationParent data={testState} index={index} />
+              <LocationList
+                data={locationElementState}
+                index={index}
+                locationArray={locationArray}
+              />
             </ListGroup.Item>
           ))
         : ""}
