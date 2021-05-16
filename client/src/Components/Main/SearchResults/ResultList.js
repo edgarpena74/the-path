@@ -79,7 +79,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
               />
               <div className="listItemTitle d-inline">{result.title}</div>
               <LocationList
-                data={locationElementState}
+                elementData={locationElementState}
                 index={index}
                 locationArray={locationArray}
               />

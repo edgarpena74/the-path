@@ -127,11 +127,12 @@ const SearchResults = () => {
     console.log("OnCLickItem ran");
     try {
       e.preventDefault();
+      console.log(searchResponse);
       // console.log(e.target.id, "ID inside of onClick");
       let idTarget = e.target.id;
       console.log(idTarget);
-      // setListItemID(idTarget);
-      // console.log(listItemID);
+      setListItemID(idTarget);
+      return listItemID;
     } catch (error) {
       console.log(error);
     }
