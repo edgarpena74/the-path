@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import axios from "axios";
+
 import FunctionsContext from "../../../utils/FunctionsContext";
 // import { QueryContext } from "../../../utils/QueryContext";
 import { QueryContext } from "../../../utils/Contexts";
@@ -28,13 +28,13 @@ const TopIntro = () => {
   //This context is used to save whats the user is searching
   //allowing the data to be used in other components
   const { userSearch, setUserSearch } = useContext(QueryContext);
-  console.log(userSearch, "usersearch from top intro");
+  // console.log(userSearch, "usersearch from top intro");
   // Updates the state of userSearch
   const onChange = (e) => {
-    console.log("on change ran");
+    // console.log("on change ran");
     setUserSearch({ ...userSearch, [e.target.name]: e.target.value });
   };
-  console.log(userSearch, " this is the value for userSearch TopMain.js");
+  // console.log(userSearch, " this is the value for userSearch TopMain.js");
   return (
     <div>
       <div className="container-fluid topMainDiv d-flex align-items-center">

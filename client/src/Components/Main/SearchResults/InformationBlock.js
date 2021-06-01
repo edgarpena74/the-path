@@ -1,16 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useQuery, useQueryClient, useMutation } from "react-query";
+
 import fern from "./Assets/fern.jpg";
-import ListGroup from "react-bootstrap/ListGroup";
+
 import Image from "react-bootstrap/Image";
-import API from "../../../utils/API";
-import { QueryContext } from "../../../utils/Contexts";
-import LocationList from "./LocationList";
 
 const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
-  console.log(locationElementIndex);
+  // console.log(locationElementIndex);
 
-  console.log(locationElementState);
+  // console.log(locationElementState);
   const stateIndex = locationElementIndex;
   const locationInfo = () => {
     if (locationElementState === []) {
@@ -19,7 +16,7 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
       return <div>{locationElementState[stateIndex]}</div>;
     }
   };
-  console.log(locationInfo());
+
   return (
     <div>
       {listItemData !== undefined
@@ -55,7 +52,7 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
 
 const InformationBlock = ({ results, listItemID, locationArray, idTarget }) => {
   const [locationElementState, setLocationElementState] = useState([]);
-  console.log(idTarget);
+  // console.log(idTarget);
 
   useEffect(() => {
     const locationPromise =
@@ -91,7 +88,7 @@ const InformationBlock = ({ results, listItemID, locationArray, idTarget }) => {
     const locationElement = async (arr, index) => {
       // console.log(arr);
       const newArr = await arr;
-      console.log(newArr);
+
       setLocationElementState(newArr);
       return newArr;
     };
@@ -99,24 +96,24 @@ const InformationBlock = ({ results, listItemID, locationArray, idTarget }) => {
   }, []);
 
   if (listItemID === "") {
-    console.log("no ID");
-    console.log(locationElementState);
+    // console.log("no ID");
+    // console.log(locationElementState);
     const locationElementIndex = 0;
     const listItemData = [results[0]];
     // const index = 0;
     return jsxFunc(listItemData, locationElementIndex, locationElementState);
   } else if (results !== undefined) {
-    console.log(locationElementState);
-    console.log("new ID");
-    console.log(listItemID, "new ID");
-    console.log(results);
+    // console.log(locationElementState);
+    // console.log("new ID");
+    // console.log(listItemID, "new ID");
+    // console.log(results);
     const listItemData = results.filter((data) => data.id === listItemID);
-    console.log(listItemData);
-    console.log(locationElementState);
+    // console.log(listItemData);
+    // console.log(locationElementState);
     const filteredItemID = listItemData[0].id;
-    console.log(filteredItemID);
+    // console.log(filteredItemID);
     const indexOfID = locationElementState.indexOf(listItemData);
-    console.log(indexOfID);
+    // console.log(indexOfID);
     const locationElementIndex = 0;
     return jsxFunc(listItemData, locationElementIndex, locationElementState);
   }

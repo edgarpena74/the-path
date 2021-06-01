@@ -1,0 +1,15 @@
+.navBar {
+  background-color: #94b0b1 !important;
+  align-content: center !important;
+  justify-content: center !important;
+}
+
+.imgContainer {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+.logo {
+  height: 100px !important;
+  width: 100px !important;
+}

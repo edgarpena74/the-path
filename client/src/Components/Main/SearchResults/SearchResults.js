@@ -61,10 +61,12 @@ const SearchResults = () => {
 
   //Don't use curly brackets for a single statement in a function
   //If you use curly braces the callback data will return undefined
-  const searchData = useQuery(userSearch.input, () =>
-    API.searchRes(userSearch.input)
+  const searchData = useQuery(
+    userSearch.input,
+    () => API.searchRes(userSearch.input),
+    { refetchInterval: false }
   );
-  console.log(searchData);
+  // console.log(searchData);
 
   const searchResponse = searchData?.data?.data?.data;
   // console.log(searchResponse);
@@ -110,7 +112,7 @@ const SearchResults = () => {
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
-      console.log("handle search");
+      // console.log("handle search");
     } catch (error) {
       return console.log(error);
     }
@@ -123,16 +125,16 @@ const SearchResults = () => {
     return setUserSearch({ [e.target.name]: e.target.value });
   };
 
-  const onClickItem = async (e) => {
-    console.log("OnCLickItem ran");
+  const onClickItem = (e) => {
+    // console.log("OnCLickItem ran");
     try {
       e.preventDefault();
-      console.log(searchResponse);
+      // console.log(searchResponse);
       // console.log(e.target.id, "ID inside of onClick");
       let idTarget = e.target.id;
-      console.log(idTarget);
+      // console.log(idTarget);
       setListItemID(idTarget);
-      return listItemID;
+      return;
     } catch (error) {
       console.log(error);
     }

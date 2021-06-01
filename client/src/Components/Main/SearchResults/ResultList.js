@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useQuery, useQueryClient, useMutation } from "react-query";
+
 import fern from "./Assets/fern.jpg";
 import ListGroup from "react-bootstrap/ListGroup";
 import Image from "react-bootstrap/Image";
-import API from "../../../utils/API";
-import { QueryContext } from "../../../utils/Contexts";
+
 import LocationList from "./LocationList";
 
 //try moving the jsx as a separate function
@@ -46,7 +45,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
     const locationElement = async (arr, index) => {
       // console.log(arr);
       const newArr = await arr;
-      console.log(newArr);
+      // console.log(newArr);
       setLocationElementState(newArr);
       return newArr;
     };
