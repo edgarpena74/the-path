@@ -4,18 +4,42 @@
 }
 
 .resultsDiv {
-  border: 10px solid black !important;
+  border: 1px solid black !important;
   height: 500px !important;
   overflow-y: scroll !important;
 }
+
+/* .listItemInfoContainer {
+  padding: 0px !important;
+}
+
+.listImageCol {
+  padding: 0px !important;
+  padding-left: 1px !important;
+}
+
+.listTextCol {
+  padding: 0px !important;
+} */
 
 .listItemImg {
   height: 100px !important;
   width: 100px !important;
   pointer-events: none !important;
 }
-.listItemTitle {
+.listItemTitleLoc {
   pointer-events: none !important;
+  margin-left: 1px !important;
+  /* justify-content: center !important;
+  align-content: center !important; */
+}
+
+.listItemTitle {
+  font-weight: bold !important;
+}
+
+.listItemLoc {
+  /*  */
 }
 
 .rightSide {
@@ -24,5 +48,5 @@
 }
 
 .infoDiv {
-  border: 10px solid black !important;
+  border: 1px solid black !important;
 }

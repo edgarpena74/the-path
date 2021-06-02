@@ -174,7 +174,6 @@ const SearchResults = () => {
           {/* Left Side */}
           <Col className="leftSide" lg="6" md="6">
             <ListGroup className="resultsDiv">
-              <p></p>
               {searchData.status === "loading" ? (
                 "loading..."
               ) : searchData.status !== "success" ? (
@@ -204,16 +203,6 @@ const SearchResults = () => {
               ) : (
                 "Data Undefined"
               )}
-
-              {/* data From API callback
-                    -id
-                    -images[0].url
-                    -latitude
-                    -longitude
-                    -title
-                    -tags[index], tags.length
-                    -url
-              */}
             </div>
           </Col>
           {/*  */}

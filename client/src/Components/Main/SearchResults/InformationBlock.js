@@ -9,6 +9,9 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
 
   // console.log(locationElementState);
   const stateIndex = locationElementIndex;
+
+  //  location Function
+  // Add class here for CSS
   const locationInfo = () => {
     if (locationElementState === []) {
       return <div>Loading...</div>;
@@ -17,32 +20,35 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
     }
   };
 
+  // List Items
   return (
     <div>
       {listItemData !== undefined
         ? listItemData.map((data, index) => (
             <div key={data.id}>
+              {/* Title */}
               <h1>{data.title}</h1>
-
+              {/* Image */}
               <Image
                 src={data.images[0].url === "" ? fern : data.images[0].url}
                 fluid
               />
               <div style={{ display: "none" }}>Hello World</div>
-              {/* <LocationParent /> */}
+              {/* Description */}
               <p>{data.audioDescription}</p>
               {"\n"}
+              {/* Open to public */}
               <p>
                 {data.isOpenToPublic === "1"
                   ? "Open to public"
                   : "Not open to public"}
               </p>
+              {/* Link to site */}
               <div>
                 <a href={data.url}>See More Information</a>
               </div>
+              {/* Location on the list item */}
               <div>{locationInfo()}</div>
-
-              {/* <div>{data.bodyText}</div> */}
             </div>
           ))
         : ""}
@@ -67,15 +73,15 @@ const InformationBlock = ({ results, listItemID, locationArray, idTarget }) => {
 
             return locationRefine(dataMap);
             //pass the data as a parameter to a function
-            // return data;
           })
         : undefined;
     // console.log(locationPromise, "hello");
 
     const locationRefine = (dataMap, index) => {
-      // console.log(dataMap);
+      //Changing name for the data that was mapped
       const promiseData = dataMap;
-      // console.log(promiseData);
+      //Array for getting location information
+      //  /////Pre Refinement
       const arr = promiseData.map((el) => {
         if (el === undefined) {
           return "No Location Found";
@@ -83,18 +89,22 @@ const InformationBlock = ({ results, listItemID, locationArray, idTarget }) => {
           return el;
         }
       });
+      //passing this data as a param to the next function
       return locationElement(arr);
     };
+    //Async func to get array data.
     const locationElement = async (arr, index) => {
       // console.log(arr);
+      //Array for the location information
       const newArr = await arr;
-
+      // Sets location element state with fulfilled array data
       setLocationElementState(newArr);
       return newArr;
     };
     //
   }, []);
 
+  // Conditional for what gets rendered in the information block
   if (listItemID === "") {
     // console.log("no ID");
     // console.log(locationElementState);
@@ -110,9 +120,9 @@ const InformationBlock = ({ results, listItemID, locationArray, idTarget }) => {
     const listItemData = results.filter((data) => data.id === listItemID);
     // console.log(listItemData);
     // console.log(locationElementState);
-    const filteredItemID = listItemData[0].id;
+    // const filteredItemID = listItemData[0].id;
     // console.log(filteredItemID);
-    const indexOfID = locationElementState.indexOf(listItemData);
+    // const indexOfID = locationElementState.indexOf(listItemData);
     // console.log(indexOfID);
     const locationElementIndex = 0;
     return jsxFunc(listItemData, locationElementIndex, locationElementState);
