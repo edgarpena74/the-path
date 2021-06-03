@@ -1,5 +1,14 @@
-.leftSide {
+/*  */
+/* Change margin with media query */
+
+.searchResultsContainer {
   margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.leftSide {
+  margin-left: 15px !important;
+  /* margin-right: 5px !important; */
   padding: 0px !important;
 }
 
@@ -36,10 +45,7 @@
 
 .listItemTitle {
   font-weight: bold !important;
-}
-
-.listItemLoc {
-  /*  */
+  text-align: center !important;
 }
 
 .rightSide {
