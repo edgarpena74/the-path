@@ -27,13 +27,15 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
         ? listItemData.map((data, index) => (
             <div key={data.id} className="infoMapDiv">
               {/* Title */}
-              <h1>{data.title}</h1>
+              <h1 className="infoTitle">{data.title}</h1>
               {/* Image */}
               <Image
+                className="infoBlockImg"
                 src={data.images[0].url === "" ? fern : data.images[0].url}
                 fluid
               />
               <div style={{ display: "none" }}>Hello World</div>
+
               {/* Description */}
               <p>{data.audioDescription}</p>
               {"\n"}
