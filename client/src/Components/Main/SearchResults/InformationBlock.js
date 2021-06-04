@@ -67,8 +67,14 @@ const InformationBlock = ({ results, listItemID, locationArray, idTarget }) => {
             // console.log(data);
 
             const dataMap = data.map((res) => {
-              const mapRes = res.data?.features[0]?.properties?.label;
-              return mapRes;
+              if (res === undefined) {
+                const noLocation = "No Location Found";
+                return noLocation;
+              } else {
+                const mapRes = res.data?.features[0]?.properties?.label;
+                // const mapRes = res.data?.features[0]?.properties;
+                return mapRes;
+              }
             });
 
             return locationRefine(dataMap);

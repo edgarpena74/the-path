@@ -28,10 +28,11 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
               if (res === undefined) {
                 const noLocation = "No Location Found";
                 return noLocation;
+              } else {
+                const mapRes = res.data?.features[0]?.properties?.label;
+                // const mapRes = res.data?.features[0]?.properties;
+                return mapRes;
               }
-              const mapRes = res.data?.features[0]?.properties?.label;
-              // const mapRes = res.data?.features[0]?.properties;
-              return mapRes;
             });
             // Passes dataMap as a param
             return locationRefine(dataMap);
