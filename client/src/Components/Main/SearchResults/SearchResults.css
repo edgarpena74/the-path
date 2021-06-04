@@ -1,36 +1,30 @@
 /*  */
 /* Change margin with media query */
-
+.searchResultsSection {
+  width: 100%;
+  /* height: 100%; */
+}
 .searchResultsContainer {
-  margin-left: 0px !important;
-  margin-right: 0px !important;
+  display: flex !important;
+  width: 100%;
+
+  padding: 0px !important;
+}
+.leftRightRow {
+  float: left !important;
+  height: 650px !important;
 }
 
 .leftSide {
-  margin-left: 15px !important;
-  /* margin-right: 5px !important; */
-  padding: 0px !important;
-}
-
-.resultsDiv {
   border: 1px solid black !important;
-  height: 500px !important;
+  height: 650px !important;
+  /* padding-left: 15px !important; */
+  /* height: 500px !important; */
+  padding: 0px !important;
   overflow-y: scroll !important;
 }
 
-/* .listItemInfoContainer {
-  padding: 0px !important;
-}
-
-.listImageCol {
-  padding: 0px !important;
-  padding-left: 1px !important;
-}
-
-.listTextCol {
-  padding: 0px !important;
-} */
-
+/* List Section */
 .listItemImg {
   height: 100px !important;
   width: 100px !important;
@@ -47,12 +41,11 @@
   font-weight: bold !important;
   text-align: center !important;
 }
+/* End of List section */
 
 .rightSide {
-  margin-right: 0px !important;
-  padding: 0px !important;
-}
-
-.infoDiv {
   border: 1px solid black !important;
+  height: 650px !important;
+  /* margin-right: 15px !important; */
+  /* padding: 0px !important; */
 }

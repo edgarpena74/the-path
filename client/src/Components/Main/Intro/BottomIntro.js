@@ -40,7 +40,7 @@ const BottomIntro = () => {
     <div className="d-flex">
       <div className="container-fluid bottomDiv">
         <Container className="subContainer ">
-          <Row className="subHeading">
+          <Row className="subHeading ">
             <h1>Northern California Favorites</h1>
           </Row>
           {/* <Row className="subBoxRow d-flex justify-content-center"> */}
@@ -48,7 +48,7 @@ const BottomIntro = () => {
             {seeds.map((data) => (
               <Card key={data.id} style={{ width: "15rem", margin: "7px" }}>
                 <Card.Body>
-                  <Card.Text>{data.title}</Card.Text>
+                  <Card.Text className="text-center">{data.title}</Card.Text>
                 </Card.Body>
                 <Card.Img
                   style={{ height: "178px" }}

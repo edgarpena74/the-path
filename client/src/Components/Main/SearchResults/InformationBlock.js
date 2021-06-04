@@ -25,7 +25,7 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
     <div>
       {listItemData !== undefined
         ? listItemData.map((data, index) => (
-            <div key={data.id}>
+            <div key={data.id} className="infoMapDiv">
               {/* Title */}
               <h1>{data.title}</h1>
               {/* Image */}

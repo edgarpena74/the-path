@@ -141,41 +141,41 @@ const SearchResults = () => {
   };
 
   return (
-    <div className="searchResultsDiv">
-      <ReactQueryDevtools initialIsOpen />
+    <div className="searchResultsSection">
+      {/* <ReactQueryDevtools initialIsOpen /> */}
       {/* <SearchBar /> */}
       {/*  */}
       {/* Container for cards and info */}
+      {/* <Row> */}
+      <Form onSubmit={handleSearch}>
+        <Form.Row className="align-items-center">
+          <Col xs="auto">
+            {/* <Form.Label htmlFor="inlineFormInput" srOnly>
+                Name
+              </Form.Label> */}
+            <Form.Control
+              // onClick={(e) => {
+              //   onClick(e);
+              // }}
+              type="text"
+              name="input"
+              id="searchInput"
+              placeholder="Search"
+            />
+          </Col>
+          <Col xs="auto">
+            <Button type="submit">Search</Button>
+          </Col>
+        </Form.Row>
+      </Form>
+      {/* </Row> */}
       <Container className="searchResultsContainer">
         {/* Search bar*/}
         {/* <Form onSubmit={handleSearch}> */}
-        <Row>
-          <Form onSubmit={handleSearch}>
-            <Form.Row className="align-items-center">
-              <Col xs="auto">
-                {/* <Form.Label htmlFor="inlineFormInput" srOnly>
-                Name
-              </Form.Label> */}
-                <Form.Control
-                  // onClick={(e) => {
-                  //   onClick(e);
-                  // }}
-                  type="text"
-                  name="input"
-                  id="searchInput"
-                  placeholder="Search"
-                />
-              </Col>
-              <Col xs="auto">
-                <Button type="submit">Search</Button>
-              </Col>
-            </Form.Row>
-          </Form>
-        </Row>
 
-        <Row>
+        <Row className="leftRightRow">
           {/* Left Side */}
-          <Col className="leftSide" lg="6" md="6">
+          <Col className="leftSide">
             <ListGroup className="resultsDiv">
               {searchData.status === "loading" ? (
                 "loading..."
@@ -193,7 +193,7 @@ const SearchResults = () => {
           </Col>
           {/*  */}
           {/* Right Side */}
-          <Col className="rightSide" lg="6" md="6">
+          <Col className="rightSide">
             <div className="infoDiv">
               {searchData.status === "loading" ? (
                 "loading..."

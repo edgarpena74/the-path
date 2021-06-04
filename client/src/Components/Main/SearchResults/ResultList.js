@@ -84,7 +84,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
                 <Row> */}
               {/* Image */}
               {/* <Col sm="2" md="2" lg="2" className="listImageCol"> */}
-              <div className="d-inline-flex">
+              <div className="d-inline">
                 <Image
                   className="listItemImg"
                   src={

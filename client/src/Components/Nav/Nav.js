@@ -34,9 +34,12 @@ const Navigation = () => {
     <div>
       {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark"> */}
       <Nav collapseOnSelect expand="lg" className="navBar">
-        <div className="imgContainer">
+        {/* <div className="imgContainer" >
           <img className="logo" src={logo} />
-        </div>
+        </div> */}
+        <Navbar.Brand className="logoImg" href="/">
+          <img className="logo" src={logo} />
+        </Navbar.Brand>
       </Nav>
     </div>
   );
