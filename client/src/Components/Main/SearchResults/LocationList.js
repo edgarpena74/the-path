@@ -1,7 +1,7 @@
 import React from "react";
 
 const LocationParent = ({ elementData, index, locationArray }) => {
-  console.log(index);
+  // console.log(index);
   if (elementData !== undefined) {
     // console.log(data);
     return <div>{elementData[index]}</div>;

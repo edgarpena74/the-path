@@ -109,6 +109,8 @@ const SearchResults = () => {
         })
       : undefined;
 
+  console.log(locationArray);
+
   const handleSearch = async (e) => {
     try {
       e.preventDefault();

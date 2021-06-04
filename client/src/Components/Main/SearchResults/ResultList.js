@@ -24,7 +24,13 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
             //
             // This gets the name of the search result
             const dataMap = data.map((res) => {
+              console.log(res);
+              if (res === undefined) {
+                const noLocation = "No Location Found";
+                return noLocation;
+              }
               const mapRes = res.data?.features[0]?.properties?.label;
+              // const mapRes = res.data?.features[0]?.properties;
               return mapRes;
             });
             // Passes dataMap as a param
@@ -52,7 +58,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
     const locationElement = async (arr, index) => {
       // console.log(arr);
       const newArr = await arr;
-      // console.log(newArr);
+      console.log(newArr);
       // Sets state with data in correct order
       setLocationElementState(newArr);
       return newArr;
