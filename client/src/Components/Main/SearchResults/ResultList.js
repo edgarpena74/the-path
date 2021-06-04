@@ -78,7 +78,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
               type="button"
               onClick={(e) => onClickItem(e)}
               action
-              className="listItemStyle"
+              className="listItemStyle stretched-link"
             >
               <Container>
                 {/* <Container className="listItemInfoContainer">
