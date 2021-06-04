@@ -175,7 +175,7 @@ const SearchResults = () => {
 
         <Row className="leftRightRow">
           {/* Left Side */}
-          <Col className="leftSide">
+          <Col className="leftSide" md="7" lg="7" sm="7">
             <ListGroup className="resultsDiv">
               {searchData.status === "loading" ? (
                 "loading..."

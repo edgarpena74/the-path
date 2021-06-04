@@ -75,39 +75,50 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
             <ListGroup.Item
               id={result.id}
               key={result.id}
-              onClick={(e) => onClickItem(e)}
               type="button"
+              onClick={(e) => onClickItem(e)}
               action
               className="listItemStyle"
             >
-              {/* <Container className="listItemInfoContainer">
+              <Container>
+                {/* <Container className="listItemInfoContainer">
                 <Row> */}
-              {/* Image */}
-              {/* <Col sm="2" md="2" lg="2" className="listImageCol"> */}
-              <div className="d-inline">
-                <Image
-                  className="listItemImg"
-                  src={
-                    result.images[0].url === "" ? fern : result.images[0].url
-                  }
-                  alt="No Image Available"
-                />
-                {/* </Col> */}
-                {/* <Col className="listTextCol"> */}
-                {/* name of area */}
-                <div className="listItemTitleLoc">
-                  <div className="listItemTitle">{result.title}</div>
-
-                  <div className="listItemLoc">
-                    {/* Locations */}
-                    <LocationList
-                      elementData={locationElementState}
-                      index={index}
-                      locationArray={locationArray}
+                {/* Image */}
+                {/* <Col sm="2" md="2" lg="2" className="listImageCol"> */}
+                {/* <div className="inlineListItem d-inline-flex"> */}
+                <Row>
+                  <Col sm="3" md="3" lg="3">
+                    {" "}
+                    <Image
+                      className="listItemImg"
+                      src={
+                        result.images[0].url === ""
+                          ? fern
+                          : result.images[0].url
+                      }
+                      alt="No Image Available"
                     />
-                  </div>
-                </div>
-              </div>
+                  </Col>
+
+                  {/* </Col> */}
+                  {/* <Col className="listTextCol"> */}
+                  {/* name of area */}
+                  <Col sm="9" md="9" lg="9">
+                    <div className="listItemTitleLoc">
+                      <div className="listItemTitle ">{result.title}</div>
+
+                      <div className="listItemLoc ">
+                        {/* Locations */}
+                        <LocationList
+                          elementData={locationElementState}
+                          index={index}
+                          locationArray={locationArray}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
 
               {/* </Col> */}
               {/* </Row> */}
