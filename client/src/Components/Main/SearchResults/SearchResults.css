@@ -1,6 +1,7 @@
 /*  */
 /* Change margin with media query */
 .searchResultsSection {
+  margin-top: 30px !important;
   width: 100%;
   /* height: 100%; */
 }
@@ -10,9 +11,86 @@
 
   padding: 0px !important;
 }
+/*  */
+/* Search Section */
+/* the row that contains all form items */
+.formRow {
+  height: 70px !important;
+  /* width: 100% !important; */
+  background: white !important;
+  border-radius: 40px;
+}
+/* Blank Columns */
+.blankColLeft {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+.blankColRight {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+/* Start of the form column */
+.formCol {
+  padding-left: 0px !important;
+  padding-right: 3px !important;
+  border: none !important;
+}
+/* "container" of form */
+.searchForm {
+  width: 100% !important;
+  padding-right: 0 !important;
+}
+/* user input area */
+.formInput {
+  width: 100% !important;
+  padding: 0px !important;
+  border: 0 !important;
+}
+
+/* Start of the button column */
+.btnCol {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.submitBtn {
+  float: right !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+/* 
+.searchBar {
+  margin: auto;
+  width: 50%;
+}
+
+.searchForm {
+  border: 2px black !important;
+  
+}
+
+.formControlCol {
+  margin: 0px !important;
+  
+  left: 50%;
+}
+
+#searchInput {
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0px !important;
+}
+
+.submitBtn {
+  background-color: transparent !important;
+  padding: 0px !important;
+} */
+/* End Search Section */
 .leftRightRow {
   float: left !important;
-  height: 700px !important;
+  height: 800px !important;
 }
 
 .leftSide {
@@ -35,6 +113,7 @@
   pointer-events: none !important;
 }
 .listItemTitleLoc {
+  text-align: center !important;
   pointer-events: none !important;
   margin-left: 1px !important;
   /* justify-content: center !important;
@@ -50,6 +129,8 @@
 .rightSide {
   border: 1px solid black !important;
   height: 700px !important;
+  overflow-y: scroll !important;
+
   /* margin-right: 15px !important; */
   /* padding: 0px !important; */
 }

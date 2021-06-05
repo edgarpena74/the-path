@@ -149,27 +149,52 @@ const SearchResults = () => {
       {/*  */}
       {/* Container for cards and info */}
       {/* <Row> */}
-      <Form onSubmit={handleSearch}>
-        <Form.Row className="align-items-center">
-          <Col xs="auto">
-            {/* <Form.Label htmlFor="inlineFormInput" srOnly>
-                Name
-              </Form.Label> */}
-            <Form.Control
-              // onClick={(e) => {
-              //   onClick(e);
-              // }}
-              type="text"
-              name="input"
-              id="searchInput"
-              placeholder="Search"
-            />
+      <Container className="searchBar">
+        <Row className="formRow d-flex align-items-stretch">
+          {/* Blank */}
+          <Col sm="1" md="1" lg="1" className="blankColLeft"></Col>
+          {/* blank */}
+          {/* Start of form col*/}
+          <Col
+            sm="8"
+            md="8"
+            lg="8"
+            className="formCol d-flex align-items-center"
+          >
+            <Form className="form-inline searchForm" id="inputSearch">
+              <input
+                type="text"
+                className="form-control formInput form-control-lg"
+                placeholder="Search"
+                name="input"
+              ></input>
+            </Form>
           </Col>
-          <Col xs="auto">
-            <Button type="submit">Search</Button>
+          {/* End of form */}
+          {/* Start of Button col */}
+          <Col
+            sm="2"
+            md="2"
+            lg="2"
+            className="btnCol d-flex border-left  align-items-center justify-content-center "
+          >
+            <button type="submit" className="btn submitBtn" form="inputSearch">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M23.111 20.058l-4.977-4.977c.965-1.52 1.523-3.322 1.523-5.251 0-5.42-4.409-9.83-9.829-9.83-5.42 0-9.828 4.41-9.828 9.83s4.408 9.83 9.829 9.83c1.834 0 3.552-.505 5.022-1.383l5.021 5.021c2.144 2.141 5.384-1.096 3.239-3.24zm-20.064-10.228c0-3.739 3.043-6.782 6.782-6.782s6.782 3.042 6.782 6.782-3.043 6.782-6.782 6.782-6.782-3.043-6.782-6.782zm2.01-1.764c1.984-4.599 8.664-4.066 9.922.749-2.534-2.974-6.993-3.294-9.922-.749z" />
+              </svg>
+            </button>
           </Col>
-        </Form.Row>
-      </Form>
+          {/* End of button col */}
+          {/* Blank */}
+          <Col sm="1" md="1" lg="1" className="blankColRight"></Col>
+          {/* Blank */}
+        </Row>
+      </Container>
       {/* </Row> */}
       <Container className="searchResultsContainer">
         {/* Search bar*/}
