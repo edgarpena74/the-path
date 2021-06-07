@@ -15,79 +15,32 @@
 /* Search Section */
 /* the row that contains all form items */
 .formRow {
-  height: 70px !important;
-  /* width: 100% !important; */
-  background: white !important;
-  border-radius: 40px;
+  justify-content: center !important;
+  align-content: center !important;
 }
-/* Blank Columns */
-.blankColLeft {
-  padding-right: 0px !important;
-  padding-left: 0px !important;
+.searchBarForm {
+  height: 48px !important;
+  /* border: 8px black !important; */
 }
-.blankColRight {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
+.formBorderDiv {
+  width: auto !important;
+  border: 8px black solid !important;
 }
-
-/* Start of the form column */
-.formCol {
-  padding-left: 0px !important;
-  padding-right: 3px !important;
-  border: none !important;
-}
-/* "container" of form */
-.searchForm {
-  width: 100% !important;
-  padding-right: 0 !important;
-}
-/* user input area */
-.formInput {
-  width: 100% !important;
-  padding: 0px !important;
-  border: 0 !important;
-}
-
-/* Start of the button column */
-.btnCol {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.submitBtn {
-  float: right !important;
-  border: 0 !important;
-  padding: 0 !important;
-}
-
-/* 
-.searchBar {
-  margin: auto;
-  width: 50%;
-}
-
-.searchForm {
-  border: 2px black !important;
-  
-}
-
-.formControlCol {
-  margin: 0px !important;
-  
-  left: 50%;
-}
-
-#searchInput {
+#searchFormInput {
+  width: 300px !important;
   border: 0px !important;
-  padding: 0px !important;
-  margin-right: 0px !important;
+  box-shadow: none !important;
+  margin-bottom: 0px !important;
 }
 
-.submitBtn {
-  background-color: transparent !important;
-  padding: 0px !important;
-} */
+.searchFormButton {
+  justify-items: center;
+  align-items: center;
+  background-color: white !important;
+  border: 0px !important;
+}
 /* End Search Section */
+/*  */
 .leftRightRow {
   float: left !important;
   height: 800px !important;
