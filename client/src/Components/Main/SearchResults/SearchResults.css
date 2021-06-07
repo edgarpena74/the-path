@@ -1,7 +1,7 @@
 /*  */
 /* Change margin with media query */
 .searchResultsSection {
-  margin-top: 30px !important;
+  /* margin-top: 30px !important; */
   width: 100%;
   /* height: 100%; */
 }
@@ -14,6 +14,10 @@
 /*  */
 /* Search Section */
 /* the row that contains all form items */
+.searchBar {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
 .formRow {
   justify-content: center !important;
   align-content: center !important;
@@ -23,11 +27,13 @@
   /* border: 8px black !important; */
 }
 .formBorderDiv {
-  width: auto !important;
-  border: 8px black solid !important;
+  /* width: 400px !important; */
+  border: 2px rgb(145, 145, 145) solid !important;
+  border-radius: 50px !important;
+  overflow: hidden !important;
 }
 #searchFormInput {
-  width: 300px !important;
+  width: 340px !important;
   border: 0px !important;
   box-shadow: none !important;
   margin-bottom: 0px !important;
@@ -38,6 +44,9 @@
   align-items: center;
   background-color: white !important;
   border: 0px !important;
+  border-left: black 1px solid !important;
+  border-radius: 0px !important;
+  margin-right: 5px;
 }
 /* End Search Section */
 /*  */

@@ -11,7 +11,7 @@ import LocationList from "./LocationList";
 
 //try moving the jsx as a separate function
 
-const ResultList = ({ onClickItem, results, locationArray }) => {
+const ResultList = ({ onClickList, results, locationArray }) => {
   const [locationElementState, setLocationElementState] = useState([]);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const ResultList = ({ onClickItem, results, locationArray }) => {
               id={result.id}
               key={result.id}
               type="button"
-              onClick={(e) => onClickItem(e)}
+              onClick={(e) => onClickList(e)}
               action
               className="listItemStyle stretched-link"
             >

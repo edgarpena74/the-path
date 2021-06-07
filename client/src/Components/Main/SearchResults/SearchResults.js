@@ -40,24 +40,6 @@ const SearchResults = () => {
   // It updates the state of what the user is searching(When is get the search bar done)
   const { userSearch, setUserSearch } = useContext(QueryContext);
   const [listItemID, setListItemID] = useState("");
-  // const [locations, setLocations] = useState([]);
-
-  // const queryClient = useQueryClient();
-
-  // const CancelToken = axios.CancelToken;
-
-  // // console.log(userSearch);
-  // const searchData = useQuery(userSearch.input, () => {
-  //   const source = CancelToken.source();
-  //   const promise = API.searchRes(userSearch.input, {
-  //     cancelToken: source.token,
-  //   });
-  //   promise.cancel = () => {
-  //     console.log("cancelled?");
-  //     source.cancel("Query was cancelled by React-Query");
-  //   };
-
-  //   return promise;
 
   //Don't use curly brackets for a single statement in a function
   //If you use curly braces the callback data will return undefined
@@ -79,22 +61,6 @@ const SearchResults = () => {
           lat: data.latitude,
         }));
 
-  //
-  //
-  // THIS WONT WORK BECAUSE YOU CANT MAP USING USEQUERY
-  //
-  //
-  // const locationRes = useQuery(lonLatArr, () => {
-  //   if (lonLatArr !== undefined) {
-  //     console.log("hello");
-  //     lonLatArr.map((data) => {
-  //       API.getLocation(data.lon, data.lat);
-  //     });
-  //   }
-  // });
-
-  // console.log(locationRes);
-
   const locationArray =
     lonLatArr !== undefined
       ? lonLatArr.map((data) => {
@@ -109,11 +75,26 @@ const SearchResults = () => {
         })
       : undefined;
 
-  console.log(locationArray);
-
+  const [testState, setTestState] = useState({
+    input: "",
+  });
+  const onChange = (e) => {
+    // const searchInput = e.target.value;
+    const { name, value } = e.target;
+    return handleNewSearch(name, value);
+  };
+  const handleNewSearch = (name, value) => {
+    console.log(name, value, "handle new search");
+  };
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
+      console.log(e.target.input.name);
+      setUserSearch({
+        [e.target.input.name]: e.target.input.value,
+      });
+      console.log(testState);
+      return;
       // console.log("handle search");
     } catch (error) {
       return console.log(error);
@@ -124,10 +105,10 @@ const SearchResults = () => {
   const onClick = (e) => {
     // console.log("onChange ran");
     e.preventDefault();
-    return setUserSearch({ [e.target.name]: e.target.value });
+    // return setUserSearch({ [e.target.name]: e.target.value });
   };
 
-  const onClickItem = (e) => {
+  const onClickList = (e) => {
     // console.log("OnCLickItem ran");
     try {
       e.preventDefault();
@@ -144,17 +125,19 @@ const SearchResults = () => {
 
   return (
     <div className="searchResultsSection">
-      {/* <ReactQueryDevtools initialIsOpen /> */}
-      {/* <SearchBar /> */}
-      {/*  */}
-      {/* Container for cards and info */}
-      {/* <Row> */}
       <Container className="searchBar">
         <Row className="formRow">
           <div className="formBorderDiv">
-            <Form inline className="searchBarForm">
+            <Form inline className="searchBarForm" onSubmit={handleSearch}>
               <Form.Group controlId="searchFormInput">
-                <Form.Control size="lg" type="text" placeholder="Enter email" />
+                {/* Input */}
+                <Form.Control
+                  size="lg"
+                  type="text"
+                  placeholder="Search For Something Else"
+                  // onChange={onChange}
+                  name="input"
+                />
               </Form.Group>
               <Button type="submit" className="searchFormButton">
                 <svg
@@ -195,7 +178,8 @@ const SearchResults = () => {
                 "loading..."
               ) : (
                 <ResultList
-                  onClickItem={onClickItem}
+                  // props
+                  onClickList={onClickList}
                   results={searchResponse}
                   locationArray={locationArray}
                 />
