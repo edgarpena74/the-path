@@ -121,7 +121,7 @@ const SearchResults = () => {
     <div className="searchResultsSection">
       <Container className="searchBar">
         <Row className="formRow">
-          <div className="formBorderDiv">
+          <div className="formBorder">
             <Form inline className="searchBarForm" onSubmit={handleSearch}>
               <Form.Group controlId="searchFormInput">
                 {/* Input */}

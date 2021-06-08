@@ -22,16 +22,19 @@
   justify-content: center !important;
   align-content: center !important;
 }
-.searchBarForm {
-  height: 48px !important;
-  /* border: 8px black !important; */
-}
-.formBorderDiv {
+
+.formBorder {
   /* width: 400px !important; */
   border: 2px rgb(145, 145, 145) solid !important;
   border-radius: 50px !important;
   overflow: hidden !important;
 }
+
+.searchBarForm {
+  height: 48px !important;
+  /* border: 8px black !important; */
+}
+
 #searchFormInput {
   width: 340px !important;
   border: 0px !important;

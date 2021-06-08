@@ -16,56 +16,48 @@
 } */
 
 .overlay {
-  /* display: absolute !important; */
-  top: 50% !important;
-  left: 50% !important;
-  width: 500px !important;
+  width: 100% !important;
+}
+/*  */
+/*  */
+.introText {
   color: white !important;
+  font-size: 100px;
+}
+/*  */
+/* Form Section */
+.topIntFormRow {
+  justify-content: center !important;
+  align-content: center !important;
 }
 
-/* the row that contains all form items */
-.formRow {
-  height: 70px !important;
-  /* width: 100% !important; */
-  background: white !important;
-  border-radius: 40px;
+.topIntFormBorder {
+  width: 400px !important;
+  border: 2px rgb(255, 255, 255) solid !important;
+  border-radius: 50px !important;
+  background-color: white !important;
+  overflow: hidden !important;
 }
-/* Blank Columns */
-.blankColLeft {
-  padding-right: 0px !important;
-  padding-left: 0px !important;
-}
-.blankColRight {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-
-/* Start of the form column */
-.formCol {
-  padding-left: 0px !important;
-  padding-right: 3px !important;
-  border: none !important;
-}
-/* "container" of form */
-.searchForm {
+/* .topIntSearchForm {
   width: 100% !important;
-  padding-right: 0 !important;
+} */
+.topIntSearchFormGroup {
+  width: 400px !important;
 }
-/* user input area */
-.formInput {
-  width: 100% !important;
-  padding: 0px !important;
-  border: 0 !important;
-}
-
-/* Start of the button column */
-.btnCol {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+.topIntSearchFormInput {
+  width: 335px !important;
+  border: 0px !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  margin-bottom: 0px !important;
 }
 
-.submitBtn {
-  float: right !important;
-  border: 0 !important;
-  padding: 0 !important;
+.topIntSearchFormBtn {
+  justify-items: center;
+  align-items: center;
+  background-color: white !important;
+  border: 0px !important;
+  border-left: black 1px solid !important;
+  border-radius: 0px !important;
+  margin-right: 0px !important;
 }
