@@ -26,6 +26,7 @@ import FunctionsContext from "./utils/FunctionsContext";
 // import { QueryContext } from "./utils/QueryContext";
 import { QueryContext, TestContext } from "./utils/Contexts";
 import API from "./utils/API";
+import Loader from "./Components/Loader/Loader";
 
 const queryClient = new QueryClient();
 
@@ -68,8 +69,9 @@ function App() {
 
   return (
     <div className="App">
+      <Nav />
       <BrowserRouter>
-        <Nav />
+        {/* <Nav /> */}
         {/* This function activates the Redirect function which redirects the user to /searchResults */}
         {renderRedirect()}
         <Switch>

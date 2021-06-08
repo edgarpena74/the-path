@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import ListGroup from "react-bootstrap/ListGroup";
 import fern from "./Assets/fern.jpg";
+import Loader from "../../Loader/Loader";
 
 import "./SearchResults.css";
 // import { QueryContext } from "../../../utils/QueryContext";
@@ -101,13 +102,6 @@ const SearchResults = () => {
     }
   };
 
-  //Consider putting this inside of handleSearch
-  const onClick = (e) => {
-    // console.log("onChange ran");
-    e.preventDefault();
-    // return setUserSearch({ [e.target.name]: e.target.value });
-  };
-
   const onClickList = (e) => {
     // console.log("OnCLickItem ran");
     try {
@@ -173,7 +167,7 @@ const SearchResults = () => {
           <Col className="leftSide" md="7" lg="7" sm="7">
             <ListGroup className="resultsDiv">
               {searchData.status === "loading" ? (
-                "loading..."
+                <Loader />
               ) : searchData.status !== "success" ? (
                 "loading..."
               ) : (
@@ -192,7 +186,7 @@ const SearchResults = () => {
           <Col className="rightSide">
             <div className="infoDiv">
               {searchData.status === "loading" ? (
-                "loading..."
+                <Loader />
               ) : searchData.data !== undefined ? (
                 <InformationBlock
                   results={searchResponse}
