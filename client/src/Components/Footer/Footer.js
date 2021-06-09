@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <footer
-        className=" justify-content-center bg-dark"
+        className=" justify-content-center "
         // sticky="bottom"
         // bg="dark"
       >

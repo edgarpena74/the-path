@@ -11,6 +11,7 @@ import Image from "react-bootstrap/Image";
 import ListGroup from "react-bootstrap/ListGroup";
 import fern from "./Assets/fern.jpg";
 import Loader from "../../Loader/Loader";
+import futureDevSR from "./futureDevSR";
 
 import "./SearchResults.css";
 // import { QueryContext } from "../../../utils/QueryContext";
@@ -119,6 +120,33 @@ const SearchResults = () => {
 
   return (
     <div className="searchResultsSection">
+      <Container className="mt-5 mb-5 border-bottom border-top">
+        <h3 className="pt-2">Future Development</h3>
+        <p>
+          Future development features include having a loading component that
+          spans the entire page instead of having showing two at a time like it
+          currently is. Also, implement another third party API that shows the
+          user the weather for the location on the right side column.
+        </p>
+        <p>
+          The API we are using for getting the exact location of the list items
+          limits us to 1000 requests per day. This request limitation is the
+          reason why only 3 list results are shown at a time
+        </p>
+        <p>
+          There are also styling elements which will be worked on. Mainly the
+          location information. In the future, the location information will be
+          structured like this
+          <p></p>
+          <p className="text-center">
+            <div>Location</div>
+            <div>County, state, Country</div>
+          </p>
+          <p>
+            which will allow for better styling across different screen widths.
+          </p>
+        </p>
+      </Container>
       <Container className="searchBar">
         <Row className="formRow">
           <div className="formBorder">
@@ -128,7 +156,7 @@ const SearchResults = () => {
                 <Form.Control
                   size="lg"
                   type="text"
-                  placeholder="Search For Something Else"
+                  placeholder="Search "
                   // onChange={onChange}
                   name="input"
                 />

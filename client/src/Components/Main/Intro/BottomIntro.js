@@ -63,6 +63,14 @@ const BottomIntro = () => {
           ))}
         </Row>
       </Container>
+      <Container className="mt-5 mb-5 border-bottom border-top">
+        <h3 className="pt-2">Future Development</h3>
+        <p>
+          Future development plans include making the card items clickable which
+          would then render information about those locations, allowing users to
+          create accounts.
+        </p>
+      </Container>
     </div>
   );
 };

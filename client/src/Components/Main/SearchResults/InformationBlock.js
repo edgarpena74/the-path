@@ -47,7 +47,9 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
               </p>
               {/* Link to site */}
               <div>
-                <a href={data.url}>See More Information</a>
+                <p>
+                  <a href={data.url}>See More Information</a>
+                </p>
               </div>
               {/* Location on the list item */}
               <div>{locationInfo()}</div>
