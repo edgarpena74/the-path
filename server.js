@@ -11,7 +11,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+//API Routing
 app.use("/api", require("./routes/apiRoutes"));
+
+// Optimize for Heroku
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 // if (process.env.NODE_ENV === "production") {
 //   app.get("*", (req, res) => {
