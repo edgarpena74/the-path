@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import fern from "./Assets/fern.jpg";
 import ListGroup from "react-bootstrap/ListGroup";

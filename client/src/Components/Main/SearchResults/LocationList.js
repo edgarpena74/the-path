@@ -1,6 +1,6 @@
 import React from "react";
 
-const LocationParent = ({ elementData, index, locationArray }) => {
+const LocationParent = ({ elementData, index }) => {
   // console.log(index);
   if (elementData !== undefined) {
     // console.log(data);

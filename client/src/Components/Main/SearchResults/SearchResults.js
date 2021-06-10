@@ -1,29 +1,17 @@
-import React, { useContext, useEffect, useState, useMemo } from "react";
-// import { useHistory } from "react-router-dom";
-import axios from "axios";
+import React, { useContext, useState } from "react";
 import API from "../../../utils/API";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Image from "react-bootstrap/Image";
 import ListGroup from "react-bootstrap/ListGroup";
-import fern from "./Assets/fern.jpg";
 import Loader from "../../Loader/Loader";
-
 import "./SearchResults.css";
-// import { QueryContext } from "../../../utils/QueryContext";
-// import { ResultIDContext } from "../../../utils/ResultIDContext";
-import FunctionsContext from "../../../utils/FunctionsContext";
 import { QueryContext } from "../../../utils/Contexts";
-import { TestContext } from "../../../utils/Contexts";
-import { ResultIDContext } from "../../../utils/Contexts";
-import { SearchResultsContext } from "../../../utils/SearchResultsContext";
-
 //React-Query library
-import { useQueryClient, useQuery } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { useQuery } from "react-query";
+// import { ReactQueryDevtools } from "react-query/devtools";
 
 //Components
 import ResultList from "./ResultList";

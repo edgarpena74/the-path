@@ -1,17 +1,10 @@
 import React, { useContext } from "react";
 import "./TopIntro.css";
-// import Image from "react-bootstrap/Image";
-// import mainPhoto from "../Assets/mainPhoto.jpeg";
-// import mainPhoto from "./Assets/mainPhoto.jpeg";
-// import SearchResults from "../SearchResults/SearchResults";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-
 import FunctionsContext from "../../../utils/FunctionsContext";
-// import { QueryContext } from "../../../utils/QueryContext";
 import { QueryContext } from "../../../utils/Contexts";
 
 //

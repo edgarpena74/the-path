@@ -8,11 +8,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <Container>
-        <footer
-          className=" justify-content-center "
-          // sticky="bottom"
-          // bg="dark"
-        >
+        <footer className=" justify-content-center ">
           <p className="footerText">&copy; Edgar Peña 2021</p>
         </footer>
       </Container>
