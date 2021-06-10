@@ -64,11 +64,27 @@ const BottomIntro = () => {
         </Row>
       </Container>
       <Container className="mt-5 mb-5 border-bottom border-top">
-        <h3 className="pt-2">Future Development</h3>
+        <h1 className="pt-2">Future Development</h1>
+        <h5>User Accounts</h5>
+        <ul>
+          <li>Allow users to create accounts.</li>
+        </ul>
         <p>
-          Future development plans include making the card items clickable which
-          would then render information about those locations, allowing users to
-          create accounts.
+          The user information would be store in a mongoDB database. Their
+          password would be encrypted using bcrypt, a password hashing function,
+          to ensure their information is secure.
+        </p>
+        <h5>Page Functionality</h5>
+        <p>
+          When the card items below the "Northern California Favorites" heading
+          are clicked the user would be redirected to a page that shows the
+          information for the location.
+        </p>
+        <h5>Visual Aspects</h5>
+        <p>
+          There will be continual development of the CSS for this page. The
+          addition of media query's will allow there to be cleaner styling of
+          the elements across different screen widths.
         </p>
       </Container>
     </div>

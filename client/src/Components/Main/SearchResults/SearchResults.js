@@ -11,7 +11,6 @@ import Image from "react-bootstrap/Image";
 import ListGroup from "react-bootstrap/ListGroup";
 import fern from "./Assets/fern.jpg";
 import Loader from "../../Loader/Loader";
-import futureDevSR from "./futureDevSR";
 
 import "./SearchResults.css";
 // import { QueryContext } from "../../../utils/QueryContext";
@@ -120,33 +119,6 @@ const SearchResults = () => {
 
   return (
     <div className="searchResultsSection">
-      <Container className="mt-5 mb-5 border-bottom border-top">
-        <h3 className="pt-2">Future Development</h3>
-        <p>
-          Future development features include having a loading component that
-          spans the entire page instead of having showing two at a time like it
-          currently is. Also, implement another third party API that shows the
-          user the weather for the location on the right side column.
-        </p>
-        <p>
-          The API we are using for getting the exact location of the list items
-          limits us to 1000 requests per day. This request limitation is the
-          reason why only 3 list results are shown at a time
-        </p>
-        <p>
-          There are also styling elements which will be worked on. Mainly the
-          location information. In the future, the location information will be
-          structured like this
-          <p></p>
-          <p className="text-center">
-            <div>Location</div>
-            <div>County, state, Country</div>
-          </p>
-          <p>
-            which will allow for better styling across different screen widths.
-          </p>
-        </p>
-      </Container>
       <Container className="searchBar">
         <Row className="formRow">
           <div className="formBorder">
@@ -228,6 +200,64 @@ const SearchResults = () => {
           </Col>
           {/*  */}
         </Row>
+      </Container>
+      <Container className="mt-5 mb-5 border-bottom border-top">
+        <h1 className="pt-2">Future Development</h1>
+        {"\n"}
+        <h5>Visual Aspects</h5>
+        <ul>
+          <li></li>
+          <li>
+            Include a single loading component that spans the entire page
+            instead of having the loading visual show up on both of the
+            container blocks.{" "}
+          </li>
+          <li>
+            Styling the list item element so that the location appears like
+            this.
+            <p className="text-center mb-4 mt-4">
+              <div>Location</div>
+              <div>County, state, Country</div>
+            </p>
+            This format would allow for better visual styling across different
+            screen widths.
+          </li>
+        </ul>
+        <h5>Technological Features</h5>
+        <ul>
+          <li>Include a weather API on the information section.</li>
+          <li>
+            Have a way to correct user searches incase they spell something
+            incorrectly.
+          </li>
+        </ul>
+        <h5>Future Bug Fixes</h5>
+        <p>
+          Upon searching for something else in this component the information
+          section on the right does not load. However, when the user clicks on a
+          list item the right side does load.
+        </p>
+        <p>
+          Solving the issues of overlap between elements on smaller screen
+          widths
+        </p>
+        <h5>API Limitations</h5>
+        <p>
+          The developer version of the reverse geocode API, that gives us the
+          location, limits the search requests to 1000 per day. In order to make
+          this feature functional, the React Query library needed to be
+          implemented. React Query updates the state of the data periodically
+          which causes an API request to be sent. This feature of React Query
+          can cause a rapid depletion of the requests therefore potentially
+          causing instability.
+        </p>
+        <p>
+          Luckily this site will have a very small number of potential users
+          which ensures the functionality. In the future there will be a way to
+          count the amount of requests being sent and once a certain threshold
+          is met there will be a notice shown to the user explaining why the
+          site needs to be put on pause for the day.
+        </p>
       </Container>
     </div>
   );

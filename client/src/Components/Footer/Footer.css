@@ -1,10 +1,11 @@
 .footer {
+  /* position: fixed !important; */
   width: 100%;
   background-color: #6887c0 !important;
   /* position: fixed; */
-  margin-top: 0px !important;
-  /* bottom: 0px !important; */
-  /* left: 0px; */
+  margin-top: 20px !important;
+  bottom: 0px !important;
+  left: 0px !important;
 }
 .footerText {
   text-align: center !important;

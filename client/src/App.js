@@ -88,9 +88,10 @@ function App() {
             </FunctionsContext.Provider>
           </QueryClientProvider>
         </Switch>
-        <Footer />
+
         {/* <Footer /> */}
       </BrowserRouter>
+      <Footer />
     </div>
   );
 }

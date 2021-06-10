@@ -35,15 +35,15 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
                 fluid
               />
               <div style={{ display: "none" }}>Hello World</div>
-
+              <p></p>
               {/* Description */}
               <p>{data.audioDescription}</p>
               {"\n"}
               {/* Open to public */}
               <p>
                 {data.isOpenToPublic === "1"
-                  ? "Open to public"
-                  : "Not open to public"}
+                  ? "Open to the public"
+                  : "Not open to the public"}
               </p>
               {/* Link to site */}
               <div>
@@ -53,6 +53,7 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
               </div>
               {/* Location on the list item */}
               <div>{locationInfo()}</div>
+              <p></p>
             </div>
           ))
         : ""}

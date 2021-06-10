@@ -2,6 +2,7 @@
 /* Change margin with media query */
 .searchResultsSection {
   /* margin-top: 30px !important; */
+  margin-bottom: 10px;
   width: 100%;
   /* height: 100%; */
 }
