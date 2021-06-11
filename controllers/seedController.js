@@ -1,9 +1,9 @@
-const Favorites = require("../models/favorites");
+const FavoritePlaces = require("../models/Favorites");
 
 module.exports = {
   getSeeds: async (req, res) => {
     try {
-      res.json(await Favorites.find());
+      res.json(await FavoritePlaces.find());
     } catch (error) {
       res.send(error);
     }

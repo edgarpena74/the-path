@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const favoritesSchema = new Schema({
+const favPlacesSchema = new Schema({
   title: {
     type: String,
   },
@@ -11,6 +11,6 @@ const favoritesSchema = new Schema({
 });
 
 //preparing module for export and setting the name that will be shown in database
-const Favorites = mongoose.model("Favorites", favoritesSchema);
+const FavoritePlaces = mongoose.model("FavoritePlaces", favPlacesSchema);
 
-module.exports = Favorites;
+module.exports = FavoritePlaces;

@@ -1,14 +1,14 @@
 let mongoose = require("mongoose");
 let db = require("../models");
 
-mongoose.connect("mongodb://localhost/trails", {
+mongoose.connect("mongodb://localhost/thePath", {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
 
-let favoriteSeed = [
+let favoriteSeeds = [
   {
     id: "1",
     title: "Point Reyes Lighthouse",
@@ -34,8 +34,8 @@ let favoriteSeed = [
   },
 ];
 
-db.Favorites.deleteMany({})
-  .then(() => db.Favorites.collection.insertMany(favoriteSeed))
+db.FavoritePlaces.deleteMany({})
+  .then(() => db.FavoritePlaces.collection.insertMany(favoriteSeeds))
   .then((data) => {
     console.log(data.result.n + " events inserted into MongoDatabase!");
     console.log(data);

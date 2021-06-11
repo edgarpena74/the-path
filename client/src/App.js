@@ -1,20 +1,8 @@
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useMemo } from "react";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  Redirect,
-  useHistory,
-} from "react-router-dom";
+import React, { useState } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 // import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import Nav from "./Components/Nav/Nav";
@@ -24,9 +12,7 @@ import Footer from "./Components/Footer/Footer";
 // import ContextRoute from "./utils/ContextRoute";
 import FunctionsContext from "./utils/FunctionsContext";
 // import { QueryContext } from "./utils/QueryContext";
-import { QueryContext, TestContext } from "./utils/Contexts";
-import API from "./utils/API";
-import Loader from "./Components/Loader/Loader";
+import { QueryContext } from "./utils/Contexts";
 
 const queryClient = new QueryClient();
 
