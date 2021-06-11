@@ -1,4 +1,4 @@
 module.exports = {
   // SearchInput: require("./searchInput"),
-  Favorites: require("./favorites"),
+  Favorites: require("./Favorites"),
 };
