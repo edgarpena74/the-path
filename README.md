@@ -1,3 +1,0 @@
-# the-path
-
-In development
