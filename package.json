@@ -12,6 +12,7 @@
     "build": "cd client && npm run build",
     "heroku-prebuild": "npm install",
     "heroku-postbuild": "cd client && npm install && npm run build"
+    
   },
   "keywords": [],
   "author": "",
