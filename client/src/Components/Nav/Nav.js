@@ -8,7 +8,7 @@ const Navigation = () => {
   return (
     <div>
       {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark"> */}
-      <Nav collapseOnSelect expand="lg" className="navBar">
+      <Nav expand="lg" className="navBar">
         {/* <div className="imgContainer" >
           <img className="logo" src={logo} />
         </div> */}

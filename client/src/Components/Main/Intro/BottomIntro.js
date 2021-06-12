@@ -7,9 +7,10 @@ import "./BottomMain.css";
 // import API from "../../../utils/API";
 import Card from "react-bootstrap/Card";
 import Loader from "../../Loader/Loader";
-import Muir from "./Assets/muir.jpg";
+import muir from "./Assets/muir.jpg";
 
 const BottomIntro = () => {
+  console.log(muir);
   //***************************************************** */
   //
   // Commenting this out to to issues with having more than one cluster in mongoDB
@@ -48,15 +49,15 @@ const BottomIntro = () => {
         "https://www.nps.gov/common/uploads/cropped_image/CCF42D59-ABD7-9F3D-9C16257CC86F35F4.jpg",
     },
     {
-      id: "4",
+      id: "3",
       title: "Drakes Beach",
       imageURL:
         "https://www.nps.gov/common/uploads/cropped_image/primary/820D2985-9030-A353-D0DB1EEF0A9BFDBC.jpg",
     },
     {
-      id: "5",
+      id: "4",
       title: "Muir Woods Main Trail",
-      imageURL: { Muir },
+      imageURL: muir,
     },
   ];
 
@@ -86,6 +87,7 @@ const BottomIntro = () => {
                   style={{ height: "178px" }}
                   variant="bottom"
                   src={data.imageURL}
+                  alt="No Image Available"
                 />
               </Card>
             ))
