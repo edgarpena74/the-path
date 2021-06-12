@@ -157,7 +157,7 @@ const SearchResults = () => {
               {searchData.status === "loading" ? (
                 <Loader />
               ) : searchData.status !== "success" ? (
-                "loading..."
+                <Loader />
               ) : (
                 <ResultList
                   // props
