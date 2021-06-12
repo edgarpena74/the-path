@@ -4,6 +4,8 @@ import fern from "./Assets/fern.jpg";
 
 import Image from "react-bootstrap/Image";
 
+import Loader from "../../Loader/Loader";
+
 const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
   // console.log(locationElementIndex);
 
@@ -23,40 +25,42 @@ const jsxFunc = (listItemData, locationElementIndex, locationElementState) => {
   // List Items
   return (
     <div>
-      {listItemData !== undefined
-        ? listItemData.map((data, index) => (
-            <div key={data.id} className="infoMapDiv">
-              {/* Title */}
-              <h1 className="infoTitle">{data.title}</h1>
-              {/* Image */}
-              <Image
-                className="infoBlockImg"
-                src={data.images[0].url === "" ? fern : data.images[0].url}
-                fluid
-              />
-              <div style={{ display: "none" }}>Hello World</div>
-              <p></p>
-              {/* Description */}
-              <p>{data.audioDescription}</p>
-              {"\n"}
-              {/* Open to public */}
+      {listItemData !== undefined ? (
+        listItemData.map((data, index) => (
+          <div key={data.id} className="infoMapDiv">
+            {/* Title */}
+            <h1 className="infoTitle">{data.title}</h1>
+            {/* Image */}
+            <Image
+              className="infoBlockImg"
+              src={data.images[0].url === "" ? fern : data.images[0].url}
+              fluid
+            />
+            <div style={{ display: "none" }}>Hello World</div>
+            <p></p>
+            {/* Description */}
+            <p>{data.audioDescription}</p>
+            {"\n"}
+            {/* Open to public */}
+            <p>
+              {data.isOpenToPublic === "1"
+                ? "Open to the public"
+                : "Not open to the public"}
+            </p>
+            {/* Link to site */}
+            <div>
               <p>
-                {data.isOpenToPublic === "1"
-                  ? "Open to the public"
-                  : "Not open to the public"}
+                <a href={data.url}>See More Information</a>
               </p>
-              {/* Link to site */}
-              <div>
-                <p>
-                  <a href={data.url}>See More Information</a>
-                </p>
-              </div>
-              {/* Location on the list item */}
-              <div>{locationInfo()}</div>
-              <p></p>
             </div>
-          ))
-        : ""}
+            {/* Location on the list item */}
+            <div>{locationInfo()}</div>
+            <p></p>
+          </div>
+        ))
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 };

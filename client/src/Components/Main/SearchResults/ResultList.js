@@ -6,6 +6,7 @@ import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Loader from "../../Loader/Loader";
 
 import LocationList from "./LocationList";
 
@@ -73,66 +74,66 @@ const ResultList = ({ onClickList, results, locationArray }) => {
   // The List of search results on the left side of screen
   return (
     <div>
-      {results !== undefined
-        ? results.map((result, index) => (
-            //
-            //
-            // *** set point-events to non in order to make this one cohesive clickable item
-            // List items for results
-            <ListGroup.Item
-              id={result.id}
-              key={result.id}
-              type="button"
-              onClick={(e) => onClickList(e)}
-              action
-              className="listItemStyle stretched-link"
-            >
-              <Container>
-                {/* <Container className="listItemInfoContainer">
+      {results !== undefined ? (
+        results.map((result, index) => (
+          //
+          //
+          // *** set point-events to non in order to make this one cohesive clickable item
+          // List items for results
+          <ListGroup.Item
+            id={result.id}
+            key={result.id}
+            type="button"
+            onClick={(e) => onClickList(e)}
+            action
+            className="listItemStyle stretched-link"
+          >
+            <Container>
+              {/* <Container className="listItemInfoContainer">
                 <Row> */}
-                {/* Image */}
-                {/* <Col sm="2" md="2" lg="2" className="listImageCol"> */}
-                {/* <div className="inlineListItem d-inline-flex"> */}
-                <Row>
-                  <Col sm="3" md="3" lg="3">
-                    {" "}
-                    <Image
-                      className="listItemImg"
-                      src={
-                        result.images[0].url === ""
-                          ? fern
-                          : result.images[0].url
-                      }
-                      alt="No Image Available"
-                    />
-                  </Col>
+              {/* Image */}
+              {/* <Col sm="2" md="2" lg="2" className="listImageCol"> */}
+              {/* <div className="inlineListItem d-inline-flex"> */}
+              <Row>
+                <Col sm="3" md="3" lg="3">
+                  {" "}
+                  <Image
+                    className="listItemImg"
+                    src={
+                      result.images[0].url === "" ? fern : result.images[0].url
+                    }
+                    alt="No Image Available"
+                  />
+                </Col>
 
-                  {/* </Col> */}
-                  {/* <Col className="listTextCol"> */}
-                  {/* name of area */}
-                  <Col sm="9" md="9" lg="9">
-                    <div className="listItemTitleLoc">
-                      <div className="listItemTitle ">{result.title}</div>
+                {/* </Col> */}
+                {/* <Col className="listTextCol"> */}
+                {/* name of area */}
+                <Col sm="9" md="9" lg="9">
+                  <div className="listItemTitleLoc">
+                    <div className="listItemTitle ">{result.title}</div>
 
-                      <div className="listItemLoc ">
-                        {/* Locations */}
-                        <LocationList
-                          elementData={locationElementState}
-                          index={index}
-                          locationArray={locationArray}
-                        />
-                      </div>
+                    <div className="listItemLoc ">
+                      {/* Locations */}
+                      <LocationList
+                        elementData={locationElementState}
+                        index={index}
+                        locationArray={locationArray}
+                      />
                     </div>
-                  </Col>
-                </Row>
-              </Container>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
 
-              {/* </Col> */}
-              {/* </Row> */}
-              {/* </Container> */}
-            </ListGroup.Item>
-          ))
-        : ""}
+            {/* </Col> */}
+            {/* </Row> */}
+            {/* </Container> */}
+          </ListGroup.Item>
+        ))
+      ) : (
+        <Loader />
+      )}
       {/* {hello()} */}
     </div>
   );

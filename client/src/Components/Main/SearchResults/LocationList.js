@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "../../Loader/Loader";
 
 const LocationParent = ({ elementData, index }) => {
   // console.log(index);
@@ -6,7 +7,11 @@ const LocationParent = ({ elementData, index }) => {
     // console.log(data);
     return <div>{elementData[index]}</div>;
   } else {
-    return <div>loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 };
 
