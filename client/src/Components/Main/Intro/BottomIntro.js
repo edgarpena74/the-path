@@ -5,16 +5,12 @@ import Col from "react-bootstrap/Col";
 import "./BottomMain.css";
 import API from "../../../utils/API";
 import Card from "react-bootstrap/Card";
+import Loader from "../../Loader/Loader";
 
 const BottomIntro = () => {
   //This brings the seed data in to the bottom section of the
   //first page
-  const [seeds, setSeeds] = useState([
-    // {
-    //   title: "",
-    //   imageURL: "",
-    // },
-  ]);
+  const [seeds, setSeeds] = useState([]);
   // This renders the seed data when it loads(is mounted)
   useEffect(() => {
     getSeedData();
@@ -48,18 +44,22 @@ const BottomIntro = () => {
           </Col>
         </Row>
         <Row className="subBoxRow">
-          {seeds.map((data) => (
-            <Card key={data.id} style={{ width: "15rem", margin: "7px" }}>
-              <Card.Body>
-                <Card.Text className="text-center">{data.title}</Card.Text>
-              </Card.Body>
-              <Card.Img
-                style={{ height: "178px" }}
-                variant="bottom"
-                src={data.imageURL}
-              />
-            </Card>
-          ))}
+          {seeds === undefined ? (
+            <Loader />
+          ) : (
+            seeds.map((data) => (
+              <Card key={data.id} style={{ width: "15rem", margin: "7px" }}>
+                <Card.Body>
+                  <Card.Text className="text-center">{data.title}</Card.Text>
+                </Card.Body>
+                <Card.Img
+                  style={{ height: "178px" }}
+                  variant="bottom"
+                  src={data.imageURL}
+                />
+              </Card>
+            ))
+          )}
         </Row>
       </Container>
       <Container className="mt-5 mb-5 border-bottom border-top">
