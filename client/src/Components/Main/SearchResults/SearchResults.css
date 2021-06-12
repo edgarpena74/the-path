@@ -51,6 +51,7 @@
   border-left: black 1px solid !important;
   border-radius: 0px !important;
   margin-right: 5px;
+  outline: none !important;
 }
 /* End Search Section */
 /*  */
