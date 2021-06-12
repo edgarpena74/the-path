@@ -6,9 +6,14 @@ router.get("/test", (req, res) => {
   res.send({ msg: "success" });
 });
 
+//***************************************************** */
+// Temp Commenting Out // Cluster mongoDB issue
+//
 // Seeds
-const { getSeeds } = require("../controllers/seedController");
-router.get("/seeds", getSeeds);
+// const { getSeeds } = require("../controllers/seedController");
+// router.get("/seeds", getSeeds);
+//
+//***************************************************** */
 
 //API for getting places
 router.get("/places/:input", async (req, res) => {
@@ -44,23 +49,23 @@ router.get("/location/:lon/:lat", async (req, res) => {
 });
 
 //For getting Seed data
-router.get("/places-seed", async (req, res) => {
-  // const searchInput = await db.SearchInput.find({ input: req.body });
-  // console.log("Line 40 // Back end SearchInput: ", searchInput);
-  const url = `https://developer.nps.gov/api/v1/places?q=muir%20woods%20national%20monumentk&api_key=${process.env.API_KEY}&limit=1`;
-  axios
-    .get(url)
-    .then((data) => {
-      res.json(data.data);
-      // const apiObject = {
-      //   title: data.data.data[0].title,
-      //   desc: data.data.data[0].title,
-      //   img: data.data.data[0].images[0].url,
-      // };
-      // // console.log("this is the object", apiObject);
-    })
-    .catch((err) => console.log(err));
-});
+// router.get("/places-seed", async (req, res) => {
+//   // const searchInput = await db.SearchInput.find({ input: req.body });
+//   // console.log("Line 40 // Back end SearchInput: ", searchInput);
+//   const url = `https://developer.nps.gov/api/v1/places?q=muir%20woods%20national%20monumentk&api_key=${process.env.API_KEY}&limit=1`;
+//   axios
+//     .get(url)
+//     .then((data) => {
+//       res.json(data.data);
+//       // const apiObject = {
+//       //   title: data.data.data[0].title,
+//       //   desc: data.data.data[0].title,
+//       //   img: data.data.data[0].images[0].url,
+//       // };
+//       // // console.log("this is the object", apiObject);
+//     })
+//     .catch((err) => console.log(err));
+// });
 
 // //Getting location by reverse geocoding
 // router.get("/");

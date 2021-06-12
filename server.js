@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const path = require("path");
 
 const PORT = process.env.PORT || 5000;
@@ -19,20 +19,24 @@ app.use("/api", require("./routes/apiRoutes"));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/thePath",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  },
-  (err) => {
-    if (err) throw err;
-    console.log("MongoDB connection established");
-  }
-);
+//***************************************************** */
+// MongoDB Cluster Issue
+//
+// mongoose.connect(
+//   process.env.MONGODB_URI || "mongodb://localhost/thePath",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//   },
+//   (err) => {
+//     if (err) throw err;
+//     console.log("MongoDB connection established");
+//   }
+// );
+//
+//***************************************************** */
 
 //Setting up port
 app.listen(PORT, () => {

@@ -7,13 +7,6 @@ import Button from "react-bootstrap/Button";
 import FunctionsContext from "../../../utils/FunctionsContext";
 import { QueryContext } from "../../../utils/Contexts";
 
-//
-//
-// EDIT CSS DETAILS LATER TO
-//
-//
-//
-
 // const TopIntro = ({ search, onChange, userSearch, setUserSearch }) => {
 const TopIntro = () => {
   //This context passes he handleSearch function from App.js
