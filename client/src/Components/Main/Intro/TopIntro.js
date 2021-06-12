@@ -48,7 +48,7 @@ const TopIntro = () => {
                     size="lg"
                     type="text"
                     placeholder="Search "
-                    // onChange={onChange}
+                    onChange={onChange}
                     name="input"
                   />
                 </Form.Group>
