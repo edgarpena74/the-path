@@ -7,6 +7,7 @@ import "./BottomMain.css";
 // import API from "../../../utils/API";
 import Card from "react-bootstrap/Card";
 import Loader from "../../Loader/Loader";
+import Muir from "./Assets/muir.jpg";
 
 const BottomIntro = () => {
   //***************************************************** */
@@ -55,7 +56,7 @@ const BottomIntro = () => {
     {
       id: "5",
       title: "Muir Woods Main Trail",
-      imageURL: "http://www.redwoodhikes.com/Muir/Main1.jpg",
+      imageURL: { Muir },
     },
   ];
 
