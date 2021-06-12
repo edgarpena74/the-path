@@ -19,7 +19,7 @@ const queryClient = new QueryClient();
 function App() {
   //Setting up userSearch in parent to send to children
   const [userSearch, setUserSearch] = useState({
-    input: "camping",
+    input: "",
   });
 
   //initial state for redirecting. If redirect is true then
